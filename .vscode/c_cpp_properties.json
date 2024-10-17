@@ -1,0 +1,43 @@
+{
+    "configurations": [
+        {
+            "name": "Bootloader",
+            "includePath": [
+                "e:\\BaiduSyncdisk\\Code\\TR\\AM32_Bootloader_STC32\\Bootloader\\inc",
+                "D:\\Compiler\\Keil_v5\\C251\\INC",
+                "D:\\Compiler\\Keil_v5\\C251\\INC\\STC",
+                "e:\\BaiduSyncdisk\\Code\\TR\\AM32_Bootloader_STC32\\Bootloader\\src",
+                "${default}",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "__C251__",
+                "__VSCODE_C251__",
+                "reentrant=",
+                "compact=",
+                "small=",
+                "large=",
+                "data=",
+                "idata=",
+                "pdata=",
+                "bdata=",
+                "edata=",
+                "xdata=",
+                "code=",
+                "bit=char",
+                "sbit=char",
+                "sfr=char",
+                "sfr16=int",
+                "sfr32=int",
+                "interrupt=",
+                "using=",
+                "far=",
+                "_at_=",
+                "_priority_=",
+                "_task_="
+            ],
+            "intelliSenseMode": "${default}"
+        }
+    ],
+    "version": 4
+}

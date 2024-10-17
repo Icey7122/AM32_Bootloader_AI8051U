@@ -1,0 +1,35 @@
+Build target 'Bootloader'
+compiling bootloader.c...
+compiling main.c...
+Bootloader\src\main.c(112): error C25: syntax error near ')'
+Bootloader\src\main.c(113): error C25: syntax error near '['
+Bootloader\src\main.c(121): warning C47: 'micros': unreferenced parameter
+Bootloader\src\main.c(213): warning C95: 'serialwriteChar': too many actual parameters
+Bootloader\src\main.c(219): warning C95: 'serialwriteChar': too many actual parameters
+Bootloader\src\main.c(225): warning C95: 'serialwriteChar': too many actual parameters
+Bootloader\src\main.c(231): warning C95: 'sendString': too many actual parameters
+Bootloader\src\main.c(360): warning C95: 'serialwriteChar': too many actual parameters
+Bootloader\src\main.c(397): error C25: syntax error near 'uint16_t'
+Bootloader\src\main.c(398): error C25: syntax error near 'if'
+Bootloader\src\main.c(398): error C25: syntax error near '=='
+Bootloader\src\main.c(399): error C53: redefinition of 'out_buffer_size'
+Bootloader\src\main.c(400): error C25: syntax error near '}'
+Bootloader\src\main.c(403): error C53: redefinition of 'setTransmit': different return types
+Bootloader\src\main.c(404): error C109: illegal constant expression
+Bootloader\src\main.c(404): error C122: 'read_data': unknown size
+Bootloader\src\main.c(405): error C76: formal parameter ignored
+Bootloader\src\main.c(405): error C25: syntax error near '0'
+Bootloader\src\main.c(405): error C25: syntax error near ')'
+Bootloader\src\main.c(407): error C25: syntax error near '('
+Bootloader\src\main.c(407): warning C34: 'read_data': missing declaration specifiers
+Bootloader\src\main.c(407): error C42: 'read_data': not in formal parameter list
+Bootloader\src\main.c(407): warning C34: 'address': missing declaration specifiers
+Bootloader\src\main.c(407): error C42: 'address': not in formal parameter list
+Bootloader\src\main.c(407): warning C34: 'out_buffer_size': missing declaration specifiers
+Bootloader\src\main.c(407): error C42: 'out_buffer_size': not in formal parameter list
+Bootloader\src\main.c(407): error C25: syntax error near ')'
+Bootloader\src\main.c(432): error C7: compilation aborted
+Bootloader\src\main.c(106): warning C64: 'MX_TIM2_Init': static function declared but not defined
+Bootloader\src\main.c(109): warning C64: 'MX_GPIO_INPUT_INIT': static function declared but not defined
+Target not created.
+Build Time Elapsed:  00:00:01

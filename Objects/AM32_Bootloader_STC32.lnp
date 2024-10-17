@@ -1,0 +1,6 @@
+".\Objects\bootloader.obj",
+".\Objects\main.obj" 
+TO ".\Objects\AM32_Bootloader_STC32" 
+PRINT(".\Listings\AM32_Bootloader_STC32.map") CASE 
+CLASSES (EDATA (0x0-0x7FF), 
+HDATA (0x0-0x7FF)) 
