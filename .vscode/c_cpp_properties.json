@@ -3,10 +3,10 @@
         {
             "name": "Bootloader",
             "includePath": [
-                "e:\\BaiduSyncdisk\\Code\\TR\\AM32_Bootloader_STC32\\Bootloader\\inc",
+                "d:\\BaiduSyncdisk\\Code\\TR\\AM32_Bootloader_STC32\\Bootloader\\inc",
                 "D:\\Compiler\\Keil_v5\\C251\\INC",
                 "D:\\Compiler\\Keil_v5\\C251\\INC\\STC",
-                "e:\\BaiduSyncdisk\\Code\\TR\\AM32_Bootloader_STC32\\Bootloader\\src",
+                "d:\\BaiduSyncdisk\\Code\\TR\\AM32_Bootloader_STC32\\Bootloader\\src",
                 "${default}",
                 "${workspaceFolder}/**"
             ],

@@ -106,10 +106,10 @@ uint32_t JumpAddress;
 //待改（系统时钟初始化）
 void SystemClock_Config(void);
 //static void MX_GPIO_Init(void);
-static void MX_TIM2_Init(void);
+static void PWMB_Timer_Init(void);
 
 /* USER CODE BEGIN PFP */
-static void MX_GPIO_INPUT_INIT(void);
+static void GPIO_INPUT_INIT(void);
 
 void processmessage(void);
 void serialwriteChar(char dat);
@@ -687,27 +687,23 @@ static void PWMB_Timer_Init(void)
 
 
 
-// static void MX_GPIO_INPUT_INIT(void)
-// {
-
-//   LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
-//  // LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2);
-//   /* GPIO Ports Clock Enable */
-// #ifdef USE_PB4
-//   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
-// #endif
-// #ifdef USE_PA2
-//   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-// #endif
+static void GPIO_INPUT_INIT(void)
+{
+ 	// LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2);
+  	/* GPIO Ports Clock Enable */
+#ifdef USE_PB4
+#endif
+#ifdef USE_PA2
+#endif
 
 
-//   /**/
-//   GPIO_InitStruct.Pin = input_pin;
-//   GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-//   GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
-//   LL_GPIO_Init(input_port, &GPIO_InitStruct);
+	/**/
+	GPIO_InitStruct.Pin = input_pin;
+	GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+	GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+	LL_GPIO_Init(input_port, &GPIO_InitStruct);
 
-// }
+}
 
 
 
