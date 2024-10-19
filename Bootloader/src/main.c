@@ -744,12 +744,8 @@ static void GPIO_INPUT_INIT(void)
 
     P0M0 &= ~0x02; 
 	P0M1 |= 0x02; 	
-
-	
     P0NCS &= ~0x02; 
     P0IE |= 0x02; 
-
-
 	P0PU |= 0x02; 
 	//高阻上拉输入
 }
