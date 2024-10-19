@@ -435,15 +435,22 @@ void serialreadChar()
 {
 	int bits_to_read;
 	rxbyte=0;
-	// PWMB_PSCRH = 0x00;
-	PWMB_PSCRL = 0x03; // set to 1/4mhz
+
+
+	PWMB_PSCRL = 0xBF; // set to 1/4mhz
+	PWMB_CNTRH = 0x00;
+	PWMB_CNTRL = 0x00;
 	while(~(input_pin)){ // wait for rx to go high
 		if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 50000){
 				invalid_command = 101;
 				return;
 		}
 	}
-	PWMB_PSCRL = 0x00; // set to 1/4mhz
+
+
+	PWMB_PSCRL = 0x2F; // set Buck to 1MHz
+	PWMB_CNTRH = 0x00;
+	PWMB_CNTRL = 0x00;
 	while(input_pin){   // wait for it go go low
 		if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250 && messagereceived){
 			return;
@@ -643,12 +650,8 @@ int main(void)
 	while (1)
 	{
 		// printf("SystemClock_Config\n");
-		// printf("%u\n",((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL));
+		printf("%u\n",((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL));
 	}
-	
-	
-  	
-//   	// LL_TIM_EnableCounter(TIM2);
 
 //    	GPIO_INPUT_INIT();     // init the pin with a pulldown
 
@@ -701,7 +704,7 @@ void SystemClock_Config(void)
 
 	USBCLK &= 0x0F;
 	USBCLK |= 0xA0;
-	NOP(20);					//等待时钟稳定
+	NOP(5);					//等待时钟稳定
 
 	//PLL产生96Mhz时钟
 
@@ -709,7 +712,7 @@ void SystemClock_Config(void)
 
 	CLKSEL |= 0x08;			//MCLK选择PLL/2为时钟源->48Mhz
 
-	HSCLKDIV = 0x01;		//PWM,SPI,I2S,TFPU时钟96MHz
+	HSCLKDIV = 0x01;		//高速PWM,SPI,I2S,TFPU时钟96MHz
 
 	USBCKS = 1;				
 	USBCKS2 = 0;			//USB时钟选择48Mhz
@@ -723,13 +726,13 @@ static void PWMB_Timer_Init(void)
 	PWMB_ENO = 0x00;		//禁止PWMB的PWM输出
 	PWMB_IOAUX = 0x00;		//禁止PWMB
 
-	PWMB_ARRH = 0x03;
-	PWMB_ARRL = 0xE8;		//设置PWMB周期为65535
+	PWMB_ARRH = 0xFF;
+	PWMB_ARRL = 0xFF;		//设置PWMB周期为65535
 	PWMB_CNTRH = 0x00;
 	PWMB_CNTRL = 0x00;		//清零计数器
-	PWMB_PSCRH = 0xBB;		
-	PWMB_PSCRL = 0x80;		//PWMB时钟源分频到1Mhz
-	PWMB_IER = 0x01;		//禁止PWMB中断
+	PWMB_PSCRH = 0x00;		
+	PWMB_PSCRL = 0x2F;		//PWMB时钟源分频到1Mhz
+	PWMB_IER = 0x00;		//禁止PWMB中断
 	PWMB_CR1 = 0x01;		//使能计数器
 }
 
@@ -750,16 +753,6 @@ static void GPIO_INPUT_INIT(void)
 	//高阻上拉输入
 }
 
-
-
-
-
-void PWMB_Timer_Handler(void) interrupt PWMB_VECTOR
-{
-	PWMB_SR1 = 0x00;
-	P20 = ~P20;
-	printf("ADCC\n");
-}
 
 #pragma FUNCTIONS (static)
 char putchar(char c)
