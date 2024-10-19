@@ -12,6 +12,8 @@
 		"STRING.H": "cpp",
 		"stdlib.h": "c",
 		"STDLIB.H": "cpp",
-		"STC8051U.H": "cpp"
+		"STC8051U.H": "cpp",
+		"stdio.h": "c",
+		"STDIO.H": "cpp"
 	}
 }

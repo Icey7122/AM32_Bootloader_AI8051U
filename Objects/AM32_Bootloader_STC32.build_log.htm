@@ -16,71 +16,30 @@ Linker/Locator:  L251.exe V4.66.93.0
 Library Manager: LIB251.exe V4.30.1.0
 Hex Converter:   OH251.exe V1.47.0.0
 CPU DLL:         S251.DLL V3.129.0.0
-Dialog DLL:      DCORE51.DLL V2.81.6.0 
+Dialog DLL:      DCORE51.DLL V2.81.6.0
+Target DLL:      STCMON251.DLL V0, 1, 0, 8
+Dialog DLL:      TCORE51.DLL V2.66.4.0
+ 
 <h2>Project:</h2>
-C:\Users\17263\Desktop\AM32_Bootloader_STC32\AM32_Bootloader_STC32.uvproj
-Project File Date:  10/14/2024
+d:\BaiduSyncdisk\Code\TR\AM32_Bootloader_STC32\AM32_Bootloader_STC32.uvproj
+Project File Date:  10/19/2024
 
 <h2>Output:</h2>
-Rebuild target 'Bootloader'
-compiling bootloader.c...
+Build target 'Bootloader'
 compiling main.c...
-Bootloader\src\main.c(122): warning C47: 'micros': unreferenced parameter
-Bootloader\src\main.c(107): warning C64: 'MX_TIM2_Init': static function declared but not defined
-Bootloader\src\main.c(110): warning C64: 'MX_GPIO_INPUT_INIT': static function declared but not defined
+Bootloader\src\main.c(716): warning C174: 'PWMB_Timer_Init': unreferenced 'static' function
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    NAME:    delayMicroseconds?_/main
+    NAME:    checkForSignal?_/main
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    NAME:    jump?_/main
+    NAME:    PWMB_Timer_Init/main
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    NAME:    decodeInput?_/main
+    NAME:    update_EEPROM?_/main
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    NAME:    ?C_C51STARTUP?2
-*** WARNING L10: CANNOT DETERMINE ROOT SEGMENT
-*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  sendString?_
-    MODULE:  .\Objects\main.obj (main)
-*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  serialwriteChar?_
-    MODULE:  .\Objects\main.obj (main)
-*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  MX_GPIO_INPUT_INIT?_
-    MODULE:  .\Objects\main.obj (main)
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  MX_GPIO_INPUT_INIT?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF06FCH
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  serialwriteChar?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF06F5H
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  serialwriteChar?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF06DDH
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  serialwriteChar?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF06E9H
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  sendString?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF06C4H
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  serialwriteChar?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF01F9H
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  sendString?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF0319H
-*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  serialwriteChar?_
-    MODULE:  .\Objects\main.obj (main)
-    ADDRESS: FF0331H
-Program Size: data=8.0 edata+hdata=573 xdata=0 const=85 code=1799
-Target not created.
+    NAME:    recieveBuffer?_/main
+Program Size: data=8.0 edata+hdata=869 xdata=0 const=109 code=3807
+creating hex file from ".\Objects\AM32_Bootloader_STC32"...
+".\Objects\AM32_Bootloader_STC32" - 0 Error(s), 5 Warning(s).
 Build Time Elapsed:  00:00:00
 </pre>
 </body>
