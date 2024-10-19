@@ -624,7 +624,7 @@ int main(void)
 {
 
 	//Prevent warnings
-	//(void)bootloader_version;
+	(void)bootloader_version;
 
   	// LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
   	// LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
@@ -754,15 +754,7 @@ static void GPIO_INPUT_INIT(void)
 	//高阻上拉输入
 }
 
-#pragma FUNCTIONS (static)
-char putchar(char c)
-{
-	// serialwriteChar(c);
-	SBUF = c;
-	while (!TI);
-	TI = 0;
-	return c;
-}
+
 
 
 
@@ -771,6 +763,16 @@ void PWMB_Timer_Handler(void) interrupt PWMB_VECTOR
 	PWMB_SR1 = 0x00;
 	P20 = ~P20;
 	printf("ADCC\n");
+}
+
+#pragma FUNCTIONS (static)
+char putchar(char c)
+{
+	// serialwriteChar(c);
+	SBUF = c;
+	while (!TI);
+	TI = 0;
+	return c;
 }
 
 
