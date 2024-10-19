@@ -103,7 +103,6 @@ uint32_t JumpAddress;
 #define JumpToApplication() 	IAP_CONTR = 0x20
 
 
-//待改（系统时钟初始化）
 void SystemClock_Config(void);
 //static void MX_GPIO_Init(void);
 static void PWMB_Timer_Init(void);
@@ -204,13 +203,15 @@ char checkCrc(uint8_t* pBuff, uint16_t length){
 //待改（接收引脚初始化）上拉输入
 void setReceive(void){
 
-	MX_GPIO_INPUT_INIT();
+	GPIO_INPUT_INIT();
 	received = 0;
 
 }
 //待改（发送引脚初始化）
 void setTransmit(void){
 	// LL_GPIO_SetPinMode(input_port, input_pin, LL_GPIO_MODE_OUTPUT);       // set as reciever // clear bits and set receive bits..
+	P0M0 |= 0x02; P0M1 &= ~0x02; 	//推挽输出
+	P0PU &= ~0x02; P0PD &= ~0x02; 	//无上下拉
 }
 
 void send_ACK(void){
@@ -432,6 +433,7 @@ void decodeInput(){
 
 void serialreadChar()
 {
+	int bits_to_read;
 	rxbyte=0;
 	// PWMB_PSCRH = 0x00;
 	PWMB_PSCRL = 0x03; // set to 1/4mhz
@@ -450,10 +452,10 @@ void serialreadChar()
 
 	delayMicroseconds(HALFBITTIME);//wait to get the center of bit time
 
-	int bits_to_read = 0;
+	bits_to_read = 0;
 	while (bits_to_read < 8) {
 		delayMicroseconds(BITTIME);
-		rxbyte = rxbyte | ((input_pin) >> PIN_NUMBER) << bits_to_read;
+		rxbyte = rxbyte | ((uint8_t)(input_pin) >> PIN_NUMBER) << bits_to_read;
 	bits_to_read++;
 	}
 
@@ -469,11 +471,11 @@ void serialwriteChar(char dat)
 
 	//BRR 只写寄存器：只能改变管脚状态为低电平，对寄存器 管脚对于位写 1 相应管脚会为低电平。写 0 无动作。
 	// input_port->BRR = input_pin;; //initiate start bit
+	char bits_to_read = 0;
 
 	input_pin = 0;					//initiate start bit
 
-	char bits_to_read = 0;
-
+	
 	while (bits_to_read < 8) {
 
 		delayMicroseconds(BITTIME);
@@ -508,8 +510,8 @@ void serialwriteChar(char dat)
 }
 
 void sendString(uint8_t *dat, int len){
-
-	for(int i = 0; i < len; i++){
+	int i;
+	for(i = 0; i < len; i++){
 		serialwriteChar(dat[i]);
 		delayMicroseconds(BITTIME);
 	}
@@ -560,10 +562,15 @@ void update_EEPROM(void){
 
 void checkForSignal(void){
 	//uint8_t floating_or_signal= 0;
-	LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_DOWN);
+	// LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_DOWN);
+	int i;
+
+	P0PU &= ~0x02; //关闭上拉电阻
+	P0PD |= 0x02; //开启下拉电阻
+
 	delayMicroseconds(500);
 
-	for(int i = 0 ; i < 500; i ++){
+	for(i = 0 ; i < 500; i ++){
 		if(~input_pin){
 			low_pin_count++;
 		}else{
@@ -578,10 +585,12 @@ void checkForSignal(void){
 
 	low_pin_count = 0;
 
-	LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_NO);
+	P0PU &= ~0x02; //关闭上拉电阻
+	P0PD &= ~0x02; //关闭下拉电阻 
+	// LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_NO);
 	delayMicroseconds(500);
 
-	for(int i = 0 ; i < 500; i ++){
+	for(i = 0 ; i < 500; i ++){
 		if(~input_pin){
 			low_pin_count++;
 		}
@@ -603,19 +612,24 @@ int main(void)
 	//Prevent warnings
 	(void)bootloader_version;
 
-  	LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
-  	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+  	// LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
+  	// LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 
-  	FLASH->ACR |= FLASH_ACR_PRFTBE;   // prefetch buffer enable
+  	// FLASH->ACR |= FLASH_ACR_PRFTBE;   // prefetch buffer enable
 
   	SystemClock_Config();
-  	MX_TIM2_Init();
-  	LL_TIM_EnableCounter(TIM2);
+  	PWMB_Timer_Init();
+  	// LL_TIM_EnableCounter(TIM2);
 
-   	MX_GPIO_INPUT_INIT();     // init the pin with a pulldown
+   	GPIO_INPUT_INIT();     // init the pin with a pulldown
 
    	checkForSignal();
-   	LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_UP);
+
+
+	P0PD &= ~0x02;
+	P0PU |= 0x02;			//上拉输入
+   	// LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_UP);
+
 #ifdef USE_ADC_INPUT  // go right to application
   	jump();
 #endif
@@ -644,26 +658,26 @@ void SystemClock_Config(void)
 
 	//由软件设置到8Mhz
        
-	IRTRIM = CHIPID12;     		//内部时钟源选择24M
-	VRTRIM = CHIPID23;   		//27M频段
+	// IRTRIM = CHIPID12;     		//内部时钟源选择24M
+	// VRTRIM = CHIPID23;   		//27M频段
 
-	// MCLKOCR = 72;         	//分频72,输出时钟的分频
+	// // MCLKOCR = 72;         	//分频72,输出时钟的分频
 
-	CLKSEL = 0x40; 			//PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
+	// CLKSEL = 0x40; 			//PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
 
-	USBCLK &= 0xAF;			//PLL时钟源分频为2则PLL时钟源为12Mhz，使能PLL
-	NOP(4);					//等待时钟稳定
+	// USBCLK &= 0xAF;			//PLL时钟源分频为2则PLL时钟源为12Mhz，使能PLL
+	// NOP(4);					//等待时钟稳定
 
-	//PLL产生96Mhz时钟
+	// //PLL产生96Mhz时钟
 
-	CLKDIV = 0X01;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
+	// CLKDIV = 0X01;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
 
-	CLKSEL |= 0x08;			//MCLK选择PLL/2为时钟源->48Mhz
+	// CLKSEL |= 0x08;			//MCLK选择PLL/2为时钟源->48Mhz
 
-	HSCLKDIV = 0x01;		//PWM,SPI,I2S,TFPU时钟96MHz
+	// HSCLKDIV = 0x01;		//PWM,SPI,I2S,TFPU时钟96MHz
 
-	USBCKS = 1;				
-	USBCKS2 = 0;			//USB时钟选择48Mhz
+	// USBCKS = 1;				
+	// USBCKS2 = 0;			//USB时钟选择48Mhz
 
 	EA = 1;
 }
@@ -698,11 +712,21 @@ static void GPIO_INPUT_INIT(void)
 
 
 	/**/
-	GPIO_InitStruct.Pin = input_pin;
-	GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
-	LL_GPIO_Init(input_port, &GPIO_InitStruct);
+	// GPIO_InitStruct.Pin = input_pin;
+	// GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+	// GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+	// LL_GPIO_Init(input_port, &GPIO_InitStruct);
 
+    P0M0 &= ~0x02; 
+	P0M1 |= 0x02; 	
+
+	
+    P0NCS &= ~0x02; 
+    P0IE |= 0x02; 
+
+
+	P0PU |= 0x02; 
+	//高阻上拉输入
 }
 
 

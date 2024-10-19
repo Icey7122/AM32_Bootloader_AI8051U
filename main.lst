@@ -1,10 +1,10 @@
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
-OBJECT MODULE PLACED IN .\Objects\main.obj
+OBJECT MODULE PLACED IN main.obj
 COMPILER INVOKED BY: D:\Compiler\Keil_v5\C251\BIN\C251.EXE Bootloader\src\main.c XSMALL FUNCTIONS(REENTRANT) FLOAT64 OPT
-                    -IMIZE(9,SPEED) BROWSE INCDIR(.\Bootloader\inc) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj) 
+                    -IMIZE(3,SPEED) INCDIR(.\Bootloader\inc) DEBUG PRINT(.\main.lst) TABS(2) OBJECT(main.obj) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
                // #define input_pin       LL_GPIO_PIN_4
                // #define input_port        GPIOB
                // #define PIN_NUMBER        4
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 2   
 
                // #define PORT_LETTER       1
                #endif
@@ -134,7 +134,7 @@ stmt  level    source
   122          //待改（使用定时器做延时函数）
   123          void delayMicroseconds(uint32_t micros){
   124   1        // TIM2->CNT = 0;
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 3   
 
   125   1        PWMB_CNTRH = 0x00;
   126   1        PWMB_CNTRL = 0x00;
@@ -202,7 +202,7 @@ stmt  level    source
   188   1      }
   189          
   190          char checkCrc(uint8_t* pBuff, uint16_t length){
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 4   
 
   191   1      
   192   1        char received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
@@ -270,7 +270,7 @@ stmt  level    source
   252   3            memset(payLoadBuffer, 0, sizeof(payLoadBuffer));             // reset buffer
   253   3      
   254   3            for(i = 0; i < len; i++){
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 5   
 
   255   4              payLoadBuffer[i]= rxBuffer[i];
   256   4            }
@@ -338,7 +338,7 @@ stmt  level    source
   318   1      
   319   1        if(cmd == CMD_SET_ADDRESS){             //  command set addressinput format is: CMD, 00 , High byte addr
              -ess, Low byte address, crclb ,crchb
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 6   
 
   320   2          len = 4;  // package without 2 byte crc
   321   2          if (!checkCrc((uint8_t*)rxBuffer, len)) {
@@ -406,7 +406,7 @@ stmt  level    source
   382   3      
   383   3            return;
   384   3          }
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 7   
 
   385   2      
   386   2          send_ACK();
@@ -474,7 +474,7 @@ stmt  level    source
   446   1        PWMB_PSCRL = 0x00; // set to 1/4mhz
   447   1        while(input_pin){   // wait for it go go low
   448   2          if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250 && messagereceived){
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 8   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 8   
 
   449   3            return;
   450   3          }
@@ -542,7 +542,7 @@ stmt  level    source
   511          
   512          void sendString(uint8_t *dat, int len){
   513   1        int i;
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 9   
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 9   
 
   514   1        for(i = 0; i < len; i++){
   515   2          serialwriteChar(dat[i]);
@@ -610,7 +610,7 @@ stmt  level    source
   576   3          }else{
   577   3        //   high_pin_count++;
   578   3          }
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 10  
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 10  
 
   579   2          delayMicroseconds(10);
   580   2        }
@@ -678,7 +678,7 @@ stmt  level    source
   641   1          {
   642   2            recieveBuffer();
   643   2            if (invalid_command > 100){
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 11  
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 11  
 
   644   3              jump();
   645   3            }
@@ -698,26 +698,27 @@ stmt  level    source
   658   1      
   659   1        //由软件设置到8Mhz
   660   1             
-  661   1        IRTRIM = CHIPID12;        //内部时钟源选择24M
-  662   1        VRTRIM = CHIPID23;      //27M频段
+  661   1        // IRTRIM = CHIPID12;         //内部时钟源选择24M
+  662   1        // VRTRIM = CHIPID23;       //27M频段
   663   1      
-  664   1        // MCLKOCR = 72;          //分频72,输出时钟的分频
+  664   1        // // MCLKOCR = 72;           //分频72,输出时钟的分频
   665   1      
-  666   1        CLKSEL = 0x40;      //PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
+  666   1        // CLKSEL = 0x40;       //PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时�
+             -�)
   667   1      
-  668   1        USBCLK &= 0xAF;     //PLL时钟源分频为2则PLL时钟源为12Mhz，使能PLL
-  669   1        NOP(4);         //等待时钟稳定
+  668   1        // USBCLK &= 0xAF;      //PLL时钟源分频为2则PLL时钟源为12Mhz，使能PLL
+  669   1        // NOP(4);          //等待时钟稳定
   670   1      
-  671   1        //PLL产生96Mhz时钟
+  671   1        // //PLL产生96Mhz时钟
   672   1      
-  673   1        CLKDIV = 0X01;      //主时钟MCLK输出到系统时钟(SYSCLK)分频1
+  673   1        // CLKDIV = 0X01;     //主时钟MCLK输出到系统时钟(SYSCLK)分频1
   674   1      
-  675   1        CLKSEL |= 0x08;     //MCLK选择PLL/2为时钟源->48Mhz
+  675   1        // CLKSEL |= 0x08;      //MCLK选择PLL/2为时钟源->48Mhz
   676   1      
-  677   1        HSCLKDIV = 0x01;    //PWM,SPI,I2S,TFPU时钟96MHz
+  677   1        // HSCLKDIV = 0x01;   //PWM,SPI,I2S,TFPU时钟96MHz
   678   1      
-  679   1        USBCKS = 1;       
-  680   1        USBCKS2 = 0;      //USB时钟选择48Mhz
+  679   1        // USBCKS = 1;        
+  680   1        // USBCKS2 = 0;     //USB时钟选择48Mhz
   681   1      
   682   1        EA = 1;
   683   1      }
@@ -745,9 +746,9 @@ stmt  level    source
   705          {
   706   1        // LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2);
   707   1          /* GPIO Ports Clock Enable */
-  708   1      #ifdef USE_PB4
-C251 COMPILER V5.60.0,  main                                                               19/10/24  15:05:44  PAGE 12  
+C251 COMPILER V5.60.0,  main                                                               19/10/24  15:12:49  PAGE 12  
 
+  708   1      #ifdef USE_PB4
                #endif
   710   1      #ifdef USE_PA2
                #endif
@@ -779,7 +780,7 @@ stmt  level    source
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      2054     ------
+  code size            =      2245     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------

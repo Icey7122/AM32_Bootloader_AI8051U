@@ -1,0 +1,6 @@
+"bootloader.obj",
+"main.obj" 
+TO "AM32_Bootloader_STC32" 
+CASE 
+CLASSES (EDATA (0x0-0x7FF), 
+HDATA (0x0-0x7FF)) 
