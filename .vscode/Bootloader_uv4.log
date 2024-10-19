@@ -1,8 +1,20 @@
-Rebuild target 'Bootloader'
-compiling bootloader.c...
+Build target 'Bootloader'
 compiling main.c...
-Bootloader\src\main.c(613): warning C138: expression with possibly no effect
+Bootloader\src\main.c(716): warning C174: 'PWMB_Timer_Init': unreferenced 'static' function
 linking...
-Program Size: data=8.0 edata+hdata=829 xdata=0 const=85 code=3026
-".\Objects\AM32_Bootloader_STC32" - 0 Error(s), 1 Warning(s).
-Build Time Elapsed:  00:00:01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    checkForSignal?_/main
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    PWMB_Timer_Init/main
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    update_EEPROM?_/main
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    recieveBuffer?_/main
+
+Program Size: data=8.0 edata+hdata=869 xdata=0 const=109 code=3807
+creating hex file from ".\Objects\AM32_Bootloader_STC32"...
+".\Objects\AM32_Bootloader_STC32" - 0 Error(s), 5 Warning(s).
+Build Time Elapsed:  00:00:00

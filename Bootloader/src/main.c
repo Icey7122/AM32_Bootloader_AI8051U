@@ -606,11 +606,25 @@ void checkForSignal(void){
 	}
 }
 
+
+void Uart1_Init(void)	//921600bps@48MHz
+{
+	SCON = 0x50;		//8位数据,可变波特率
+	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
+	AUXR |= 0x04;		//定时器时钟1T模式
+	T2L = 0xF3;			//设置定时初始值
+	T2H = 0xFF;			//设置定时初始值
+	AUXR |= 0x10;		//定时器2开始计时
+}
+
+#include <stdio.h>
+
+
 int main(void)
 {
 
 	//Prevent warnings
-	(void)bootloader_version;
+	//(void)bootloader_version;
 
   	// LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
   	// LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
@@ -618,66 +632,80 @@ int main(void)
   	// FLASH->ACR |= FLASH_ACR_PRFTBE;   // prefetch buffer enable
 
   	SystemClock_Config();
-  	PWMB_Timer_Init();
-  	// LL_TIM_EnableCounter(TIM2);
+	Uart1_Init();
 
-   	GPIO_INPUT_INIT();     // init the pin with a pulldown
-
-   	checkForSignal();
+	P3M0 |= 0x03; P3M1 &= ~0x03; 
 
 
-	P0PD &= ~0x02;
-	P0PU |= 0x02;			//上拉输入
-   	// LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_UP);
+	while (1)
+	{
+		printf("SystemClock_Config\n");
+	}
+	
+	
+//   	PWMB_Timer_Init();
+//   	// LL_TIM_EnableCounter(TIM2);
 
-#ifdef USE_ADC_INPUT  // go right to application
-  	jump();
-#endif
-  	deviceInfo[3] = pin_code;
-  	update_EEPROM();
+//    	GPIO_INPUT_INIT();     // init the pin with a pulldown
 
-//  sendDeviceInfo();
-  	while (1)
-  	{
-	  	recieveBuffer();
-	  	if (invalid_command > 100){
-		  	jump();
-	  	}
-  	}
+//    	checkForSignal();
+
+
+// 	P0PD &= ~0x02;
+// 	P0PU |= 0x02;			//上拉输入
+//    	// LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_UP);
+
+// #ifdef USE_ADC_INPUT  // go right to application
+//   	jump();
+// #endif
+//   	deviceInfo[3] = pin_code;
+//   	update_EEPROM();
+
+// //  sendDeviceInfo();
+//   	while (1)
+//   	{
+// 	  	recieveBuffer();
+// 	  	if (invalid_command > 100){
+// 		  	jump();
+// 	  	}
+//   	}
 
 }
+
+
 
 void SystemClock_Config(void)
 {
 	EA = 0;
 
-	EAXFR = 1;				      // 使能访问XFR
 	CKCON = 0x00;			      // 设置外部数据总线为最快
 	WTST = 1;               	// 设置程序代码等待参数，赋值为0可将CPU执行程序的速度设置为最快
-	P_SW2 |= 0x80;			    // 开启特殊地址访问
+	P_SW2 = 0x80;			    // 开启特殊地址访问
 
-	//由软件设置到8Mhz
+	CLKDIV = 0x04;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
        
-	// IRTRIM = CHIPID12;     		//内部时钟源选择24M
-	// VRTRIM = CHIPID23;   		//27M频段
+	IRTRIM = CHIPID12;     		//内部时钟源选择24M
+	VRTRIM = CHIPID23;   		
 
-	// // MCLKOCR = 72;         	//分频72,输出时钟的分频
+	// MCLKOCR = 72;         	//分频72,输出时钟的分频
 
-	// CLKSEL = 0x40; 			//PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
+	CLKSEL = 0x40; 			//PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
 
 	// USBCLK &= 0xAF;			//PLL时钟源分频为2则PLL时钟源为12Mhz，使能PLL
-	// NOP(4);					//等待时钟稳定
+	USBCLK &= 0x0F;
+	USBCLK |= 0xA0;			//USB时钟源选择PLL/2 
+	NOP(20);					//等待时钟稳定
 
-	// //PLL产生96Mhz时钟
+	//PLL产生96Mhz时钟
 
-	// CLKDIV = 0X01;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
+	CLKDIV = 0X01;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
 
-	// CLKSEL |= 0x08;			//MCLK选择PLL/2为时钟源->48Mhz
+	CLKSEL |= 0x08;			//MCLK选择PLL/2为时钟源->48Mhz
 
-	// HSCLKDIV = 0x01;		//PWM,SPI,I2S,TFPU时钟96MHz
+	HSCLKDIV = 0x01;		//PWM,SPI,I2S,TFPU时钟96MHz
 
-	// USBCKS = 1;				
-	// USBCKS2 = 0;			//USB时钟选择48Mhz
+	USBCKS = 1;				
+	USBCKS2 = 0;			//USB时钟选择48Mhz
 
 	EA = 1;
 }
@@ -727,6 +755,16 @@ static void GPIO_INPUT_INIT(void)
 
 	P0PU |= 0x02; 
 	//高阻上拉输入
+}
+
+#pragma FUNCTIONS (static)
+char putchar(char c)
+{
+	// serialwriteChar(c);
+	SBUF = c;
+	while (!TI);
+	TI = 0;
+	return c;
 }
 
 

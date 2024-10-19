@@ -16,21 +16,31 @@ Linker/Locator:  L251.exe V4.66.93.0
 Library Manager: LIB251.exe V4.30.1.0
 Hex Converter:   OH251.exe V1.47.0.0
 CPU DLL:         S251.DLL V3.129.0.0
-Dialog DLL:      DCORE51.DLL V2.81.6.0 
+Dialog DLL:      DCORE51.DLL V2.81.6.0
+Target DLL:      STCMON251.DLL V0, 1, 0, 8
+Dialog DLL:      TCORE51.DLL V2.66.4.0
+ 
 <h2>Project:</h2>
-D:\BaiduSyncdisk\Code\TR\AM32_Bootloader_STC32\AM32_Bootloader_STC32.uvproj
+d:\BaiduSyncdisk\Code\TR\AM32_Bootloader_STC32\AM32_Bootloader_STC32.uvproj
 Project File Date:  10/19/2024
 
 <h2>Output:</h2>
-Rebuild target 'Bootloader'
-compiling bootloader.c...
+Build target 'Bootloader'
 compiling main.c...
-Bootloader\src\main.c(613): warning C138: expression with possibly no effect
+Bootloader\src\main.c(716): warning C174: 'PWMB_Timer_Init': unreferenced 'static' function
 linking...
-Program Size: data=8.0 edata+hdata=829 xdata=0 const=85 code=2932
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    checkForSignal?_/main
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    PWMB_Timer_Init/main
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    update_EEPROM?_/main
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    NAME:    recieveBuffer?_/main
+Program Size: data=8.0 edata+hdata=869 xdata=0 const=109 code=3807
 creating hex file from ".\Objects\AM32_Bootloader_STC32"...
-".\Objects\AM32_Bootloader_STC32" - 0 Error(s), 1 Warning(s).
-Build Time Elapsed:  00:00:01
+".\Objects\AM32_Bootloader_STC32" - 0 Error(s), 5 Warning(s).
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

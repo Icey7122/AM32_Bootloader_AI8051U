@@ -1,0 +1,1 @@
+"Bootloader\src\main.c" XSMALL FUNCTIONS (REENTRANT) FLOAT64 OPTIMIZE (3,SPEED) INCDIR(.\Bootloader\inc) DEBUG PRINT(.\main.lst) TABS (2) OBJECT(.\Objects\main.obj)
