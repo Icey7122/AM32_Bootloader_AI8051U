@@ -635,15 +635,19 @@ int main(void)
 	Uart1_Init();
 
 	P3M0 |= 0x03; P3M1 &= ~0x03; 
+	P2M0 |= 0x03; P2M1 &= ~0x03; 
+
+	PWMB_Timer_Init();
 
 
 	while (1)
 	{
-		printf("SystemClock_Config\n");
+		// printf("SystemClock_Config\n");
+		// printf("%u\n",((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL));
 	}
 	
 	
-//   	PWMB_Timer_Init();
+  	
 //   	// LL_TIM_EnableCounter(TIM2);
 
 //    	GPIO_INPUT_INIT();     // init the pin with a pulldown
@@ -685,15 +689,18 @@ void SystemClock_Config(void)
 	CLKDIV = 0x04;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
        
 	IRTRIM = CHIPID12;     		//内部时钟源选择24M
-	VRTRIM = CHIPID23;   		
+	HIRCSEL1 = 1;
+	HIRCSEL0 = 0;
 
+	HIRCCR = 0x80;
+	while (!(HIRCCR & 0x01));
+	
 	// MCLKOCR = 72;         	//分频72,输出时钟的分频
 
 	CLKSEL = 0x40; 			//PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
 
-	// USBCLK &= 0xAF;			//PLL时钟源分频为2则PLL时钟源为12Mhz，使能PLL
 	USBCLK &= 0x0F;
-	USBCLK |= 0xA0;			//USB时钟源选择PLL/2 
+	USBCLK |= 0xA0;
 	NOP(20);					//等待时钟稳定
 
 	//PLL产生96Mhz时钟
@@ -713,17 +720,16 @@ void SystemClock_Config(void)
 
 static void PWMB_Timer_Init(void)
 {
-	PWMB_CLKDIV = 0x30;		//PWMB时钟源分频到1Mhz
 	PWMB_ENO = 0x00;		//禁止PWMB的PWM输出
 	PWMB_IOAUX = 0x00;		//禁止PWMB
 
-	PWMB_ARRH = 0xFF;
-	PWMB_ARRL = 0xFF;		//设置PWMB周期为65535
+	PWMB_ARRH = 0x03;
+	PWMB_ARRL = 0xE8;		//设置PWMB周期为65535
 	PWMB_CNTRH = 0x00;
 	PWMB_CNTRL = 0x00;		//清零计数器
-	PWMB_PSCRH = 0x00;		
-	PWMB_PSCRL = 0x00;		//PWMB时钟源分频到1Mhz
-	PWMB_IER = 0x00;		//禁止PWMB中断
+	PWMB_PSCRH = 0xBB;		
+	PWMB_PSCRL = 0x80;		//PWMB时钟源分频到1Mhz
+	PWMB_IER = 0x01;		//禁止PWMB中断
 	PWMB_CR1 = 0x01;		//使能计数器
 }
 
@@ -731,19 +737,10 @@ static void PWMB_Timer_Init(void)
 
 static void GPIO_INPUT_INIT(void)
 {
- 	// LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2);
-  	/* GPIO Ports Clock Enable */
 #ifdef USE_PB4
 #endif
 #ifdef USE_PA2
 #endif
-
-
-	/**/
-	// GPIO_InitStruct.Pin = input_pin;
-	// GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
-	// GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
-	// LL_GPIO_Init(input_port, &GPIO_InitStruct);
 
     P0M0 &= ~0x02; 
 	P0M1 |= 0x02; 	
@@ -765,6 +762,15 @@ char putchar(char c)
 	while (!TI);
 	TI = 0;
 	return c;
+}
+
+
+
+void PWMB_Timer_Handler(void) interrupt PWMB_VECTOR
+{
+	PWMB_SR1 = 0x00;
+	P20 = ~P20;
+	printf("ADCC\n");
 }
 
 

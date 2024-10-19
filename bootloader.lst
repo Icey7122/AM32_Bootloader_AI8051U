@@ -1,0 +1,131 @@
+C251 COMPILER V5.60.0,  bootloader                                                         19/10/24  19:12:00  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE bootloader
+OBJECT MODULE PLACED IN .\Objects\bootloader.obj
+COMPILER INVOKED BY: D:\Compiler\Keil_v5\C251\BIN\C251.EXE Bootloader\src\bootloader.c XSMALL FUNCTIONS(REENTRANT) FLOAT
+                    -64 OPTIMIZE(3,SPEED) INCDIR(.\Bootloader\inc) DEBUG PRINT(.\bootloader.lst) TABS(2) OBJECT(.\Objects\bootloader.obj) 
+
+stmt  level    source
+
+    1          /*
+    2           * bootloader.c
+    3           *
+    4           *  Created on: Mar. 25, 2020
+    5           *      Author: Alka
+    6           *  Porting on: Mar. 13, 2024
+    7           *    Porting code from F051 to STC8051U
+    8           *  
+    9           *
+   10           */
+   11          
+   12          #include "bootloader.h"
+   13          #include <string.h>
+   14          
+   15          
+   16          #define page_size 0x200                   // 512 bytes for STC8051U
+   17          
+   18          
+   19          void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
+   20   1      
+   21   1        IAP_ENABLE();                         
+   22   1        // unlock flash
+   23   1        // erase page if address even divisable by 512
+   24   1        if((add % page_size) == 0){
+   25   2      
+   26   2          IAP_ERASE();                        
+   27   2      
+   28   2          IAP_ADDRE = (uint8_t)(add >> 16); 
+   29   2          IAP_ADDRH = (uint8_t)(add >> 8);  
+   30   2          IAP_ADDRL = (uint8_t)add;         
+   31   2      
+   32   2          IAP_TRIG = 0x5A;
+   33   2          IAP_TRIG = 0xA5;                   
+   34   2          _nop_();   
+   35   2          _nop_();
+   36   2          _nop_();
+   37   2          _nop_();
+   38   2      
+   39   2          while(CMD_FAIL);                  
+   40   2        }
+   41   1      
+   42   1        IAP_WRITE();                        //宏调用, 送字节写命令
+   43   1        do
+   44   1          {
+   45   2              IAP_ADDRE = (uint8_t)(add >> 16); 
+   46   2              IAP_ADDRH = (uint8_t)(add >> 8);  
+   47   2              IAP_ADDRL = (uint8_t)add;         
+   48   2              IAP_DATA  = *dat;      
+   49   2      
+   50   2          IAP_TRIG = 0x5A;
+   51   2          IAP_TRIG = 0xA5;                   
+   52   2          _nop_();   
+   53   2          _nop_();
+   54   2          _nop_();
+   55   2          _nop_();
+   56   2      
+   57   2          while(CMD_FAIL);
+   58   2      
+C251 COMPILER V5.60.0,  bootloader                                                         19/10/24  19:12:00  PAGE 2   
+
+   59   2              add++;                     //下一个地址
+   60   2              dat++;                    //下一个数据
+   61   2          }
+   62   1          while(--length);                    //直到结束
+   63   1      
+   64   1      
+   65   1        IAP_DISABLE();                      //关闭IAP
+   66   1      }
+   67          
+   68          void read_flash_bin(uint8_t*  dat , uint32_t add , int out_buff_len){
+   69   1        int i;
+   70   1        IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
+   71   1          IAP_READ();                             //送字节读命令，命令不需改变时，不需重新�
+             -�命令
+   72   1        for (i = 0; i < out_buff_len ; i ++){
+   73   2              IAP_ADDRE = (uint8_t)((add+i) >> 16); //送地址高字节（地址需要改变时才需重新送
+             -地址）
+   74   2              IAP_ADDRH = (uint8_t)((add+i) >> 8);  //送地址中字节（地址需要改变时才需重新送
+             -地址）
+   75   2              IAP_ADDRL = (uint8_t)(add+i);         //送地址低字节（地址需要改变时才需重新送
+             -地址）
+   76   2      
+   77   2          IAP_TRIG = 0x5A;
+   78   2          IAP_TRIG = 0xA5;                   
+   79   2          _nop_();   
+   80   2          _nop_();
+   81   2          _nop_();
+   82   2          _nop_();
+   83   2          while(CMD_FAIL);
+   84   2      
+   85   2              dat[i] = IAP_DATA;            //读出的数据送往
+   86   2        }
+   87   1      
+   88   1        IAP_DISABLE();                      
+   89   1      }
+   90          
+   91          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       275     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
