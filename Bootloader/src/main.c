@@ -242,7 +242,6 @@ bool checkAddressWritable(uint32_t address) {
 }
 
 void decodeInput(){
-	DEBUG("DECODE INPUT\n");
 	if(incoming_payload_no_command){
 		len = payload_buffer_size;
 	//	received_crc_low_byte = rxBuffer[len];          // one higher than len in buffer
@@ -264,6 +263,7 @@ void decodeInput(){
 	}
 
 	cmd = rxBuffer[0];
+	printf("cmd:%X\n",cmd);
 
 	if(rxBuffer[16] == 0x7d){
 		if(rxBuffer[8] == 13 && rxBuffer[9] == 66){
@@ -436,22 +436,20 @@ void serialreadChar()
 	int bits_to_read;
 	rxbyte=0;
 
-	DEBUG("SERIAL READ CHAR\n");
-
 	PWMB_PSCRL = 0xBF; // set to 1/4mhz
-	PWMB_CNTRH = 0x00;
-	PWMB_CNTRL = 0x00;
-	while(~(input_pin)){ // wait for rx to go high
+	PWMB_CNTRH = 0;
+	PWMB_CNTRL = 0;
+	while(~input_pin){ // wait for rx to go high
 		if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 50000){
-				invalid_command = 101;
-				return;
+			invalid_command = 101;
+			return;
 		}
 	}
 
 
 	PWMB_PSCRL = 0x2F; // set Buck to 1MHz
-	PWMB_CNTRH = 0x00;
-	PWMB_CNTRL = 0x00;
+	PWMB_CNTRH = 0;
+	PWMB_CNTRL = 0;
 	while(input_pin){   // wait for it go go low
 		if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250 && messagereceived){
 			return;
@@ -463,17 +461,14 @@ void serialreadChar()
 	bits_to_read = 0;
 	while (bits_to_read < 8) {
 		delayMicroseconds(BITTIME);
-		rxbyte = rxbyte | (uint8_t)(input_pin) << bits_to_read;
+		rxbyte = rxbyte | (uint8_t)input_pin << bits_to_read;
 		bits_to_read++;
 	}
 
 	delayMicroseconds(HALFBITTIME); //wait till the stop bit time begins
 	messagereceived = 1;
 	receviedByte = rxbyte;
-
-	printf("rxbyte:%u\n",(uint8_t)rxbyte);
-	//return rxbyte;
-
+	
 }
 
 void serialwriteChar(char dat)
@@ -538,6 +533,7 @@ void recieveBuffer(void){
 		serialreadChar();
 		if(incoming_payload_no_command){
 			if(count == payload_buffer_size+2){
+				
 				break;
 			}
 			rxBuffer[i] = rxbyte;
@@ -555,6 +551,10 @@ void recieveBuffer(void){
 			}
 		}
 	}
+
+	for(i = 0; i < 30; i++)
+		printf("Buffer[%d]:%c\r\n",i,rxBuffer[i]);
+
 	decodeInput();
 }
 
@@ -660,13 +660,12 @@ int main(void)
 	P0PD &= ~0x02;
 	P0PU |= 0x02;			//上拉输入
 
-  	deviceInfo[3] = pin_code;
+  	deviceInfo[3] = 0x14;
 
 	update_EEPROM();
   	while (1)
   	{
 	  	recieveBuffer();
-		printf("invalid_command:%d\n",invalid_command);
 	  	if (invalid_command > 100){
 		  	// jump();
 			
@@ -743,9 +742,8 @@ static void GPIO_INPUT_INIT(void)
 #ifdef USE_PA2
 #endif
 
-    P0M0 &= ~0x02; 
-	P0M1 |= 0x02; 	
-    P0NCS &= ~0x02; 
+	P0M0 = 0x00; P0M1 = 0xff; 
+
     P0IE |= 0x02; 
 	P0PU |= 0x02; 
 	//高阻上拉输入

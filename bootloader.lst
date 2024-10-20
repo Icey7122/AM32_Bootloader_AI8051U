@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  bootloader                                                         20/10/24  17:59:15  PAGE 1   
+C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  00:20:18  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE bootloader
 OBJECT MODULE PLACED IN .\Objects\bootloader.obj
 COMPILER INVOKED BY: D:\Compiler\Keil_v5\C251\BIN\C251.EXE Bootloader\src\bootloader.c XSMALL FUNCTIONS(REENTRANT) FLOAT
-                    -64 WARNINGLEVEL(3) OPTIMIZE(0,SIZE) BROWSE INCDIR(.\Bootloader\inc) DEBUG PRINT(.\bootloader.lst) TABS(2) OBJECT(.\Objec
-                    -ts\bootloader.obj) 
+                    -64 WARNINGLEVEL(3) BROWSE INCDIR(.\Bootloader\inc) DEBUG PRINT(.\bootloader.lst) TABS(2) OBJECT(.\Objects\bootloader.obj
+                    -) 
 
 stmt  level    source
 
@@ -66,7 +66,7 @@ stmt  level    source
    55   2          IAP_TRIG = 0x5A;
    56   2          IAP_TRIG = 0xA5;                   
    57   2          _nop_();   
-C251 COMPILER V5.60.0,  bootloader                                                         20/10/24  17:59:15  PAGE 2   
+C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  00:20:18  PAGE 2   
 
    58   2          _nop_();
    59   2          _nop_();
@@ -119,7 +119,7 @@ stmt  level    source
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =       436     ------
+  code size            =       260     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
@@ -135,7 +135,7 @@ Module Information          Static   Overlayable
   huge data size       =    ------     ------
   const size           =    ------     ------
   hconst size          =        10     ------
-C251 COMPILER V5.60.0,  bootloader                                                         20/10/24  17:59:15  PAGE 3   
+C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  00:20:18  PAGE 3   
 
 End of Module Information.
 
