@@ -693,7 +693,7 @@ void SystemClock_Config(void)
        
 	IRTRIM = CHIPID12;     		//内部时钟源选择24M
 	HIRCSEL1 = 1;
-	HIRCSEL0 = 0;
+	HIRCSEL0 = 0;				//27Mhz频段
 
 	HIRCCR = 0x80;
 	while (!(HIRCCR & 0x01));

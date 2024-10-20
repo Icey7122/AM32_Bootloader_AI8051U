@@ -1,10 +1,11 @@
-C251 COMPILER V5.60.0,  bootloader                                                         19/10/24  19:12:00  PAGE 1   
+C251 COMPILER V5.60.0,  bootloader                                                         20/10/24  10:38:11  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE bootloader
 OBJECT MODULE PLACED IN .\Objects\bootloader.obj
 COMPILER INVOKED BY: D:\Compiler\Keil_v5\C251\BIN\C251.EXE Bootloader\src\bootloader.c XSMALL FUNCTIONS(REENTRANT) FLOAT
-                    -64 OPTIMIZE(3,SPEED) INCDIR(.\Bootloader\inc) DEBUG PRINT(.\bootloader.lst) TABS(2) OBJECT(.\Objects\bootloader.obj) 
+                    -64 OPTIMIZE(3,SPEED) INCDIR(.\Bootloader\inc) DEBUG PRINT(.\Objects\bootloader.lst) TABS(2) OBJECT(.\Objects\bootloader.
+                    -obj) 
 
 stmt  level    source
 
@@ -65,9 +66,9 @@ stmt  level    source
    55   2          _nop_();
    56   2      
    57   2          while(CMD_FAIL);
-   58   2      
-C251 COMPILER V5.60.0,  bootloader                                                         19/10/24  19:12:00  PAGE 2   
+C251 COMPILER V5.60.0,  bootloader                                                         20/10/24  10:38:11  PAGE 2   
 
+   58   2      
    59   2              add++;                     //下一个地址
    60   2              dat++;                    //下一个数据
    61   2          }

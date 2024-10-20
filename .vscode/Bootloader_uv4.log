@@ -1,6 +1,7 @@
-Build target 'Bootloader'
+Rebuild target 'Bootloader'
+compiling bootloader.c...
 compiling main.c...
-Bootloader\src\main.c(627): warning C138: expression with possibly no effect
+Bootloader\src\main.c(634): warning C138: expression with possibly no effect
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    checkForSignal?_/main
@@ -11,7 +12,7 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    recieveBuffer?_/main
 
-Program Size: data=8.0 edata+hdata=869 xdata=0 const=93 code=3843
+Program Size: data=8.0 edata+hdata=869 xdata=0 const=93 code=3892
 creating hex file from ".\Objects\AM32_Bootloader_STC32"...
 ".\Objects\AM32_Bootloader_STC32" - 0 Error(s), 4 Warning(s).
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
