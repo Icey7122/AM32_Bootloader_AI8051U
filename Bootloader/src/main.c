@@ -6,7 +6,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "nstdbool.h"
 #include "main.h"
-
+#include <stdio.h>
 //#define USE_ADC_INPUT      // will go right to application and ignore eeprom
 
 #include "nstdint.h"
@@ -14,9 +14,11 @@
 #include <string.h>
 #include "bootloader.h"
 
+#define DEBUG(x) printf(x) 
+
 #define STC32_FLASH_START 0x00000000
 #define FIRMWARE_RELATIVE_START 0x0000
-#define EEPROM_RELATIVE_START 0x0000
+#define EEPROM_RELATIVE_START 0xFFFF - 0x400
 
 uint8_t bootloader_version = BOOTLOADER_VERSION;
 
@@ -73,7 +75,7 @@ int received;
 uint8_t port_letter;
 
 
-uint8_t pin_code = PORT_LETTER << 4 | PIN_NUMBER;
+uint8_t pin_code = 0;
 uint8_t deviceInfo[9] = { 0 };      // stm32 device info
 
 size_t str_len;
@@ -104,7 +106,6 @@ uint32_t JumpAddress;
 
 
 void SystemClock_Config(void);
-//static void MX_GPIO_Init(void);
 static void PWMB_Timer_Init(void);
 
 /* USER CODE BEGIN PFP */
@@ -164,7 +165,7 @@ void jump(){
 
 
 void makeCrc(uint8_t* pBuff, uint16_t length){
-	int i;
+	uint16_t i;
 	uint8_t xb;
 	static uint8_16_u CRC_16;
 	
@@ -202,16 +203,14 @@ char checkCrc(uint8_t* pBuff, uint16_t length){
 
 //待改（接收引脚初始化）上拉输入
 void setReceive(void){
-
 	GPIO_INPUT_INIT();
 	received = 0;
-
 }
 //待改（发送引脚初始化）
 void setTransmit(void){
 	// LL_GPIO_SetPinMode(input_port, input_pin, LL_GPIO_MODE_OUTPUT);       // set as reciever // clear bits and set receive bits..
-	P0M0 |= 0x02; P0M1 &= ~0x02; 	//推挽输出
 	P0PU &= ~0x02; P0PD &= ~0x02; 	//无上下拉
+	P0M0 |= 0x02; P0M1 &= ~0x02; 	//推挽输出
 }
 
 void send_ACK(void){
@@ -243,12 +242,13 @@ bool checkAddressWritable(uint32_t address) {
 }
 
 void decodeInput(){
+	DEBUG("DECODE INPUT\n");
 	if(incoming_payload_no_command){
 		len = payload_buffer_size;
 	//	received_crc_low_byte = rxBuffer[len];          // one higher than len in buffer
 	//	received_crc_high_byte = rxBuffer[len+1];
 		if(checkCrc(rxBuffer,len)){
-			int i;
+			uint16_t i;
 			memset(payLoadBuffer, 0, sizeof(payLoadBuffer));             // reset buffer
 
 			for(i = 0; i < len; i++){
@@ -393,7 +393,7 @@ void decodeInput(){
 
 	if(cmd == CMD_READ_FLASH_SIL){     // for sending contents of flash memory at the memory location set in bootloader.c need to still set memory with data from set mem command
 		uint16_t out_buffer_size;
-		uint8_t *read_data;
+		uint8_t xdata* read_data;
 		len = 2;
 		if (!checkCrc((uint8_t*)rxBuffer, len)) {
 			send_BAD_CRC_ACK();
@@ -407,7 +407,7 @@ void decodeInput(){
 			out_buffer_size = 256;
 		}
 		address_expected_increment = 128;
-		read_data = (uint8_t*)malloc(out_buffer_size + 3);
+		read_data = (uint8_t xdata*)malloc(out_buffer_size + 3);
 		setTransmit();														// make buffer 3 larger to fit CRC and ACK
 		memset(read_data, 0, sizeof(read_data));
         //    read_flash((uint8_t*)read_data , address);                 	// make sure read_flash reads two less than buffer.
@@ -436,6 +436,7 @@ void serialreadChar()
 	int bits_to_read;
 	rxbyte=0;
 
+	DEBUG("SERIAL READ CHAR\n");
 
 	PWMB_PSCRL = 0xBF; // set to 1/4mhz
 	PWMB_CNTRH = 0x00;
@@ -462,13 +463,15 @@ void serialreadChar()
 	bits_to_read = 0;
 	while (bits_to_read < 8) {
 		delayMicroseconds(BITTIME);
-		rxbyte = rxbyte | ((uint8_t)(input_pin) >> PIN_NUMBER) << bits_to_read;
-	bits_to_read++;
+		rxbyte = rxbyte | (uint8_t)(input_pin) << bits_to_read;
+		bits_to_read++;
 	}
 
 	delayMicroseconds(HALFBITTIME); //wait till the stop bit time begins
 	messagereceived = 1;
 	receviedByte = rxbyte;
+
+	printf("rxbyte:%u\n",(uint8_t)rxbyte);
 	//return rxbyte;
 
 }
@@ -531,7 +534,6 @@ void recieveBuffer(void){
 	messagereceived = 0;
 	memset(rxBuffer, 0, sizeof(rxBuffer));
 
-
 	for(i = 0; i < sizeof(rxBuffer); i++){
 		serialreadChar();
 		if(incoming_payload_no_command){
@@ -557,7 +559,10 @@ void recieveBuffer(void){
 }
 
 void update_EEPROM(void){
+	
 	read_flash_bin(rxBuffer , EEPROM_START_ADD , 48);
+
+	// printf("Buffer:%s\n",rxBuffer);
 	if(BOOTLOADER_VERSION != rxBuffer[2]){
 		if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
 			return;
@@ -578,6 +583,7 @@ void checkForSignal(void){
 	delayMicroseconds(500);
 
 	for(i = 0 ; i < 500; i ++){
+
 		if(~input_pin){
 			low_pin_count++;
 		}else{
@@ -622,61 +628,51 @@ void Uart1_Init(void)	//921600bps@48MHz
 	T2L = 0xF3;			//设置定时初始值
 	T2H = 0xFF;			//设置定时初始值
 	AUXR |= 0x10;		//定时器2开始计时
-}
 
-#include <stdio.h>
-
-
-int main(void)
-{
-
-	//Prevent warnings
-	(void)bootloader_version;
-
-  	// LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
-  	// LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
-
-  	// FLASH->ACR |= FLASH_ACR_PRFTBE;   // prefetch buffer enable
-
-  	SystemClock_Config();
-	Uart1_Init();
 
 	P3M0 |= 0x03; P3M1 &= ~0x03; 
 	P2M0 |= 0x03; P2M1 &= ~0x03; 
+}
+
+
+uint8_t xdata MEMPOOL[512];
+
+int main(void)
+{
+	
+	//Prevent warnings
+	(void)bootloader_version;
+
+  	SystemClock_Config();
+
+	IAP_TPS =48;	//设置IAP等待时间
 
 	PWMB_Timer_Init();
 
+   	GPIO_INPUT_INIT();     // init the pin with a pulldown
 
-	while (1)
-	{
-		// printf("SystemClock_Config\n");
-		printf("%u\n",((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL));
-	}
+	Uart1_Init();
 
-//    	GPIO_INPUT_INIT();     // init the pin with a pulldown
+	init_mempool(MEMPOOL,512);
+	
+   	checkForSignal();
+	
+	P0PD &= ~0x02;
+	P0PU |= 0x02;			//上拉输入
 
-//    	checkForSignal();
+  	deviceInfo[3] = pin_code;
 
-
-// 	P0PD &= ~0x02;
-// 	P0PU |= 0x02;			//上拉输入
-//    	// LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_UP);
-
-// #ifdef USE_ADC_INPUT  // go right to application
-//   	jump();
-// #endif
-//   	deviceInfo[3] = pin_code;
-//   	update_EEPROM();
-
-// //  sendDeviceInfo();
-//   	while (1)
-//   	{
-// 	  	recieveBuffer();
-// 	  	if (invalid_command > 100){
-// 		  	jump();
-// 	  	}
-//   	}
-
+	update_EEPROM();
+  	while (1)
+  	{
+	  	recieveBuffer();
+		printf("invalid_command:%d\n",invalid_command);
+	  	if (invalid_command > 100){
+		  	// jump();
+			
+	  	}
+		P20 = ~P20;
+  	}
 }
 
 
@@ -690,7 +686,7 @@ void SystemClock_Config(void)
 	P_SW2 = 0x80;			    // 开启特殊地址访问
 
 	CLKDIV = 0x04;			//主时钟MCLK输出到系统时钟(SYSCLK)分频1
-       
+  
 	IRTRIM = CHIPID12;     		//内部时钟源选择24M
 	HIRCSEL1 = 1;
 	HIRCSEL0 = 0;				//27Mhz频段
@@ -723,6 +719,8 @@ void SystemClock_Config(void)
 
 static void PWMB_Timer_Init(void)
 {
+//由于未开启高速PWM所以PWMB的时钟源为48Mhz
+
 	PWMB_ENO = 0x00;		//禁止PWMB的PWM输出
 	PWMB_IOAUX = 0x00;		//禁止PWMB
 
@@ -731,7 +729,7 @@ static void PWMB_Timer_Init(void)
 	PWMB_CNTRH = 0x00;
 	PWMB_CNTRL = 0x00;		//清零计数器
 	PWMB_PSCRH = 0x00;		
-	PWMB_PSCRL = 0x2F;		//PWMB时钟源分频到1Mhz
+	PWMB_PSCRL = 47;		//PWMB时钟源分频到1Mhz
 	PWMB_IER = 0x00;		//禁止PWMB中断
 	PWMB_CR1 = 0x01;		//使能计数器
 }

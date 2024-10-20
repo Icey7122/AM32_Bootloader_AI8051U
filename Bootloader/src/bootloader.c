@@ -11,10 +11,12 @@
 
 #include "bootloader.h"
 #include <string.h>
+#include "stdio.h"
 
 
 #define page_size 0x200                   // 512 bytes for STC8051U
 
+extern void delayMicroseconds(uint32_t micros);
 
 void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 
@@ -36,10 +38,13 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 		_nop_();
 		_nop_();
 
-		while(CMD_FAIL);                  
+		while(CMD_FAIL)
+		{
+			printf("CMD_FAIL\n");
+		}                  
 	}
 
-	IAP_WRITE();                        //宏调用, 送字节写命令
+	IAP_WRITE();  			//宏调用, 送字节写命令
 	do
     {
         IAP_ADDRE = (uint8_t)(add >> 16); 
@@ -54,7 +59,10 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 		_nop_();
 		_nop_();
 
-		while(CMD_FAIL);
+		while(CMD_FAIL)
+		{
+			printf("CMD_FAIL\n");
+		}
 
         add++;                     //下一个地址
         dat++;                    //下一个数据
@@ -70,6 +78,7 @@ void read_flash_bin(uint8_t*  dat , uint32_t add , int out_buff_len){
 	IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
     IAP_READ();                             //送字节读命令，命令不需改变时，不需重新送命令
 	for (i = 0; i < out_buff_len ; i ++){
+		CMD_FAIL = 0;
         IAP_ADDRE = (uint8_t)((add+i) >> 16); //送地址高字节（地址需要改变时才需重新送地址）
         IAP_ADDRH = (uint8_t)((add+i) >> 8);  //送地址中字节（地址需要改变时才需重新送地址）
         IAP_ADDRL = (uint8_t)(add+i);         //送地址低字节（地址需要改变时才需重新送地址）
