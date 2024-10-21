@@ -6,7 +6,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "nstdbool.h"
 #include "main.h"
-// #include <stdio.h>
+#include <stdio.h>
 //#define USE_ADC_INPUT      // will go right to application and ignore eeprom
 
 #include "nstdint.h"
@@ -14,11 +14,11 @@
 #include <string.h>
 #include "bootloader.h"
 
-#define STC32_FLASH_START 0x00000000
+#define STC32_FLASH_START 		0x0000
 #define FIRMWARE_RELATIVE_START 0x1000
-#define EEPROM_RELATIVE_START 0xFFFF - 0x400
+#define EEPROM_RELATIVE_START 	0xFFFF - 0x400
 
-uint8_t bootloader_version = BOOTLOADER_VERSION;
+uint8_t code bootloader_version = BOOTLOADER_VERSION;
 
 typedef void (*pFunction)(void);
 
@@ -414,9 +414,10 @@ void decodeInput(void){
         read_data[out_buffer_size + 1] = calculated_crc_high_byte;
         read_data[out_buffer_size + 2] = 0x30;
         sendString(read_data, out_buffer_size+3);
-		
+
 		setReceive();
 		free(read_data);
+
 		return;
 	}
 
@@ -627,22 +628,26 @@ void Uart1_Init(void)	//921600bps@48MHz
 }
 
 
+
 int main(void)
 {
-	
+
 	//Prevent warnings
+	static uint8_t xdata MEMPOOL[1024];		//内存池
 	(void)bootloader_version;
+	
 
   	SystemClock_Config();
+	init_mempool(MEMPOOL, sizeof(MEMPOOL));	//初始化内存池
 
 	IAP_TPS =48;	//设置IAP等待时间
 
 	PWMB_Timer_Init();
 
-   	GPIO_INPUT_INIT();     // init the pin with a pulldown
+   	GPIO_INPUT_INIT();     // init the pin with a pullup
 
-	Uart1_Init();
-	
+	// Uart1_Init();
+
    	checkForSignal();
 	
 	P0PD &= ~0x02;

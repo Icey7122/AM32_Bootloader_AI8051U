@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -17,7 +17,7 @@ stmt  level    source
     6          /* Includes ------------------------------------------------------------------*/
     7          #include "nstdbool.h"
     8          #include "main.h"
-    9          // #include <stdio.h>
+    9          #include <stdio.h>
    10          //#define USE_ADC_INPUT      // will go right to application and ignore eeprom
    11          
    12          #include "nstdint.h"
@@ -25,11 +25,11 @@ stmt  level    source
    14          #include <string.h>
    15          #include "bootloader.h"
    16          
-   17          #define STC32_FLASH_START 0x00000000
+   17          #define STC32_FLASH_START     0x0000
    18          #define FIRMWARE_RELATIVE_START 0x1000
-   19          #define EEPROM_RELATIVE_START 0xFFFF - 0x400
+   19          #define EEPROM_RELATIVE_START   0xFFFF - 0x400
    20          
-   21          uint8_t bootloader_version = BOOTLOADER_VERSION;
+   21          uint8_t code bootloader_version = BOOTLOADER_VERSION;
    22          
    23          typedef void (*pFunction)(void);
    24          
@@ -66,7 +66,7 @@ stmt  level    source
    55          #ifdef USE_PB4
                // #define input_pin       LL_GPIO_PIN_4
                // #define input_port        GPIOB
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 2   
 
                // #define PIN_NUMBER        4
                // #define PORT_LETTER       1
@@ -134,7 +134,7 @@ stmt  level    source
   121          //待改（使用定时器做延时函数）
   122          void delayMicroseconds(uint32_t micros){
   123   1        // TIM2->CNT = 0;
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 3   
 
   124   1        PWMB_CNTRH = 0x00;
   125   1        PWMB_CNTRL = 0x00;
@@ -202,7 +202,7 @@ stmt  level    source
   187   1      }
   188          
   189          char checkCrc(uint8_t* pBuff, uint16_t length){
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 4   
 
   190   1      
   191   1        uint8_t received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
@@ -270,7 +270,7 @@ stmt  level    source
   251   3            for(i = 0; i < len; i++){
   252   4              payLoadBuffer[i]= rxBuffer[i];
   253   4            }
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 5   
 
   254   3            send_ACK();
   255   3            incoming_payload_no_command = 0;
@@ -338,7 +338,7 @@ stmt  level    source
              -ess, Low byte address, crclb ,crchb
   317   2          len = 4;  // package without 2 byte crc
   318   2          if (!checkCrc((uint8_t*)rxBuffer, len)) {
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 6   
 
   319   3            send_BAD_CRC_ACK();
   320   3            return;
@@ -406,7 +406,7 @@ stmt  level    source
   381   2      
   382   2          send_ACK();
   383   2          return;
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 7   
 
   384   2        }
   385   1      
@@ -446,377 +446,382 @@ stmt  level    source
   417   2      
   418   2          setReceive();
   419   2          free(read_data);
-  420   2          return;
-  421   2        }
-  422   1      
-  423   1          setTransmit();
-  424   1      
-  425   1        serialwriteChar(0xC1);                // bad command message.
-  426   1        invalid_command++;
-  427   1        setReceive();
-  428   1      }
-  429          
-  430          void serialreadChar()
-  431          {
-  432   1        int bits_to_read;
-  433   1        rxbyte=0;
-  434   1      
-  435   1        PWMB_PSCRL = 0xBF; // set to 1/4mhz
-  436   1        PWMB_CNTRH = 0;
-  437   1        PWMB_CNTRL = 0;
-  438   1        while(~input_pin){ // wait for rx to go high
-  439   2          if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 50000){
-  440   3            invalid_command = 101;
-  441   3            return;
-  442   3          }
-  443   2        }
-  444   1      
+  420   2      
+  421   2          return;
+  422   2        }
+  423   1      
+  424   1          setTransmit();
+  425   1      
+  426   1        serialwriteChar(0xC1);                // bad command message.
+  427   1        invalid_command++;
+  428   1        setReceive();
+  429   1      }
+  430          
+  431          void serialreadChar()
+  432          {
+  433   1        int bits_to_read;
+  434   1        rxbyte=0;
+  435   1      
+  436   1        PWMB_PSCRL = 0xBF; // set to 1/4mhz
+  437   1        PWMB_CNTRH = 0;
+  438   1        PWMB_CNTRL = 0;
+  439   1        while(~input_pin){ // wait for rx to go high
+  440   2          if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 50000){
+  441   3            invalid_command = 101;
+  442   3            return;
+  443   3          }
+  444   2        }
   445   1      
-  446   1        PWMB_PSCRL = 0x2F; // set Buck to 1MHz
-  447   1        PWMB_CNTRH = 0;
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 8   
+  446   1      
+  447   1        PWMB_PSCRL = 0x2F; // set Buck to 1MHz
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 8   
 
-  448   1        PWMB_CNTRL = 0;
-  449   1        while(input_pin){   // wait for it go go low
-  450   2          if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250 && messagereceived){
-  451   3            return;
-  452   3          }
-  453   2        }
-  454   1      
-  455   1        delayMicroseconds(HALFBITTIME);//wait to get the center of bit time
-  456   1      
-  457   1        bits_to_read = 0;
-  458   1        while (bits_to_read < 8) {
-  459   2          delayMicroseconds(BITTIME);
-  460   2          rxbyte = rxbyte | (uint8_t)input_pin << bits_to_read;
-  461   2          bits_to_read++;
-  462   2        }
-  463   1      
-  464   1        delayMicroseconds(HALFBITTIME); //wait till the stop bit time begins
-  465   1        messagereceived = 1;
-  466   1        receviedByte = rxbyte;
-  467   1        
-  468   1      }
-  469          
-  470          void serialwriteChar(char dat)
-  471          {
-  472   1      
-  473   1        //BRR 只写寄存器：只能改变管脚状态为低电平，对寄存器 管脚对于位写 1 相应�
+  448   1        PWMB_CNTRH = 0;
+  449   1        PWMB_CNTRL = 0;
+  450   1        while(input_pin){   // wait for it go go low
+  451   2          if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250 && messagereceived){
+  452   3            return;
+  453   3          }
+  454   2        }
+  455   1      
+  456   1        delayMicroseconds(HALFBITTIME);//wait to get the center of bit time
+  457   1      
+  458   1        bits_to_read = 0;
+  459   1        while (bits_to_read < 8) {
+  460   2          delayMicroseconds(BITTIME);
+  461   2          rxbyte = rxbyte | (uint8_t)input_pin << bits_to_read;
+  462   2          bits_to_read++;
+  463   2        }
+  464   1      
+  465   1        delayMicroseconds(HALFBITTIME); //wait till the stop bit time begins
+  466   1        messagereceived = 1;
+  467   1        receviedByte = rxbyte;
+  468   1        
+  469   1      }
+  470          
+  471          void serialwriteChar(char dat)
+  472          {
+  473   1      
+  474   1        //BRR 只写寄存器：只能改变管脚状态为低电平，对寄存器 管脚对于位写 1 相应�
              -��脚会为低电平。写 0 无动作。
-  474   1        // input_port->BRR = input_pin;; //initiate start bit
-  475   1        char bits_to_read = 0;
-  476   1      
-  477   1        input_pin = 0;          //initiate start bit
-  478   1      
-  479   1        
-  480   1        while (bits_to_read < 8) {
-  481   2      
-  482   2          delayMicroseconds(BITTIME);
-  483   2      
-  484   2          if (dat & 0x01) {
-  485   3            // input_port->BSRR = input_pin;
-  486   3            input_pin = 1;
-  487   3          }else{
-  488   3            // input_port->BRR = input_pin;
-  489   3            input_pin = 0;
-  490   3          }
-  491   2          bits_to_read++;
-  492   2          dat = dat >> 1;
-  493   2        }
-  494   1      
-  495   1        delayMicroseconds(BITTIME);
-  496   1      
-  497   1        // input_port->BSRR = input_pin; //write the stop bit
-  498   1      
+  475   1        // input_port->BRR = input_pin;; //initiate start bit
+  476   1        char bits_to_read = 0;
+  477   1      
+  478   1        input_pin = 0;          //initiate start bit
+  479   1      
+  480   1        
+  481   1        while (bits_to_read < 8) {
+  482   2      
+  483   2          delayMicroseconds(BITTIME);
+  484   2      
+  485   2          if (dat & 0x01) {
+  486   3            // input_port->BSRR = input_pin;
+  487   3            input_pin = 1;
+  488   3          }else{
+  489   3            // input_port->BRR = input_pin;
+  490   3            input_pin = 0;
+  491   3          }
+  492   2          bits_to_read++;
+  493   2          dat = dat >> 1;
+  494   2        }
+  495   1      
+  496   1        delayMicroseconds(BITTIME);
+  497   1      
+  498   1        // input_port->BSRR = input_pin; //write the stop bit
   499   1      
-  500   1        input_pin = 1;          //write the stop bit
-  501   1      
+  500   1      
+  501   1        input_pin = 1;          //write the stop bit
   502   1      
-  503   1        // if more than one byte a delay is needed after stop bit,
-  504   1        //if its the only one no delay, the sendstring function adds delay after each bit
-  505   1      
-  506   1        //if(cmd == 255 || cmd == 254 || cmd == 1  || incoming_payload_no_command){
-  507   1        //
-  508   1        //}else{
-  509   1        //  delayMicroseconds(BITTIME);
-  510   1        //}
-  511   1      }
-  512          
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 9   
+  503   1      
+  504   1        // if more than one byte a delay is needed after stop bit,
+  505   1        //if its the only one no delay, the sendstring function adds delay after each bit
+  506   1      
+  507   1        //if(cmd == 255 || cmd == 254 || cmd == 1  || incoming_payload_no_command){
+  508   1        //
+  509   1        //}else{
+  510   1        //  delayMicroseconds(BITTIME);
+  511   1        //}
+  512   1      }
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 9   
 
-  513          void sendString(uint8_t *dat, int len){
-  514   1        int i;
-  515   1        for(i = 0; i < len; i++){
-  516   2          serialwriteChar(dat[i]);
-  517   2          delayMicroseconds(BITTIME);
-  518   2        }
-  519   1      }
-  520          
-  521          void recieveBuffer(void){
-  522   1      
-  523   1        int i = 0;
-  524   1        count = 0;
-  525   1        messagereceived = 0;
-  526   1        memset(rxBuffer, 0, sizeof(rxBuffer));
-  527   1      
-  528   1        for(i = 0; i < sizeof(rxBuffer); i++){
-  529   2          serialreadChar();
-  530   2          if(incoming_payload_no_command){
-  531   3            if(count == payload_buffer_size+2){
-*** WARNING C173 IN LINE 531 OF Bootloader\src\main.c: '==': signed/unsigned type mismatch
-  532   4              
-  533   4              break;
-  534   4            }
-  535   3            rxBuffer[i] = rxbyte;
-  536   3            count++;
-  537   3          }else{
-  538   3            if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250){
-  539   4            count = 0;
-  540   4            break;
-  541   4            }else{
-  542   4            rxBuffer[i] = rxbyte;
-  543   4            if(i == 257){
-  544   5              invalid_command+=20;       // needs one hundred to trigger a jump but will be reset on next set addre
+  513          
+  514          void sendString(uint8_t *dat, int len){
+  515   1        int i;
+  516   1        for(i = 0; i < len; i++){
+  517   2          serialwriteChar(dat[i]);
+  518   2          delayMicroseconds(BITTIME);
+  519   2        }
+  520   1      }
+  521          
+  522          void recieveBuffer(void){
+  523   1      
+  524   1        int i = 0;
+  525   1        count = 0;
+  526   1        messagereceived = 0;
+  527   1        memset(rxBuffer, 0, sizeof(rxBuffer));
+  528   1      
+  529   1        for(i = 0; i < sizeof(rxBuffer); i++){
+  530   2          serialreadChar();
+  531   2          if(incoming_payload_no_command){
+  532   3            if(count == payload_buffer_size+2){
+*** WARNING C173 IN LINE 532 OF Bootloader\src\main.c: '==': signed/unsigned type mismatch
+  533   4              
+  534   4              break;
+  535   4            }
+  536   3            rxBuffer[i] = rxbyte;
+  537   3            count++;
+  538   3          }else{
+  539   3            if(((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL) > 250){
+  540   4            count = 0;
+  541   4            break;
+  542   4            }else{
+  543   4            rxBuffer[i] = rxbyte;
+  544   4            if(i == 257){
+  545   5              invalid_command+=20;       // needs one hundred to trigger a jump but will be reset on next set addre
              -ss commmand
-  545   5      
-  546   5              }
-  547   4            }
-  548   3          }
-  549   2        }
-  550   1      
-  551   1        decodeInput();
-  552   1      }
-  553          
-  554          void update_EEPROM(void){
-  555   1        
-  556   1        read_flash_bin(rxBuffer , EEPROM_START_ADD , 48);
-  557   1      
-  558   1        if(BOOTLOADER_VERSION != rxBuffer[2]){
-  559   2          if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
-  560   3            return;
-  561   3          }
-  562   2          rxBuffer[2] = BOOTLOADER_VERSION;
-  563   2          save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
-  564   2        }
-  565   1      }
-  566          
-  567          void checkForSignal(void){
-  568   1        //uint8_t floating_or_signal= 0;
-  569   1        // LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_DOWN);
-  570   1        int i;
-  571   1      
-  572   1        P0PU &= ~0x02; //关闭上拉电阻
-  573   1        P0PD |= 0x02; //开启下拉电阻
-  574   1      
-  575   1        delayMicroseconds(500);
-  576   1      
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 10  
+  546   5      
+  547   5              }
+  548   4            }
+  549   3          }
+  550   2        }
+  551   1      
+  552   1        decodeInput();
+  553   1      }
+  554          
+  555          void update_EEPROM(void){
+  556   1        
+  557   1        read_flash_bin(rxBuffer , EEPROM_START_ADD , 48);
+  558   1      
+  559   1        if(BOOTLOADER_VERSION != rxBuffer[2]){
+  560   2          if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
+  561   3            return;
+  562   3          }
+  563   2          rxBuffer[2] = BOOTLOADER_VERSION;
+  564   2          save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
+  565   2        }
+  566   1      }
+  567          
+  568          void checkForSignal(void){
+  569   1        //uint8_t floating_or_signal= 0;
+  570   1        // LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_DOWN);
+  571   1        int i;
+  572   1      
+  573   1        P0PU &= ~0x02; //关闭上拉电阻
+  574   1        P0PD |= 0x02; //开启下拉电阻
+  575   1      
+  576   1        delayMicroseconds(500);
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 10  
 
-  577   1        for(i = 0 ; i < 500; i ++){
-  578   2      
-  579   2          if(~input_pin){
-  580   3            low_pin_count++;
-  581   3          }else{
-  582   3        //   high_pin_count++;
-  583   3          }
-  584   2          delayMicroseconds(10);
-  585   2        }
-  586   1      
-  587   1        if(low_pin_count == 0){
-  588   2          return;           // all high while pin is pulled low, bootloader signal
-  589   2        }
-  590   1      
-  591   1        low_pin_count = 0;
-  592   1      
-  593   1        P0PU &= ~0x02; //关闭上拉电阻
-  594   1        P0PD &= ~0x02; //关闭下拉电阻 
-  595   1        // LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_NO);
-  596   1        delayMicroseconds(500);
-  597   1      
-  598   1        for(i = 0 ; i < 500; i ++){
-  599   2          if(~input_pin){
-  600   3            low_pin_count++;
-  601   3          }
-  602   2          delayMicroseconds(10);
-  603   2        }
-  604   1      
-  605   1        if(low_pin_count == 0){
-  606   2          return;            // when floated all
-  607   2        }
-  608   1      
-  609   1        if(low_pin_count > 0){
-  610   2          jump();
-  611   2        }
-  612   1      }
-  613          
+  577   1      
+  578   1        for(i = 0 ; i < 500; i ++){
+  579   2      
+  580   2          if(~input_pin){
+  581   3            low_pin_count++;
+  582   3          }else{
+  583   3        //   high_pin_count++;
+  584   3          }
+  585   2          delayMicroseconds(10);
+  586   2        }
+  587   1      
+  588   1        if(low_pin_count == 0){
+  589   2          return;           // all high while pin is pulled low, bootloader signal
+  590   2        }
+  591   1      
+  592   1        low_pin_count = 0;
+  593   1      
+  594   1        P0PU &= ~0x02; //关闭上拉电阻
+  595   1        P0PD &= ~0x02; //关闭下拉电阻 
+  596   1        // LL_GPIO_SetPinPull(input_port, input_pin, LL_GPIO_PULL_NO);
+  597   1        delayMicroseconds(500);
+  598   1      
+  599   1        for(i = 0 ; i < 500; i ++){
+  600   2          if(~input_pin){
+  601   3            low_pin_count++;
+  602   3          }
+  603   2          delayMicroseconds(10);
+  604   2        }
+  605   1      
+  606   1        if(low_pin_count == 0){
+  607   2          return;            // when floated all
+  608   2        }
+  609   1      
+  610   1        if(low_pin_count > 0){
+  611   2          jump();
+  612   2        }
+  613   1      }
   614          
-  615          void Uart1_Init(void) //921600bps@48MHz
-  616          {
-  617   1        SCON = 0x50;    //8位数据,可变波特率
-  618   1        AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
-  619   1        AUXR |= 0x04;   //定时器时钟1T模式
-  620   1        T2L = 0xF3;     //设置定时初始值
-  621   1        T2H = 0xFF;     //设置定时初始值
-  622   1        AUXR |= 0x10;   //定时器2开始计时
-  623   1      
+  615          
+  616          void Uart1_Init(void) //921600bps@48MHz
+  617          {
+  618   1        SCON = 0x50;    //8位数据,可变波特率
+  619   1        AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
+  620   1        AUXR |= 0x04;   //定时器时钟1T模式
+  621   1        T2L = 0xF3;     //设置定时初始值
+  622   1        T2H = 0xFF;     //设置定时初始值
+  623   1        AUXR |= 0x10;   //定时器2开始计时
   624   1      
-  625   1        P3M0 |= 0x03; P3M1 &= ~0x03; 
-  626   1        P2M0 |= 0x03; P2M1 &= ~0x03; 
-  627   1      }
-  628          
+  625   1      
+  626   1        P3M0 |= 0x03; P3M1 &= ~0x03; 
+  627   1        P2M0 |= 0x03; P2M1 &= ~0x03; 
+  628   1      }
   629          
-  630          int main(void)
-  631          {
-  632   1        
-  633   1        //Prevent warnings
-  634   1        (void)bootloader_version;
-*** WARNING C138 IN LINE 634 OF Bootloader\src\main.c: expression with possibly no effect
-  635   1      
-  636   1          SystemClock_Config();
-  637   1      
-  638   1        IAP_TPS =48;  //设置IAP等待时间
+  630          
+  631          
+  632          int main(void)
+  633          {
+  634   1      
+  635   1        //Prevent warnings
+  636   1        static uint8_t xdata MEMPOOL[1024];
+  637   1        (void)bootloader_version;
+*** WARNING C138 IN LINE 637 OF Bootloader\src\main.c: expression with possibly no effect
+  638   1        
   639   1      
-  640   1        PWMB_Timer_Init();
-  641   1      
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 11  
+  640   1          SystemClock_Config();
+  641   1        init_mempool(MEMPOOL, sizeof(MEMPOOL));
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 11  
 
-  642   1          GPIO_INPUT_INIT();     // init the pin with a pulldown
-  643   1      
-  644   1        // Uart1_Init();
-  645   1        
-  646   1          checkForSignal();
-  647   1        
-  648   1        P0PD &= ~0x02;
-  649   1        P0PU |= 0x02;     //上拉输入
+  642   1      
+  643   1        IAP_TPS =48;  //设置IAP等待时间
+  644   1      
+  645   1        PWMB_Timer_Init();
+  646   1      
+  647   1          GPIO_INPUT_INIT();     // init the pin with a pullup
+  648   1      
+  649   1        // Uart1_Init();
   650   1      
-  651   1          deviceInfo[3] = pin_code;
-  652   1      
-  653   1        update_EEPROM();
-  654   1          while (1)
-  655   1          {
-  656   2            recieveBuffer();
-  657   2            // if (invalid_command > 100){
-  658   2          //    // jump();
-  659   2            
-  660   2            // }
-  661   2          }
-  662   1      }
-  663          
-  664          
-  665          
-  666          void SystemClock_Config(void)
-  667          {
-  668   1        EA = 0;
-  669   1      
-  670   1        CKCON = 0x00;           // 设置外部数据总线为最快
-  671   1        WTST = 1;                 // 设置程序代码等待参数，赋值为0可将CPU执行程序的速度设
+  651   1          checkForSignal();
+  652   1        
+  653   1        P0PD &= ~0x02;
+  654   1        P0PU |= 0x02;     //上拉输入
+  655   1      
+  656   1          deviceInfo[3] = pin_code;
+  657   1      
+  658   1        update_EEPROM();
+  659   1          while (1)
+  660   1          {
+  661   2            recieveBuffer();
+  662   2            // if (invalid_command > 100){
+  663   2          //    // jump();
+  664   2            
+  665   2            // }
+  666   2          }
+  667   1      }
+  668          
+  669          
+  670          
+  671          void SystemClock_Config(void)
+  672          {
+  673   1        EA = 0;
+  674   1      
+  675   1        CKCON = 0x00;           // 设置外部数据总线为最快
+  676   1        WTST = 1;                 // 设置程序代码等待参数，赋值为0可将CPU执行程序的速度设
              -置为最快
-  672   1        P_SW2 = 0x80;         // 开启特殊地址访问
-  673   1      
-  674   1        CLKDIV = 0x04;      //主时钟MCLK输出到系统时钟(SYSCLK)分频1
-  675   1        
-  676   1        IRTRIM = CHIPID12;        //内部时钟源选择24M
-  677   1        HIRCSEL1 = 1;
-  678   1        HIRCSEL0 = 0;       //27Mhz频段
-  679   1      
-  680   1        HIRCCR = 0x80;
-  681   1        while (!(HIRCCR & 0x01));
-  682   1        
-  683   1        // MCLKOCR = 72;          //分频72,输出时钟的分频
+  677   1        P_SW2 = 0x80;         // 开启特殊地址访问
+  678   1      
+  679   1        CLKDIV = 0x04;      //主时钟MCLK输出到系统时钟(SYSCLK)分频1
+  680   1        
+  681   1        IRTRIM = CHIPID12;        //内部时钟源选择24M
+  682   1        HIRCSEL1 = 1;
+  683   1        HIRCSEL0 = 0;       //27Mhz频段
   684   1      
-  685   1        CLKSEL = 0x40;      //PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
-  686   1      
-  687   1        USBCLK &= 0x0F;
-  688   1        USBCLK |= 0xA0;
-  689   1        NOP(5);         //等待时钟稳定
-  690   1      
-  691   1        //PLL产生96Mhz时钟
-  692   1      
-  693   1        CLKDIV = 0X01;      //主时钟MCLK输出到系统时钟(SYSCLK)分频1
-  694   1      
-  695   1        CLKSEL |= 0x08;     //MCLK选择PLL/2为时钟源->48Mhz
-  696   1      
-  697   1        HSCLKDIV = 0x01;    //高速PWM,SPI,I2S,TFPU时钟96MHz
-  698   1      
-  699   1        USBCKS = 1;       
-  700   1        USBCKS2 = 0;      //USB时钟选择48Mhz
+  685   1        HIRCCR = 0x80;
+  686   1        while (!(HIRCCR & 0x01));
+  687   1        
+  688   1        // MCLKOCR = 72;          //分频72,输出时钟的分频
+  689   1      
+  690   1        CLKSEL = 0x40;      //PLL,高速IO，系统时钟源的相关设置(先选择内部IRC作为系统时钟)
+  691   1      
+  692   1        USBCLK &= 0x0F;
+  693   1        USBCLK |= 0xA0;
+  694   1        NOP(5);         //等待时钟稳定
+  695   1      
+  696   1        //PLL产生96Mhz时钟
+  697   1      
+  698   1        CLKDIV = 0X01;      //主时钟MCLK输出到系统时钟(SYSCLK)分频1
+  699   1      
+  700   1        CLKSEL |= 0x08;     //MCLK选择PLL/2为时钟源->48Mhz
   701   1      
-  702   1        EA = 1;
-  703   1      }
-  704          
-  705          
-  706          static void PWMB_Timer_Init(void)
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 12  
+  702   1        HSCLKDIV = 0x01;    //高速PWM,SPI,I2S,TFPU时钟96MHz
+  703   1      
+  704   1        USBCKS = 1;       
+  705   1        USBCKS2 = 0;      //USB时钟选择48Mhz
+  706   1      
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 12  
 
-  707          {
-  708   1      //由于未开启高速PWM所以PWMB的时钟源为48Mhz
-  709   1      
-  710   1        PWMB_ENO = 0x00;    //禁止PWMB的PWM输出
-  711   1        PWMB_IOAUX = 0x00;    //禁止PWMB
-  712   1      
-  713   1        PWMB_ARRH = 0xFF;
-  714   1        PWMB_ARRL = 0xFF;   //设置PWMB周期为65535
-  715   1        PWMB_CNTRH = 0x00;
-  716   1        PWMB_CNTRL = 0x00;    //清零计数器
-  717   1        PWMB_PSCRH = 0x00;    
-  718   1        PWMB_PSCRL = 47;    //PWMB时钟源分频到1Mhz
-  719   1        PWMB_IER = 0x00;    //禁止PWMB中断
-  720   1        PWMB_CR1 = 0x01;    //使能计数器
-  721   1      }
-  722          
-  723          
-  724          
-  725          static void GPIO_INPUT_INIT(void)
-  726          {
-  727   1      #ifdef USE_PB4
+  707   1        EA = 1;
+  708   1      }
+  709          
+  710          
+  711          static void PWMB_Timer_Init(void)
+  712          {
+  713   1      //由于未开启高速PWM所以PWMB的时钟源为48Mhz
+  714   1      
+  715   1        PWMB_ENO = 0x00;    //禁止PWMB的PWM输出
+  716   1        PWMB_IOAUX = 0x00;    //禁止PWMB
+  717   1      
+  718   1        PWMB_ARRH = 0xFF;
+  719   1        PWMB_ARRL = 0xFF;   //设置PWMB周期为65535
+  720   1        PWMB_CNTRH = 0x00;
+  721   1        PWMB_CNTRL = 0x00;    //清零计数器
+  722   1        PWMB_PSCRH = 0x00;    
+  723   1        PWMB_PSCRL = 47;    //PWMB时钟源分频到1Mhz
+  724   1        PWMB_IER = 0x00;    //禁止PWMB中断
+  725   1        PWMB_CR1 = 0x01;    //使能计数器
+  726   1      }
+  727          
+  728          
+  729          
+  730          static void GPIO_INPUT_INIT(void)
+  731          {
+  732   1      #ifdef USE_PB4
                #endif
-  729   1      #ifdef USE_PA2
+  734   1      #ifdef USE_PA2
                #endif
-  731   1      
-  732   1        P0M0 = 0x00; P0M1 = 0xff; 
-  733   1      
-  734   1          P0IE |= 0x02; 
-  735   1        P0PU |= 0x02; 
-  736   1        //高阻上拉输入
-  737   1      }
-  738          
-  739          
-  740          #pragma FUNCTIONS (static)
-  741          char putchar(char c)
-  742          {
-  743   1        // serialwriteChar(c);
-  744   1        SBUF = c;
-  745   1        while (!TI);
-  746   1        TI = 0;
-  747   1        return c;
-  748   1      }
-  749          
-  750          
-  751          
-  752          
-  753          
+  736   1      
+  737   1        P0M0 = 0x00; P0M1 = 0xff; 
+  738   1      
+  739   1          P0IE |= 0x02; 
+  740   1        P0PU |= 0x02; 
+  741   1        //高阻上拉输入
+  742   1      }
+  743          
+  744          
+  745          #pragma FUNCTIONS (static)
+  746          char putchar(char c)
+  747          {
+  748   1        // serialwriteChar(c);
+  749   1        SBUF = c;
+  750   1        while (!TI);
+  751   1        TI = 0;
+  752   1        return c;
+  753   1      }
+  754          
+  755          
+  756          
+  757          
+  758          
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      2407     ------
+  code size            =      2423     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
   pdata size           =    ------     ------
-  xdata size           =    ------     ------
+  xdata size           =      1024     ------
   xdata-const size     =    ------     ------
-  edata size           =       569     ------
+  edata size           =       568     ------
   bit size             =    ------     ------
   ebit size            =    ------     ------
   bitaddressable size  =    ------     ------
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:25:40  PAGE 13  
+
   ebitaddressable size =    ------     ------
   far data size        =    ------     ------
   huge data size       =    ------     ------
   const size           =    ------     ------
-  hconst size          =        83     ------
-C251 COMPILER V5.60.0,  main                                                               21/10/24  10:51:43  PAGE 13  
-
+  hconst size          =        78     ------
 End of Module Information.
 
 

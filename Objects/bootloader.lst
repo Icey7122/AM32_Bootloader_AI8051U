@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  10:34:30  PAGE 1   
+C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  11:14:30  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE bootloader
@@ -22,19 +22,19 @@ stmt  level    source
    11          
    12          #include "bootloader.h"
    13          #include <string.h>
-   14          #include "stdio.h"
+   14          
    15          
-   16          
-   17          #define page_size 0x200                   // 512 bytes for STC8051U
-   18          
-   19          extern void delayMicroseconds(uint32_t micros);
-   20          
-   21          void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
-   22   1      
-   23   1        IAP_ENABLE();                         
-   24   1        // unlock flash
-   25   1        // erase page if address even divisable by 512
-   26   1        if((add % page_size) == 0){
+   16          #define page_size 0x200                   // 512 bytes for STC8051U
+   17          
+   18          extern void delayMicroseconds(uint32_t micros);
+   19          
+   20          void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
+   21   1      
+   22   1        IAP_ENABLE();                         
+   23   1        // unlock flash
+   24   1        // erase page if address even divisable by 512
+   25   1        if((add % page_size) == 0){
+   26   2          CMD_FAIL = 0;
    27   2      
    28   2          IAP_ERASE();                        
    29   2      
@@ -49,77 +49,73 @@ stmt  level    source
    38   2          _nop_();
    39   2          _nop_();
    40   2      
-   41   2          while(CMD_FAIL)
-   42   2          {
-   43   3            printf("CMD_FAIL\n");
-   44   3          }                  
-   45   2        }
-   46   1      
-   47   1        IAP_WRITE();        //宏调用, 送字节写命令
-   48   1        do
-   49   1          {
-   50   2              IAP_ADDRE = (uint8_t)(add >> 16); 
-   51   2              IAP_ADDRH = (uint8_t)(add >> 8);  
-   52   2              IAP_ADDRL = (uint8_t)add;         
-   53   2              IAP_DATA  = *dat;      
-   54   2      
-   55   2          IAP_TRIG = 0x5A;
-   56   2          IAP_TRIG = 0xA5;                   
-   57   2          _nop_();   
-C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  10:34:30  PAGE 2   
+   41   2          while(CMD_FAIL);       
+   42   2        }
+   43   1      
+   44   1        IAP_WRITE();        //宏调用, 送字节写命令
+   45   1        do
+   46   1          {
+   47   2          CMD_FAIL = 0;
+   48   2      
+   49   2              IAP_ADDRE = (uint8_t)(add >> 16); 
+   50   2              IAP_ADDRH = (uint8_t)(add >> 8);  
+   51   2              IAP_ADDRL = (uint8_t)add;         
+   52   2              IAP_DATA  = *dat;      
+   53   2      
+   54   2          IAP_TRIG = 0x5A;
+   55   2          IAP_TRIG = 0xA5;                   
+   56   2          _nop_();   
+   57   2          _nop_();
+C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  11:14:30  PAGE 2   
 
    58   2          _nop_();
    59   2          _nop_();
-   60   2          _nop_();
-   61   2      
-   62   2          while(CMD_FAIL)
-   63   2          {
-   64   3            printf("CMD_FAIL\n");
-   65   3          }
-   66   2      
-   67   2              add++;                     //下一个地址
-   68   2              dat++;                    //下一个数据
-   69   2          }
-   70   1          while(--length);                    //直到结束
-   71   1      
-   72   1      
-   73   1        IAP_DISABLE();                      //关闭IAP
-   74   1      }
-   75          
-   76          void read_flash_bin(uint8_t*  dat , uint32_t add , int out_buff_len){
-   77   1        int i;
-   78   1        IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
-   79   1          IAP_READ();                             //送字节读命令，命令不需改变时，不需重新�
+   60   2      
+   61   2          while(CMD_FAIL);
+   62   2      
+   63   2              add++;                     //下一个地址
+   64   2              dat++;                    //下一个数据
+   65   2          }
+   66   1          while(--length);                    //直到结束
+   67   1      
+   68   1      
+   69   1        IAP_DISABLE();                      //关闭IAP
+   70   1      }
+   71          
+   72          void read_flash_bin(uint8_t*  dat , uint32_t add , int out_buff_len){
+   73   1        int i;
+   74   1        IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
+   75   1          IAP_READ();                             //送字节读命令，命令不需改变时，不需重新�
              -�命令
-   80   1        for (i = 0; i < out_buff_len ; i ++){
-   81   2          CMD_FAIL = 0;
-   82   2              IAP_ADDRE = (uint8_t)((add+i) >> 16); //送地址高字节（地址需要改变时才需重新送
+   76   1        for (i = 0; i < out_buff_len ; i ++){
+   77   2          CMD_FAIL = 0;
+   78   2              IAP_ADDRE = (uint8_t)((add+i) >> 16); //送地址高字节（地址需要改变时才需重新送
              -地址）
-   83   2              IAP_ADDRH = (uint8_t)((add+i) >> 8);  //送地址中字节（地址需要改变时才需重新送
+   79   2              IAP_ADDRH = (uint8_t)((add+i) >> 8);  //送地址中字节（地址需要改变时才需重新送
              -地址）
-   84   2              IAP_ADDRL = (uint8_t)(add+i);         //送地址低字节（地址需要改变时才需重新送
+   80   2              IAP_ADDRL = (uint8_t)(add+i);         //送地址低字节（地址需要改变时才需重新送
              -地址）
-   85   2      
-   86   2          IAP_TRIG = 0x5A;
-   87   2          IAP_TRIG = 0xA5;                   
-   88   2          _nop_();   
-   89   2          _nop_();
-   90   2          _nop_();
-   91   2          _nop_();
-   92   2          while(CMD_FAIL);
-   93   2      
-   94   2              dat[i] = IAP_DATA;            //读出的数据送往
-   95   2        }
-   96   1      
-   97   1        IAP_DISABLE();                      
-   98   1      }
-   99          
-  100          
+   81   2      
+   82   2          IAP_TRIG = 0x5A;
+   83   2          IAP_TRIG = 0xA5;                   
+   84   2          _nop_();   
+   85   2          _nop_();
+   86   2          _nop_();
+   87   2          _nop_();
+   88   2          while(CMD_FAIL);
+   89   2      
+   90   2              dat[i] = IAP_DATA;            //读出的数据送往
+   91   2        }
+   92   1      
+   93   1        IAP_DISABLE();                      
+   94   1      }
+   95          
+   96          
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =       308     ------
+  code size            =       278     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
@@ -134,9 +130,7 @@ Module Information          Static   Overlayable
   far data size        =    ------     ------
   huge data size       =    ------     ------
   const size           =    ------     ------
-  hconst size          =        10     ------
-C251 COMPILER V5.60.0,  bootloader                                                         21/10/24  10:34:30  PAGE 3   
-
+  hconst size          =    ------     ------
 End of Module Information.
 
 

@@ -11,7 +11,6 @@
 
 #include "bootloader.h"
 #include <string.h>
-#include "stdio.h"
 
 
 #define page_size 0x200                   // 512 bytes for STC8051U
@@ -24,6 +23,7 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 	// unlock flash
 	// erase page if address even divisable by 512
 	if((add % page_size) == 0){
+		CMD_FAIL = 0;
 
 		IAP_ERASE();                        
 
@@ -38,15 +38,14 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 		_nop_();
 		_nop_();
 
-		while(CMD_FAIL)
-		{
-			printf("CMD_FAIL\n");
-		}                  
+		while(CMD_FAIL);       
 	}
 
 	IAP_WRITE();  			//宏调用, 送字节写命令
 	do
     {
+		CMD_FAIL = 0;
+
         IAP_ADDRE = (uint8_t)(add >> 16); 
         IAP_ADDRH = (uint8_t)(add >> 8);  
         IAP_ADDRL = (uint8_t)add;         
@@ -59,10 +58,7 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 		_nop_();
 		_nop_();
 
-		while(CMD_FAIL)
-		{
-			printf("CMD_FAIL\n");
-		}
+		while(CMD_FAIL);
 
         add++;                     //下一个地址
         dat++;                    //下一个数据
