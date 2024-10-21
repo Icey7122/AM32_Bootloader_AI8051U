@@ -659,10 +659,9 @@ int main(void)
   	while (1)
   	{
 	  	recieveBuffer();
-	  	// if (invalid_command > 100){
-		//   	// jump();
-			
-	  	// }
+	  	if (invalid_command > 100){
+		  	jump();
+	  	}
   	}
 }
 

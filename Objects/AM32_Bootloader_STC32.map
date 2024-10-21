@@ -1,4 +1,4 @@
-L251 LINKER/LOCATER V4.66.93.0                                                          10/21/2024  11:25:40  PAGE 1
+L251 LINKER/LOCATER V4.66.93.0                                                          10/21/2024  11:27:03  PAGE 1
 
 
 L251 LINKER/LOCATER V4.66.93.0, INVOKED BY:
@@ -39,7 +39,7 @@ BASE        START       END         USED      MEMORY CLASS
 ==========================================================
 000000H     000000H     0007FFH     000338H   EDATA
 000000H     000000H     0007FFH     000004H   HDATA
-FF0000H     FF0000H     FFFFFFH     000C50H   CODE
+FF0000H     FF0000H     FFFFFFH     000C5DH   CODE
 010000H     010000H     01FFFFH     000400H   XDATA
 000000H     FF0000H     FFFFFFH     000050H   HCONST
 000000H     000000H     00007FH     000008H   DATA
@@ -67,35 +67,35 @@ FF0684H   FF071FH   00009CH   BYTE   INSEG    CODE           ?PR?RECIEVEBUFFER?_
 FF0720H   FF07B0H   000091H   BYTE   INSEG    CODE           ?PR?SYSTEMCLOCK_CONFIG?_?MAIN
 FF07B1H   FF082DH   00007DH   BYTE   INSEG    CODE           ?PR?PWMB_TIMER_INIT?_?MAIN
 FF082EH   FF0896H   000069H   BYTE   INSEG    CODE           ?PR?MAKECRC?_?MAIN
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 2
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 2
 
 
 FF0897H   FF08FAH   000064H   BYTE   INSEG    CODE           ?PR?READ_FLASH_BIN?_?BOOTLOADER
-FF08FBH   FF0953H   000059H   BYTE   INSEG    CODE           ?PR?MALLOC?MALLOC
-FF0954H   FF09A1H   00004EH   BYTE   INSEG    CODE           ?PR?MAIN?MAIN
-FF09A2H   FF09E6H   000045H   BYTE   INSEG    CODE           ?PR?UPDATE_EEPROM?_?MAIN
-FF09E7H   FF0A27H   000041H   BYTE   INSEG    CODE           ?PR?JUMP?_?MAIN
-FF0A28H   FF0A67H   000040H   BYTE   INSEG    CODE           ?PR?SENDSTRING?_?MAIN
-FF0A68H   FF0AA6H   00003FH   BYTE   INSEG    CODE           ?PR?DELAYMICROSECONDS?_?MAIN
-FF0AA7H   FF0AB9H   000013H   BYTE   UNIT     CODE           ?C_C51STARTUP
-FF0ABAH   FF0AE2H   000029H   BYTE   UNIT     CODE           ?C_C51STARTUP?2
-FF0AE3H   FF0AE5H   000003H   BYTE   UNIT     CODE           ?C_C51STARTUP?3
-FF0AE6H   FF0B16H   000031H   BYTE   INSEG    CODE           ?PR?SERIALWRITECHAR?_?MAIN
-FF0B17H   FF0B46H   000030H   BYTE   INSEG    CODE           ?PR?CHECKCRC?_?MAIN
-FF0B47H   FF0B6DH   000027H   BYTE   INSEG    CODE           ?PR?SETTRANSMIT?_?MAIN
-FF0B6EH   FF0B94H   000027H   BYTE   INSEG    CODE           ?PR?GPIO_INPUT_INIT?_?MAIN
-FF0B95H   FF0BBBH   000027H   BYTE   INSEG    CODE           ?PR?INIT_MEMPOOL?INIT_MEM
-FF0BBCH   FF0BDAH   00001FH   BYTE   INSEG    CODE           ?PR?UART1_INIT?_?MAIN
-FF0BDBH   FF0BF4H   00001AH   BYTE   INSEG    CODE           ?PR?MEMSET?_?MEMSET
-FF0BF5H   FF0C06H   000012H   BYTE   INSEG    CODE           ?PR?SENDDEVICEINFO?_?MAIN
-FF0C07H   FF0C13H   00000DH   BYTE   INSEG    CODE           ?PR?CHECKADDRESSWRITABLE?_?MAIN
-FF0C14H   FF0C20H   00000DH   BYTE   INSEG    CODE           ?PR?PUTCHAR?MAIN
-FF0C21H   FF0C2CH   00000CH   BYTE   INSEG    CODE           ?PR?SEND_BAD_ACK?_?MAIN
-FF0C2DH   FF0C38H   00000CH   BYTE   INSEG    CODE           ?PR?SEND_BAD_CRC_ACK?_?MAIN
-FF0C39H   FF0C44H   00000CH   BYTE   INSEG    CODE           ?PR?SEND_ACK?_?MAIN
-FF0C45H   FF0C4EH   00000AH   BYTE   INSEG    CODE           ?PR?SETRECEIVE?_?MAIN
-FF0C4FH   FF0C4FH   000001H   BYTE   UNIT     CODE           ?CO?MAIN
-FF0C50H   FF0C9FH   000050H   BYTE   UNIT     HCONST         ?C_INITEDATA
+FF08FBH   FF0955H   00005BH   BYTE   INSEG    CODE           ?PR?MAIN?MAIN
+FF0956H   FF09AEH   000059H   BYTE   INSEG    CODE           ?PR?MALLOC?MALLOC
+FF09AFH   FF09F3H   000045H   BYTE   INSEG    CODE           ?PR?UPDATE_EEPROM?_?MAIN
+FF09F4H   FF0A34H   000041H   BYTE   INSEG    CODE           ?PR?JUMP?_?MAIN
+FF0A35H   FF0A74H   000040H   BYTE   INSEG    CODE           ?PR?SENDSTRING?_?MAIN
+FF0A75H   FF0AB3H   00003FH   BYTE   INSEG    CODE           ?PR?DELAYMICROSECONDS?_?MAIN
+FF0AB4H   FF0AC6H   000013H   BYTE   UNIT     CODE           ?C_C51STARTUP
+FF0AC7H   FF0AEFH   000029H   BYTE   UNIT     CODE           ?C_C51STARTUP?2
+FF0AF0H   FF0AF2H   000003H   BYTE   UNIT     CODE           ?C_C51STARTUP?3
+FF0AF3H   FF0B23H   000031H   BYTE   INSEG    CODE           ?PR?SERIALWRITECHAR?_?MAIN
+FF0B24H   FF0B53H   000030H   BYTE   INSEG    CODE           ?PR?CHECKCRC?_?MAIN
+FF0B54H   FF0B7AH   000027H   BYTE   INSEG    CODE           ?PR?SETTRANSMIT?_?MAIN
+FF0B7BH   FF0BA1H   000027H   BYTE   INSEG    CODE           ?PR?GPIO_INPUT_INIT?_?MAIN
+FF0BA2H   FF0BC8H   000027H   BYTE   INSEG    CODE           ?PR?INIT_MEMPOOL?INIT_MEM
+FF0BC9H   FF0BE7H   00001FH   BYTE   INSEG    CODE           ?PR?UART1_INIT?_?MAIN
+FF0BE8H   FF0C01H   00001AH   BYTE   INSEG    CODE           ?PR?MEMSET?_?MEMSET
+FF0C02H   FF0C13H   000012H   BYTE   INSEG    CODE           ?PR?SENDDEVICEINFO?_?MAIN
+FF0C14H   FF0C20H   00000DH   BYTE   INSEG    CODE           ?PR?CHECKADDRESSWRITABLE?_?MAIN
+FF0C21H   FF0C2DH   00000DH   BYTE   INSEG    CODE           ?PR?PUTCHAR?MAIN
+FF0C2EH   FF0C39H   00000CH   BYTE   INSEG    CODE           ?PR?SEND_BAD_ACK?_?MAIN
+FF0C3AH   FF0C45H   00000CH   BYTE   INSEG    CODE           ?PR?SEND_BAD_CRC_ACK?_?MAIN
+FF0C46H   FF0C51H   00000CH   BYTE   INSEG    CODE           ?PR?SEND_ACK?_?MAIN
+FF0C52H   FF0C5BH   00000AH   BYTE   INSEG    CODE           ?PR?SETRECEIVE?_?MAIN
+FF0C5CH   FF0C5CH   000001H   BYTE   UNIT     CODE           ?CO?MAIN
+FF0C5DH   FF0CACH   000050H   BYTE   UNIT     HCONST         ?C_INITEDATA
 
 
 
@@ -120,6 +120,7 @@ main/main                          ----- -----  ----- -----
   +--> checkForSignal?_/main
   +--> update_EEPROM?_/main
   +--> recieveBuffer?_/main
+  +--> jump?_/main
 
 SystemClock_Config?_/main          ----- -----  ----- -----
 
@@ -134,8 +135,8 @@ checkForSignal?_/main              ----- -----  ----- -----
   +--> jump?_/main
 
 delayMicroseconds?_/main           ----- -----  ----- -----
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 3
 
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 3
 
 
 jump?_/main                        ----- -----  ----- -----
@@ -202,10 +203,10 @@ send_BAD_CRC_ACK?_/main            ----- -----  ----- -----
 sendDeviceInfo?_/main              ----- -----  ----- -----
   +--> setTransmit?_/main
   +--> sendString?_/main
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 4
+
+
   +--> setReceive?_/main
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 4
-
-
 
 sendString?_/main                  ----- -----  ----- -----
   +--> serialwriteChar?_/main
@@ -234,8 +235,8 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
       =================================================
       000000FFH   NUMBER   ---       ?C?CODESEG
-      00FF0ABAH   CODE     ---       ?C?INITEDATA
-      00FF0C9EH   HCONST   WORD      ?C?INITEDATA_END
+      00FF0AC7H   CODE     ---       ?C?INITEDATA
+      00FF0CABH   HCONST   WORD      ?C?INITEDATA_END
       00FF0000H   CODE     ---       ?C?STARTUP
       00000001H   NUMBER   ---       ?C?XDATASEG
       00FF0000H   CODE     ---       ?C_STARTUP
@@ -247,12 +248,12 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *SFR* 000000EFH   DATA     BYTE      AUXINTIF
 *SFR* 0000008EH   DATA     BYTE      AUXR
 *SFR* 00000097H   DATA     BYTE      AUXR2
-      00FF0C4FH   CODE     BYTE      bootloader_version
+      00FF0C5CH   CODE     BYTE      bootloader_version
       0000011EH   EDATA    CHAR      bootloaderactive
       0000022CH   EDATA    BYTE      calculated_crc_high_byte
       00000008H   EDATA    BYTE      calculated_crc_low_byte
-      00FF0C07H   CODE     ---       checkAddressWritable?_
-      00FF0B17H   CODE     ---       checkCrc?_
+      00FF0C14H   CODE     ---       checkAddressWritable?_
+      00FF0B24H   CODE     ---       checkCrc?_
       00FF0518H   CODE     ---       checkForSignal?_
 *SFR* 000000EAH   DATA     BYTE      CKCON
       0000011FH   EDATA    INT       cmd
@@ -262,7 +263,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00000123H   EDATA    CHAR      connected
       00000017H   EDATA    INT       count
       00FF0003H   CODE     ---       decodeInput?_
-      00FF0A68H   CODE     ---       delayMicroseconds?_
+      00FF0A75H   CODE     ---       delayMicroseconds?_
       0000000AH   EDATA    ---       deviceInfo
 *SFR* 000000A8H.7 DATA     BIT       EA
       00000121H   EDATA    CHAR      eeprom_req
@@ -270,10 +271,10 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *SFR* 0000009DH.0 DATA     BIT       HIRCSEL0
 *SFR* 0000009DH.1 DATA     BIT       HIRCSEL1
 *SFR* 000000F6H   DATA     BYTE      IAP_ADDRE
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 5
+
+
 *SFR* 000000C3H   DATA     BYTE      IAP_ADDRH
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 5
-
-
 *SFR* 000000C4H   DATA     BYTE      IAP_ADDRL
 *SFR* 000000C5H   DATA     BYTE      IAP_CMD
 *SFR* 000000C7H   DATA     BYTE      IAP_CONTR
@@ -284,7 +285,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *SFR* 000000A8H   DATA     BYTE      IE
 *SFR* 000000AFH   DATA     BYTE      IE2
       00000016H   EDATA    CHAR      incoming_payload_no_command
-      00FF0B95H   CODE     ---       init_mempool
+      00FF0BA2H   CODE     ---       init_mempool
 *SFR* 0000008FH   DATA     BYTE      INTCLKO
       0000011BH   EDATA    WORD      invalid_command
 *SFR* 000000B8H   DATA     BYTE      IP
@@ -295,14 +296,14 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *SFR* 000000B7H   DATA     BYTE      IPH
 *SFR* 0000009DH   DATA     BYTE      IRCBAND
 *SFR* 0000009FH   DATA     BYTE      IRTRIM
-      00FF09E7H   CODE     ---       jump?_
+      00FF09F4H   CODE     ---       jump?_
       00000232H   EDATA    DWORD     JumpAddress
       00000125H   EDATA    WORD      len
       00000013H   EDATA    WORD      low_pin_count
-      00FF0954H   CODE     ---       main
+      00FF08FBH   CODE     ---       main
       00FF082EH   CODE     ---       makeCrc?_
-      00FF08FBH   CODE     ---       malloc
-      00FF0BDBH   CODE     ---       memset?_
+      00FF0956H   CODE     ---       malloc
+      00FF0BE8H   CODE     ---       memset?_
       00000122H   EDATA    CHAR      messagereceived
 *SFR* 00000080H   DATA     BYTE      P0
 *SFR* 00000080H.1 DATA     BIT       P01
@@ -330,7 +331,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00000124H   EDATA    BYTE      port_letter
 *SFR* 000000D0H   DATA     BYTE      PSW
 *SFR* 000000D1H   DATA     BYTE      PSW1
-      00FF0C14H   CODE     ---       putchar
+      00FF0C21H   CODE     ---       putchar
       00FF0897H   CODE     ---       read_flash_bin?_
       0000022AH   EDATA    INT       received
       00000009H   EDATA    BYTE      received_crc_high_byte
@@ -338,10 +339,10 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       0000022FH   EDATA    INT       receivedCount
       00000231H   EDATA    CHAR      receviedByte
       00FF0684H   CODE     ---       recieveBuffer?_
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 6
+
+
 *SFR* 000000FFH   DATA     BYTE      RSTCFG
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 6
-
-
       00000128H   EDATA    ---       rxBuffer
       00000015H   EDATA    CHAR      rxbyte
 *SFR* 0000009AH   DATA     BYTE      S2CON
@@ -350,15 +351,15 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF05D2H   CODE     ---       save_flash_nolib?_
 *SFR* 00000099H   DATA     BYTE      SBUF
 *SFR* 00000098H   DATA     BYTE      SCON
-      00FF0C39H   CODE     ---       send_ACK?_
-      00FF0C21H   CODE     ---       send_BAD_ACK?_
-      00FF0C2DH   CODE     ---       send_BAD_CRC_ACK?_
-      00FF0BF5H   CODE     ---       sendDeviceInfo?_
-      00FF0A28H   CODE     ---       sendString?_
+      00FF0C46H   CODE     ---       send_ACK?_
+      00FF0C2EH   CODE     ---       send_BAD_ACK?_
+      00FF0C3AH   CODE     ---       send_BAD_CRC_ACK?_
+      00FF0C02H   CODE     ---       sendDeviceInfo?_
+      00FF0A35H   CODE     ---       sendString?_
       00FF0330H   CODE     ---       serialreadChar?_
-      00FF0AE6H   CODE     ---       serialwriteChar?_
-      00FF0C45H   CODE     ---       setReceive?_
-      00FF0B47H   CODE     ---       setTransmit?_
+      00FF0AF3H   CODE     ---       serialwriteChar?_
+      00FF0C52H   CODE     ---       setReceive?_
+      00FF0B54H   CODE     ---       setTransmit?_
 *SFR* 000000CEH   DATA     BYTE      SPCTL
 *SFR* 000000CDH   DATA     BYTE      SPSTAT
       0000023CH   EDATA    WORD      str_len
@@ -370,8 +371,8 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *SFR* 00000098H.1 DATA     BIT       TI
       00000019H   EDATA    INT       tick
 *SFR* 00000089H   DATA     BYTE      TMOD
-      00FF0BBCH   CODE     ---       Uart1_Init?_
-      00FF09A2H   CODE     ---       update_EEPROM?_
+      00FF0BC9H   CODE     ---       Uart1_Init?_
+      00FF09AFH   CODE     ---       update_EEPROM?_
 *SFR* 0000009DH.7 DATA     BIT       USBCKS
 *SFR* 0000009DH.6 DATA     BIT       USBCKS2
 *SFR* 000000DCH   DATA     BYTE      USBCLK
@@ -406,10 +407,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       000000C7H.4 SFRSYM    DATA     BIT       CMD_FAIL
       000000DFH   SFRSYM    DATA     BYTE      IP3
       000000F4H   SFRSYM    DATA     BYTE      USBCON
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 7
+
+
       000000B5H   SFRSYM    DATA     BYTE      IP2
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 7
-
-
       000000FFH   SFRSYM    DATA     BYTE      RSTCFG
       000000C7H   SFRSYM    DATA     BYTE      IAP_CONTR
       0000008EH   SFRSYM    DATA     BYTE      AUXR
@@ -474,10 +475,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF062FH   LINE      CODE     ---       #50
       00FF063BH   LINE      CODE     ---       #51
       00FF0645H   LINE      CODE     ---       #52
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 8
+
+
       00FF064AH   LINE      CODE     ---       #54
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 8
-
-
       00FF064DH   LINE      CODE     ---       #55
       00FF0650H   LINE      CODE     ---       #56
       00FF0651H   LINE      CODE     ---       #57
@@ -520,32 +521,32 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       main
-      00FF0C21H   PUBLIC    CODE     ---       send_BAD_ACK?_
-      00FF0A68H   PUBLIC    CODE     ---       delayMicroseconds?_
+      00FF0C2EH   PUBLIC    CODE     ---       send_BAD_ACK?_
+      00FF0A75H   PUBLIC    CODE     ---       delayMicroseconds?_
       00FF0518H   PUBLIC    CODE     ---       checkForSignal?_
-      00FF0C07H   PUBLIC    CODE     ---       checkAddressWritable?_
-      00FF0BF5H   PUBLIC    CODE     ---       sendDeviceInfo?_
-      00FF0C45H   PUBLIC    CODE     ---       setReceive?_
-      00FF0B17H   PUBLIC    CODE     ---       checkCrc?_
+      00FF0C14H   PUBLIC    CODE     ---       checkAddressWritable?_
+      00FF0C02H   PUBLIC    CODE     ---       sendDeviceInfo?_
+      00FF0C52H   PUBLIC    CODE     ---       setReceive?_
+      00FF0B24H   PUBLIC    CODE     ---       checkCrc?_
       00FF0330H   PUBLIC    CODE     ---       serialreadChar?_
-      00FF0B47H   PUBLIC    CODE     ---       setTransmit?_
-      00FF0954H   PUBLIC    CODE     ---       main
-      00FF0A28H   PUBLIC    CODE     ---       sendString?_
-      00FF09A2H   PUBLIC    CODE     ---       update_EEPROM?_
+      00FF0B54H   PUBLIC    CODE     ---       setTransmit?_
+      00FF08FBH   PUBLIC    CODE     ---       main
+      00FF0A35H   PUBLIC    CODE     ---       sendString?_
+      00FF09AFH   PUBLIC    CODE     ---       update_EEPROM?_
       00FF0720H   PUBLIC    CODE     ---       SystemClock_Config?_
-      00FF0AE6H   PUBLIC    CODE     ---       serialwriteChar?_
+      00FF0AF3H   PUBLIC    CODE     ---       serialwriteChar?_
       00FF082EH   PUBLIC    CODE     ---       makeCrc?_
-      00FF0C2DH   PUBLIC    CODE     ---       send_BAD_CRC_ACK?_
-      00FF09E7H   PUBLIC    CODE     ---       jump?_
-      00FF0BBCH   PUBLIC    CODE     ---       Uart1_Init?_
+      00FF0C3AH   PUBLIC    CODE     ---       send_BAD_CRC_ACK?_
+      00FF09F4H   PUBLIC    CODE     ---       jump?_
+      00FF0BC9H   PUBLIC    CODE     ---       Uart1_Init?_
       00FF0684H   PUBLIC    CODE     ---       recieveBuffer?_
-      00FF0C39H   PUBLIC    CODE     ---       send_ACK?_
+      00FF0C46H   PUBLIC    CODE     ---       send_ACK?_
       00FF0003H   PUBLIC    CODE     ---       decodeInput?_
-      00FF0C14H   PUBLIC    CODE     ---       putchar
+      00FF0C21H   PUBLIC    CODE     ---       putchar
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 9
+
+
       00000008H   PUBLIC    EDATA    BYTE      calculated_crc_low_byte
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 9
-
-
       00000009H   PUBLIC    EDATA    BYTE      received_crc_high_byte
       0000000AH   PUBLIC    EDATA    ---       deviceInfo
       00000013H   PUBLIC    EDATA    WORD      low_pin_count
@@ -574,7 +575,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00000236H   PUBLIC    EDATA    DWORD     address
       0000023AH   PUBLIC    EDATA    WORD      payload_buffer_size
       0000023CH   PUBLIC    EDATA    WORD      str_len
-      00FF0C4FH   PUBLIC    CODE     BYTE      bootloader_version
+      00FF0C5CH   PUBLIC    CODE     BYTE      bootloader_version
       00000094H   SFRSYM    DATA     BYTE      P0M0
       000000D0H   SFRSYM    DATA     BYTE      PSW
       0000009DH   SFRSYM    DATA     BYTE      IRCBAND
@@ -610,10 +611,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000089H   SFRSYM    DATA     BYTE      TMOD
       00000098H   SFRSYM    DATA     BYTE      SCON
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 10
+
+
       000000F5H   SFRSYM    DATA     BYTE      IAP_TPS
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 10
-
-
       00000080H.1 SFRSYM    DATA     BIT       P01
       00000087H   SFRSYM    DATA     BYTE      PCON
       00000099H   SFRSYM    DATA     BYTE      SBUF
@@ -654,45 +655,45 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       0000009DH.6 SFRSYM    DATA     BIT       USBCKS2
       00000093H   SFRSYM    DATA     BYTE      P0M1
       00FF07B1H   SYMBOL    CODE     ---       PWMB_Timer_Init?_
-      00FF0B6EH   SYMBOL    CODE     ---       GPIO_INPUT_INIT?_
+      00FF0B7BH   SYMBOL    CODE     ---       GPIO_INPUT_INIT?_
 
-      00FF0A68H   BLOCK     CODE     ---       LVL=0
+      00FF0A75H   BLOCK     CODE     ---       LVL=0
       DR28        REGSYM    ---      DWORD     micros
-      00FF0A68H   LINE      CODE     ---       #122
-      00FF0A6AH   LINE      CODE     ---       #124
-      00FF0A76H   LINE      CODE     ---       #125
-      00FF0A82H   LINE      CODE     ---       #126
-      00FF0A82H   LINE      CODE     ---       #127
-      00FF0AA6H   LINE      CODE     ---       #128
+      00FF0A75H   LINE      CODE     ---       #122
+      00FF0A77H   LINE      CODE     ---       #124
+      00FF0A83H   LINE      CODE     ---       #125
+      00FF0A8FH   LINE      CODE     ---       #126
+      00FF0A8FH   LINE      CODE     ---       #127
+      00FF0AB3H   LINE      CODE     ---       #128
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF09E7H   BLOCK     CODE     ---       LVL=0
+      00FF09F4H   BLOCK     CODE     ---       LVL=0
       R11         REGSYM    ---      BYTE      value
-      00FF09E7H   LINE      CODE     ---       #130
-      00FF09E7H   LINE      CODE     ---       #134
-      00FF09E9H   LINE      CODE     ---       #136
-      00FF09ECH   LINE      CODE     ---       #137
-      00FF09EFH   LINE      CODE     ---       #139
-      00FF09F2H   LINE      CODE     ---       #140
-      00FF09F5H   LINE      CODE     ---       #141
-      00FF09F8H   LINE      CODE     ---       #142
-      00FF09FBH   LINE      CODE     ---       #143
-      00FF09FEH   LINE      CODE     ---       #144
-      00FF09FFH   LINE      CODE     ---       #145
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 11
+      00FF09F4H   LINE      CODE     ---       #130
+      00FF09F4H   LINE      CODE     ---       #134
+      00FF09F6H   LINE      CODE     ---       #136
+      00FF09F9H   LINE      CODE     ---       #137
+      00FF09FCH   LINE      CODE     ---       #139
+      00FF09FFH   LINE      CODE     ---       #140
+      00FF0A02H   LINE      CODE     ---       #141
+      00FF0A05H   LINE      CODE     ---       #142
+      00FF0A08H   LINE      CODE     ---       #143
+      00FF0A0BH   LINE      CODE     ---       #144
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 11
 
 
-      00FF0A00H   LINE      CODE     ---       #146
-      00FF0A01H   LINE      CODE     ---       #147
-      00FF0A02H   LINE      CODE     ---       #148
-      00FF0A06H   LINE      CODE     ---       #150
-      00FF0A08H   LINE      CODE     ---       #152
-      00FF0A17H   LINE      CODE     ---       #156
-      00FF0A1CH   LINE      CODE     ---       #157
-      00FF0A22H   LINE      CODE     ---       #158
-      00FF0A24H   LINE      CODE     ---       #159
-      00FF0A24H   LINE      CODE     ---       #161
-      00FF0A27H   LINE      CODE     ---       #162
+      00FF0A0CH   LINE      CODE     ---       #145
+      00FF0A0DH   LINE      CODE     ---       #146
+      00FF0A0EH   LINE      CODE     ---       #147
+      00FF0A0FH   LINE      CODE     ---       #148
+      00FF0A13H   LINE      CODE     ---       #150
+      00FF0A15H   LINE      CODE     ---       #152
+      00FF0A24H   LINE      CODE     ---       #156
+      00FF0A29H   LINE      CODE     ---       #157
+      00FF0A2FH   LINE      CODE     ---       #158
+      00FF0A31H   LINE      CODE     ---       #159
+      00FF0A31H   LINE      CODE     ---       #161
+      00FF0A34H   LINE      CODE     ---       #162
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF082EH   BLOCK     CODE     ---       LVL=0
@@ -725,79 +726,79 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0896H   LINE      CODE     ---       #187
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0B17H   BLOCK     CODE     ---       LVL=0
+      00FF0B24H   BLOCK     CODE     ---       LVL=0
       REG=7       REGSYM    ---      ---       pBuff
       WR10        REGSYM    ---      WORD      length
-      00FF0B1DH   BLOCK     CODE     NEAR LAB  LVL=1
+      00FF0B2AH   BLOCK     CODE     NEAR LAB  LVL=1
       R14         REGSYM    ---      BYTE      received_crc_low_byte2
       R15         REGSYM    ---      BYTE      received_crc_high_byte2
       ---         BLOCKEND  ---      ---       LVL=1
-      00FF0B17H   LINE      CODE     ---       #189
-      00FF0B1DH   LINE      CODE     ---       #191
-      00FF0B24H   LINE      CODE     ---       #192
-      00FF0B2CH   LINE      CODE     ---       #193
-      00FF0B33H   LINE      CODE     ---       #194
-      00FF0B3FH   LINE      CODE     ---       #195
-      00FF0B43H   LINE      CODE     ---       #196
-      00FF0B43H   LINE      CODE     ---       #197
-      00FF0B44H   LINE      CODE     ---       #198
-      00FF0B44H   LINE      CODE     ---       #200
+      00FF0B24H   LINE      CODE     ---       #189
+      00FF0B2AH   LINE      CODE     ---       #191
+      00FF0B31H   LINE      CODE     ---       #192
+      00FF0B39H   LINE      CODE     ---       #193
+      00FF0B40H   LINE      CODE     ---       #194
+      00FF0B4CH   LINE      CODE     ---       #195
+      00FF0B50H   LINE      CODE     ---       #196
+      00FF0B50H   LINE      CODE     ---       #197
+      00FF0B51H   LINE      CODE     ---       #198
+      00FF0B51H   LINE      CODE     ---       #200
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0C45H   BLOCK     CODE     ---       LVL=0
-      00FF0C45H   LINE      CODE     ---       #203
-      00FF0C45H   LINE      CODE     ---       #204
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 12
+      00FF0C52H   BLOCK     CODE     ---       LVL=0
+      00FF0C52H   LINE      CODE     ---       #203
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 12
 
 
-      00FF0C48H   LINE      CODE     ---       #205
-      00FF0C4EH   LINE      CODE     ---       #206
+      00FF0C52H   LINE      CODE     ---       #204
+      00FF0C55H   LINE      CODE     ---       #205
+      00FF0C5BH   LINE      CODE     ---       #206
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0B47H   BLOCK     CODE     ---       LVL=0
-      00FF0B47H   LINE      CODE     ---       #208
-      00FF0B47H   LINE      CODE     ---       #210
-      00FF0B67H   LINE      CODE     ---       #211
-      00FF0B6DH   LINE      CODE     ---       #212
+      00FF0B54H   BLOCK     CODE     ---       LVL=0
+      00FF0B54H   LINE      CODE     ---       #208
+      00FF0B54H   LINE      CODE     ---       #210
+      00FF0B74H   LINE      CODE     ---       #211
+      00FF0B7AH   LINE      CODE     ---       #212
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0C39H   BLOCK     CODE     ---       LVL=0
-      00FF0C39H   LINE      CODE     ---       #214
-      00FF0C39H   LINE      CODE     ---       #215
-      00FF0C3CH   LINE      CODE     ---       #216
-      00FF0C41H   LINE      CODE     ---       #217
-      00FF0C44H   LINE      CODE     ---       #218
+      00FF0C46H   BLOCK     CODE     ---       LVL=0
+      00FF0C46H   LINE      CODE     ---       #214
+      00FF0C46H   LINE      CODE     ---       #215
+      00FF0C49H   LINE      CODE     ---       #216
+      00FF0C4EH   LINE      CODE     ---       #217
+      00FF0C51H   LINE      CODE     ---       #218
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0C21H   BLOCK     CODE     ---       LVL=0
-      00FF0C21H   LINE      CODE     ---       #220
-      00FF0C21H   LINE      CODE     ---       #221
-      00FF0C24H   LINE      CODE     ---       #222
-      00FF0C29H   LINE      CODE     ---       #223
-      00FF0C2CH   LINE      CODE     ---       #224
+      00FF0C2EH   BLOCK     CODE     ---       LVL=0
+      00FF0C2EH   LINE      CODE     ---       #220
+      00FF0C2EH   LINE      CODE     ---       #221
+      00FF0C31H   LINE      CODE     ---       #222
+      00FF0C36H   LINE      CODE     ---       #223
+      00FF0C39H   LINE      CODE     ---       #224
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0C2DH   BLOCK     CODE     ---       LVL=0
-      00FF0C2DH   LINE      CODE     ---       #226
-      00FF0C2DH   LINE      CODE     ---       #227
-      00FF0C30H   LINE      CODE     ---       #228
-      00FF0C35H   LINE      CODE     ---       #229
-      00FF0C38H   LINE      CODE     ---       #230
+      00FF0C3AH   BLOCK     CODE     ---       LVL=0
+      00FF0C3AH   LINE      CODE     ---       #226
+      00FF0C3AH   LINE      CODE     ---       #227
+      00FF0C3DH   LINE      CODE     ---       #228
+      00FF0C42H   LINE      CODE     ---       #229
+      00FF0C45H   LINE      CODE     ---       #230
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0BF5H   BLOCK     CODE     ---       LVL=0
-      00FF0BF5H   LINE      CODE     ---       #232
-      00FF0BF5H   LINE      CODE     ---       #233
-      00FF0BF8H   LINE      CODE     ---       #234
-      00FF0C03H   LINE      CODE     ---       #235
-      00FF0C06H   LINE      CODE     ---       #236
+      00FF0C02H   BLOCK     CODE     ---       LVL=0
+      00FF0C02H   LINE      CODE     ---       #232
+      00FF0C02H   LINE      CODE     ---       #233
+      00FF0C05H   LINE      CODE     ---       #234
+      00FF0C10H   LINE      CODE     ---       #235
+      00FF0C13H   LINE      CODE     ---       #236
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0C07H   BLOCK     CODE     ---       LVL=0
+      00FF0C14H   BLOCK     CODE     ---       LVL=0
       DR0         REGSYM    ---      DWORD     address
-      00FF0C07H   LINE      CODE     ---       #238
-      00FF0C09H   LINE      CODE     ---       #239
-      00FF0C13H   LINE      CODE     ---       #240
+      00FF0C14H   LINE      CODE     ---       #238
+      00FF0C16H   LINE      CODE     ---       #239
+      00FF0C20H   LINE      CODE     ---       #240
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF0003H   BLOCK     CODE     ---       LVL=0
@@ -814,10 +815,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0013H   LINE      CODE     ---       #247
       00FF0020H   LINE      CODE     ---       #249
       00FF002CH   LINE      CODE     ---       #251
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 13
+
+
       00FF0030H   LINE      CODE     ---       #252
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 13
-
-
       00FF0038H   LINE      CODE     ---       #253
       00FF0040H   LINE      CODE     ---       #254
       00FF0043H   LINE      CODE     ---       #255
@@ -882,10 +883,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF019AH   LINE      CODE     ---       #335
       00FF019DH   LINE      CODE     ---       #337
       00FF01A0H   LINE      CODE     ---       #338
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 14
+
+
       00FF01A0H   LINE      CODE     ---       #341
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 14
-
-
       00FF01A7H   LINE      CODE     ---       #342
       00FF01AFH   LINE      CODE     ---       #343
       00FF01B1H   LINE      CODE     ---       #344
@@ -950,10 +951,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0318H   LINE      CODE     ---       #424
       00FF031BH   LINE      CODE     ---       #426
       00FF0320H   LINE      CODE     ---       #427
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 15
+
+
       00FF032AH   LINE      CODE     ---       #428
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 15
-
-
       00FF032DH   LINE      CODE     ---       #429
       ---         BLOCKEND  ---      ---       LVL=0
 
@@ -992,45 +993,45 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF042EH   LINE      CODE     ---       #469
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0AE6H   BLOCK     CODE     ---       LVL=0
+      00FF0AF3H   BLOCK     CODE     ---       LVL=0
       R15         REGSYM    ---      CHAR      dat
-      00FF0AEAH   BLOCK     CODE     NEAR LAB  LVL=1
+      00FF0AF7H   BLOCK     CODE     NEAR LAB  LVL=1
       R14         REGSYM    ---      CHAR      bits_to_read
       ---         BLOCKEND  ---      ---       LVL=1
-      00FF0AE6H   LINE      CODE     ---       #471
-      00FF0AEAH   LINE      CODE     ---       #472
-      00FF0AEAH   LINE      CODE     ---       #476
-      00FF0AECH   LINE      CODE     ---       #478
-      00FF0AEEH   LINE      CODE     ---       #481
-      00FF0AF0H   LINE      CODE     ---       #483
-      00FF0AF7H   LINE      CODE     ---       #485
-      00FF0AFCH   LINE      CODE     ---       #487
-      00FF0AFEH   LINE      CODE     ---       #488
-      00FF0B00H   LINE      CODE     ---       #490
-      00FF0B02H   LINE      CODE     ---       #491
-      00FF0B02H   LINE      CODE     ---       #492
-      00FF0B04H   LINE      CODE     ---       #493
-      00FF0B06H   LINE      CODE     ---       #494
-      00FF0B0BH   LINE      CODE     ---       #496
-      00FF0B12H   LINE      CODE     ---       #501
-      00FF0B14H   LINE      CODE     ---       #512
+      00FF0AF3H   LINE      CODE     ---       #471
+      00FF0AF7H   LINE      CODE     ---       #472
+      00FF0AF7H   LINE      CODE     ---       #476
+      00FF0AF9H   LINE      CODE     ---       #478
+      00FF0AFBH   LINE      CODE     ---       #481
+      00FF0AFDH   LINE      CODE     ---       #483
+      00FF0B04H   LINE      CODE     ---       #485
+      00FF0B09H   LINE      CODE     ---       #487
+      00FF0B0BH   LINE      CODE     ---       #488
+      00FF0B0DH   LINE      CODE     ---       #490
+      00FF0B0FH   LINE      CODE     ---       #491
+      00FF0B0FH   LINE      CODE     ---       #492
+      00FF0B11H   LINE      CODE     ---       #493
+      00FF0B13H   LINE      CODE     ---       #494
+      00FF0B18H   LINE      CODE     ---       #496
+      00FF0B1FH   LINE      CODE     ---       #501
+      00FF0B21H   LINE      CODE     ---       #512
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0A28H   BLOCK     CODE     ---       LVL=0
+      00FF0A35H   BLOCK     CODE     ---       LVL=0
       REG=3       REGSYM    ---      ---       dat
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 16
+
+
       FFFFFFFDH   STKSYM    ---      INT       len
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 16
-
-
-      00FF0A30H   BLOCK     CODE     NEAR LAB  LVL=1
+      00FF0A3DH   BLOCK     CODE     NEAR LAB  LVL=1
       FFFFFFFFH   STKSYM    ---      INT       i
       ---         BLOCKEND  ---      ---       LVL=1
-      00FF0A28H   LINE      CODE     ---       #514
-      00FF0A30H   LINE      CODE     ---       #516
-      00FF0A38H   LINE      CODE     ---       #517
-      00FF0A46H   LINE      CODE     ---       #518
-      00FF0A4DH   LINE      CODE     ---       #519
-      00FF0A63H   LINE      CODE     ---       #520
+      00FF0A35H   LINE      CODE     ---       #514
+      00FF0A3DH   LINE      CODE     ---       #516
+      00FF0A45H   LINE      CODE     ---       #517
+      00FF0A53H   LINE      CODE     ---       #518
+      00FF0A5AH   LINE      CODE     ---       #519
+      00FF0A70H   LINE      CODE     ---       #520
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF0684H   BLOCK     CODE     ---       LVL=0
@@ -1065,16 +1066,16 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF071DH   LINE      CODE     ---       #553
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF09A2H   BLOCK     CODE     ---       LVL=0
-      00FF09A2H   LINE      CODE     ---       #555
-      00FF09A2H   LINE      CODE     ---       #557
-      00FF09B5H   LINE      CODE     ---       #559
-      00FF09BEH   LINE      CODE     ---       #560
-      00FF09CDH   LINE      CODE     ---       #561
-      00FF09CDH   LINE      CODE     ---       #562
-      00FF09CDH   LINE      CODE     ---       #563
-      00FF09D3H   LINE      CODE     ---       #564
-      00FF09E6H   LINE      CODE     ---       #565
+      00FF09AFH   BLOCK     CODE     ---       LVL=0
+      00FF09AFH   LINE      CODE     ---       #555
+      00FF09AFH   LINE      CODE     ---       #557
+      00FF09C2H   LINE      CODE     ---       #559
+      00FF09CBH   LINE      CODE     ---       #560
+      00FF09DAH   LINE      CODE     ---       #561
+      00FF09DAH   LINE      CODE     ---       #562
+      00FF09DAH   LINE      CODE     ---       #563
+      00FF09E0H   LINE      CODE     ---       #564
+      00FF09F3H   LINE      CODE     ---       #565
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF0518H   BLOCK     CODE     ---       LVL=0
@@ -1086,10 +1087,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF052AH   LINE      CODE     ---       #574
       00FF053AH   LINE      CODE     ---       #576
       00FF0541H   LINE      CODE     ---       #578
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 17
+
+
       00FF0545H   LINE      CODE     ---       #580
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 17
-
-
       00FF054AH   LINE      CODE     ---       #581
       00FF0554H   LINE      CODE     ---       #582
       00FF0554H   LINE      CODE     ---       #584
@@ -1116,98 +1117,100 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF05CFH   LINE      CODE     ---       #612
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0BBCH   BLOCK     CODE     ---       LVL=0
-      00FF0BBCH   LINE      CODE     ---       #616
-      00FF0BBCH   LINE      CODE     ---       #618
-      00FF0BBFH   LINE      CODE     ---       #619
-      00FF0BC2H   LINE      CODE     ---       #620
-      00FF0BC5H   LINE      CODE     ---       #621
-      00FF0BC8H   LINE      CODE     ---       #622
-      00FF0BCBH   LINE      CODE     ---       #623
-      00FF0BCEH   LINE      CODE     ---       #626
-      00FF0BD4H   LINE      CODE     ---       #627
-      00FF0BDAH   LINE      CODE     ---       #628
+      00FF0BC9H   BLOCK     CODE     ---       LVL=0
+      00FF0BC9H   LINE      CODE     ---       #616
+      00FF0BC9H   LINE      CODE     ---       #618
+      00FF0BCCH   LINE      CODE     ---       #619
+      00FF0BCFH   LINE      CODE     ---       #620
+      00FF0BD2H   LINE      CODE     ---       #621
+      00FF0BD5H   LINE      CODE     ---       #622
+      00FF0BD8H   LINE      CODE     ---       #623
+      00FF0BDBH   LINE      CODE     ---       #626
+      00FF0BE1H   LINE      CODE     ---       #627
+      00FF0BE7H   LINE      CODE     ---       #628
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0954H   BLOCK     CODE     ---       LVL=0
+      00FF08FBH   BLOCK     CODE     ---       LVL=0
       00010000H   SYMBOL    XDATA    ---       MEMPOOL
-      00FF0954H   LINE      CODE     ---       #632
-      00FF0954H   LINE      CODE     ---       #633
-      00FF0954H   LINE      CODE     ---       #637
-      00FF0954H   LINE      CODE     ---       #640
-      00FF0957H   LINE      CODE     ---       #641
-      00FF0966H   LINE      CODE     ---       #643
-      00FF0969H   LINE      CODE     ---       #645
-      00FF096CH   LINE      CODE     ---       #647
-      00FF096FH   LINE      CODE     ---       #651
-      00FF0972H   LINE      CODE     ---       #653
-      00FF0982H   LINE      CODE     ---       #654
-      00FF0992H   LINE      CODE     ---       #656
-      00FF099AH   LINE      CODE     ---       #658
-      00FF099DH   LINE      CODE     ---       #659
-      00FF099DH   LINE      CODE     ---       #661
-      00FF09A0H   LINE      CODE     ---       #666
+      00FF08FBH   LINE      CODE     ---       #632
+      00FF08FBH   LINE      CODE     ---       #633
+      00FF08FBH   LINE      CODE     ---       #637
+      00FF08FBH   LINE      CODE     ---       #640
+      00FF08FEH   LINE      CODE     ---       #641
+      00FF090DH   LINE      CODE     ---       #643
+      00FF0910H   LINE      CODE     ---       #645
+      00FF0913H   LINE      CODE     ---       #647
+      00FF0916H   LINE      CODE     ---       #651
+      00FF0919H   LINE      CODE     ---       #653
+      00FF0929H   LINE      CODE     ---       #654
+      00FF0939H   LINE      CODE     ---       #656
+      00FF0941H   LINE      CODE     ---       #658
+      00FF0944H   LINE      CODE     ---       #659
+      00FF0944H   LINE      CODE     ---       #661
+      00FF0947H   LINE      CODE     ---       #662
+      00FF0951H   LINE      CODE     ---       #663
+      00FF0954H   LINE      CODE     ---       #664
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF0720H   BLOCK     CODE     ---       LVL=0
-      00FF0720H   LINE      CODE     ---       #671
-      00FF0720H   LINE      CODE     ---       #673
-      00FF0722H   LINE      CODE     ---       #675
-      00FF0725H   LINE      CODE     ---       #676
-      00FF0728H   LINE      CODE     ---       #677
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 18
+      00FF0720H   LINE      CODE     ---       #670
+      00FF0720H   LINE      CODE     ---       #672
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 18
 
 
-      00FF072BH   LINE      CODE     ---       #679
-      00FF0738H   LINE      CODE     ---       #681
-      00FF0745H   LINE      CODE     ---       #682
-      00FF0748H   LINE      CODE     ---       #683
-      00FF074BH   LINE      CODE     ---       #685
-      00FF0758H   LINE      CODE     ---       #686
-      00FF0766H   LINE      CODE     ---       #690
-      00FF0773H   LINE      CODE     ---       #692
-      00FF0776H   LINE      CODE     ---       #693
-      00FF0779H   LINE      CODE     ---       #694
-      00FF077EH   LINE      CODE     ---       #698
-      00FF078BH   LINE      CODE     ---       #700
-      00FF079BH   LINE      CODE     ---       #702
-      00FF07A8H   LINE      CODE     ---       #704
-      00FF07ABH   LINE      CODE     ---       #705
-      00FF07AEH   LINE      CODE     ---       #707
-      00FF07B0H   LINE      CODE     ---       #708
+      00FF0722H   LINE      CODE     ---       #674
+      00FF0725H   LINE      CODE     ---       #675
+      00FF0728H   LINE      CODE     ---       #676
+      00FF072BH   LINE      CODE     ---       #678
+      00FF0738H   LINE      CODE     ---       #680
+      00FF0745H   LINE      CODE     ---       #681
+      00FF0748H   LINE      CODE     ---       #682
+      00FF074BH   LINE      CODE     ---       #684
+      00FF0758H   LINE      CODE     ---       #685
+      00FF0766H   LINE      CODE     ---       #689
+      00FF0773H   LINE      CODE     ---       #691
+      00FF0776H   LINE      CODE     ---       #692
+      00FF0779H   LINE      CODE     ---       #693
+      00FF077EH   LINE      CODE     ---       #697
+      00FF078BH   LINE      CODE     ---       #699
+      00FF079BH   LINE      CODE     ---       #701
+      00FF07A8H   LINE      CODE     ---       #703
+      00FF07ABH   LINE      CODE     ---       #704
+      00FF07AEH   LINE      CODE     ---       #706
+      00FF07B0H   LINE      CODE     ---       #707
       ---         BLOCKEND  ---      ---       LVL=0
 
       00FF07B1H   BLOCK     CODE     ---       LVL=0
-      00FF07B1H   LINE      CODE     ---       #711
-      00FF07B1H   LINE      CODE     ---       #715
-      00FF07BDH   LINE      CODE     ---       #716
-      00FF07C9H   LINE      CODE     ---       #718
-      00FF07D6H   LINE      CODE     ---       #719
-      00FF07E3H   LINE      CODE     ---       #720
-      00FF07EFH   LINE      CODE     ---       #721
-      00FF07FBH   LINE      CODE     ---       #722
-      00FF0807H   LINE      CODE     ---       #723
-      00FF0814H   LINE      CODE     ---       #724
-      00FF0820H   LINE      CODE     ---       #725
-      00FF082DH   LINE      CODE     ---       #726
+      00FF07B1H   LINE      CODE     ---       #710
+      00FF07B1H   LINE      CODE     ---       #714
+      00FF07BDH   LINE      CODE     ---       #715
+      00FF07C9H   LINE      CODE     ---       #717
+      00FF07D6H   LINE      CODE     ---       #718
+      00FF07E3H   LINE      CODE     ---       #719
+      00FF07EFH   LINE      CODE     ---       #720
+      00FF07FBH   LINE      CODE     ---       #721
+      00FF0807H   LINE      CODE     ---       #722
+      00FF0814H   LINE      CODE     ---       #723
+      00FF0820H   LINE      CODE     ---       #724
+      00FF082DH   LINE      CODE     ---       #725
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0B6EH   BLOCK     CODE     ---       LVL=0
-      00FF0B6EH   LINE      CODE     ---       #730
-      00FF0B6EH   LINE      CODE     ---       #737
-      00FF0B74H   LINE      CODE     ---       #739
-      00FF0B84H   LINE      CODE     ---       #740
-      00FF0B94H   LINE      CODE     ---       #742
+      00FF0B7BH   BLOCK     CODE     ---       LVL=0
+      00FF0B7BH   LINE      CODE     ---       #729
+      00FF0B7BH   LINE      CODE     ---       #736
+      00FF0B81H   LINE      CODE     ---       #738
+      00FF0B91H   LINE      CODE     ---       #739
+      00FF0BA1H   LINE      CODE     ---       #741
       ---         BLOCKEND  ---      ---       LVL=0
 
-      00FF0C14H   BLOCK     CODE     ---       LVL=0
+      00FF0C21H   BLOCK     CODE     ---       LVL=0
       R10         REGSYM    ---      CHAR      c
-      00FF0C14H   LINE      CODE     ---       #746
-      00FF0C16H   LINE      CODE     ---       #749
-      00FF0C19H   LINE      CODE     ---       #750
-      00FF0C1CH   LINE      CODE     ---       #751
-      00FF0C1EH   LINE      CODE     ---       #752
-      00FF0C20H   LINE      CODE     ---       #753
+      00FF0C21H   LINE      CODE     ---       #745
+      00FF0C23H   LINE      CODE     ---       #748
+      00FF0C26H   LINE      CODE     ---       #749
+      00FF0C29H   LINE      CODE     ---       #750
+      00FF0C2BH   LINE      CODE     ---       #751
+      00FF0C2DH   LINE      CODE     ---       #752
       ---         BLOCKEND  ---      ---       LVL=0
 
       ---         MODULE    ---      ---       ?C_START
@@ -1215,25 +1218,25 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0000H   PUBLIC    CODE     ---       ?C_STARTUP
 
       ---         MODULE    ---      ---       ?C?INITEDATA
-      00FF0ABAH   PUBLIC    CODE     ---       ?C?INITEDATA
+      00FF0AC7H   PUBLIC    CODE     ---       ?C?INITEDATA
 
       ---         MODULE    ---      ---       memset
-      00FF0BDBH   PUBLIC    CODE     ---       memset?_
+      00FF0BE8H   PUBLIC    CODE     ---       memset?_
+
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 19
+
 
       ---         MODULE    ---      ---       malloc
-      00FF08FBH   PUBLIC    CODE     ---       malloc
-
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:25:40  PAGE 19
-
+      00FF0956H   PUBLIC    CODE     ---       malloc
 
       ---         MODULE    ---      ---       free
       00FF0431H   PUBLIC    CODE     ---       free
 
       ---         MODULE    ---      ---       init_mem
-      00FF0B95H   PUBLIC    CODE     ---       init_mempool
+      00FF0BA2H   PUBLIC    CODE     ---       init_mempool
 
       ---         MODULE    ---      ---       ?C?INITEDATA_END
-      00FF0C9EH   PUBLIC    HCONST   WORD      ?C?INITEDATA_END
+      00FF0CABH   PUBLIC    HCONST   WORD      ?C?INITEDATA_END
 
       ---         MODULE    ---      ---       mdefine
       00000340H   PUBLIC    HDATA    ---       __mp__
@@ -1246,5 +1249,5 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
     NAME:    putchar/main
 
-Program Size: data=8.0 edata+hdata=828 xdata=1024 const=80 code=3152
+Program Size: data=8.0 edata+hdata=828 xdata=1024 const=80 code=3165
 L251 RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)
