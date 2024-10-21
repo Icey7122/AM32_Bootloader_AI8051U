@@ -1,4 +1,5 @@
-Build target 'Bootloader'
+Rebuild target 'Bootloader'
+compiling bootloader.c...
 compiling main.c...
 Bootloader\src\main.c(532): warning C173: '==': signed/unsigned type mismatch
 Bootloader\src\main.c(637): warning C138: expression with possibly no effect

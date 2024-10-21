@@ -1,4 +1,4 @@
-L251 LINKER/LOCATER V4.66.93.0                                                          10/21/2024  11:27:03  PAGE 1
+L251 LINKER/LOCATER V4.66.93.0                                                          10/21/2024  11:28:38  PAGE 1
 
 
 L251 LINKER/LOCATER V4.66.93.0, INVOKED BY:
@@ -67,7 +67,7 @@ FF0684H   FF071FH   00009CH   BYTE   INSEG    CODE           ?PR?RECIEVEBUFFER?_
 FF0720H   FF07B0H   000091H   BYTE   INSEG    CODE           ?PR?SYSTEMCLOCK_CONFIG?_?MAIN
 FF07B1H   FF082DH   00007DH   BYTE   INSEG    CODE           ?PR?PWMB_TIMER_INIT?_?MAIN
 FF082EH   FF0896H   000069H   BYTE   INSEG    CODE           ?PR?MAKECRC?_?MAIN
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 2
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 2
 
 
 FF0897H   FF08FAH   000064H   BYTE   INSEG    CODE           ?PR?READ_FLASH_BIN?_?BOOTLOADER
@@ -135,7 +135,7 @@ checkForSignal?_/main              ----- -----  ----- -----
   +--> jump?_/main
 
 delayMicroseconds?_/main           ----- -----  ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 3
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 3
 
 
 
@@ -203,7 +203,7 @@ send_BAD_CRC_ACK?_/main            ----- -----  ----- -----
 sendDeviceInfo?_/main              ----- -----  ----- -----
   +--> setTransmit?_/main
   +--> sendString?_/main
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 4
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 4
 
 
   +--> setReceive?_/main
@@ -271,7 +271,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 *SFR* 0000009DH.0 DATA     BIT       HIRCSEL0
 *SFR* 0000009DH.1 DATA     BIT       HIRCSEL1
 *SFR* 000000F6H   DATA     BYTE      IAP_ADDRE
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 5
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 5
 
 
 *SFR* 000000C3H   DATA     BYTE      IAP_ADDRH
@@ -339,7 +339,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       0000022FH   EDATA    INT       receivedCount
       00000231H   EDATA    CHAR      receviedByte
       00FF0684H   CODE     ---       recieveBuffer?_
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 6
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 6
 
 
 *SFR* 000000FFH   DATA     BYTE      RSTCFG
@@ -407,7 +407,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       000000C7H.4 SFRSYM    DATA     BIT       CMD_FAIL
       000000DFH   SFRSYM    DATA     BYTE      IP3
       000000F4H   SFRSYM    DATA     BYTE      USBCON
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 7
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 7
 
 
       000000B5H   SFRSYM    DATA     BYTE      IP2
@@ -475,7 +475,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF062FH   LINE      CODE     ---       #50
       00FF063BH   LINE      CODE     ---       #51
       00FF0645H   LINE      CODE     ---       #52
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 8
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 8
 
 
       00FF064AH   LINE      CODE     ---       #54
@@ -543,7 +543,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0C46H   PUBLIC    CODE     ---       send_ACK?_
       00FF0003H   PUBLIC    CODE     ---       decodeInput?_
       00FF0C21H   PUBLIC    CODE     ---       putchar
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 9
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 9
 
 
       00000008H   PUBLIC    EDATA    BYTE      calculated_crc_low_byte
@@ -611,7 +611,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000089H   SFRSYM    DATA     BYTE      TMOD
       00000098H   SFRSYM    DATA     BYTE      SCON
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 10
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 10
 
 
       000000F5H   SFRSYM    DATA     BYTE      IAP_TPS
@@ -679,7 +679,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0A05H   LINE      CODE     ---       #142
       00FF0A08H   LINE      CODE     ---       #143
       00FF0A0BH   LINE      CODE     ---       #144
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 11
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 11
 
 
       00FF0A0CH   LINE      CODE     ---       #145
@@ -747,7 +747,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 
       00FF0C52H   BLOCK     CODE     ---       LVL=0
       00FF0C52H   LINE      CODE     ---       #203
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 12
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 12
 
 
       00FF0C52H   LINE      CODE     ---       #204
@@ -815,7 +815,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0013H   LINE      CODE     ---       #247
       00FF0020H   LINE      CODE     ---       #249
       00FF002CH   LINE      CODE     ---       #251
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 13
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 13
 
 
       00FF0030H   LINE      CODE     ---       #252
@@ -883,7 +883,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF019AH   LINE      CODE     ---       #335
       00FF019DH   LINE      CODE     ---       #337
       00FF01A0H   LINE      CODE     ---       #338
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 14
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 14
 
 
       00FF01A0H   LINE      CODE     ---       #341
@@ -951,7 +951,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0318H   LINE      CODE     ---       #424
       00FF031BH   LINE      CODE     ---       #426
       00FF0320H   LINE      CODE     ---       #427
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 15
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 15
 
 
       00FF032AH   LINE      CODE     ---       #428
@@ -1019,7 +1019,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
 
       00FF0A35H   BLOCK     CODE     ---       LVL=0
       REG=3       REGSYM    ---      ---       dat
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 16
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 16
 
 
       FFFFFFFDH   STKSYM    ---      INT       len
@@ -1087,7 +1087,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF052AH   LINE      CODE     ---       #574
       00FF053AH   LINE      CODE     ---       #576
       00FF0541H   LINE      CODE     ---       #578
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 17
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 17
 
 
       00FF0545H   LINE      CODE     ---       #580
@@ -1155,7 +1155,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       00FF0720H   BLOCK     CODE     ---       LVL=0
       00FF0720H   LINE      CODE     ---       #670
       00FF0720H   LINE      CODE     ---       #672
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 18
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 18
 
 
       00FF0722H   LINE      CODE     ---       #674
@@ -1223,7 +1223,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC32 (bootloader)
       ---         MODULE    ---      ---       memset
       00FF0BE8H   PUBLIC    CODE     ---       memset?_
 
-L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:27:03  PAGE 19
+L251 LINKER/LOCATER V4.66.93.0                                                        10/21/2024  11:28:38  PAGE 19
 
 
       ---         MODULE    ---      ---       malloc

@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -66,7 +66,7 @@ stmt  level    source
    55          #ifdef USE_PB4
                // #define input_pin       LL_GPIO_PIN_4
                // #define input_port        GPIOB
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 2   
 
                // #define PIN_NUMBER        4
                // #define PORT_LETTER       1
@@ -134,7 +134,7 @@ stmt  level    source
   121          //待改（使用定时器做延时函数）
   122          void delayMicroseconds(uint32_t micros){
   123   1        // TIM2->CNT = 0;
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 3   
 
   124   1        PWMB_CNTRH = 0x00;
   125   1        PWMB_CNTRL = 0x00;
@@ -202,7 +202,7 @@ stmt  level    source
   187   1      }
   188          
   189          char checkCrc(uint8_t* pBuff, uint16_t length){
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 4   
 
   190   1      
   191   1        uint8_t received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
@@ -270,7 +270,7 @@ stmt  level    source
   251   3            for(i = 0; i < len; i++){
   252   4              payLoadBuffer[i]= rxBuffer[i];
   253   4            }
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 5   
 
   254   3            send_ACK();
   255   3            incoming_payload_no_command = 0;
@@ -338,7 +338,7 @@ stmt  level    source
              -ess, Low byte address, crclb ,crchb
   317   2          len = 4;  // package without 2 byte crc
   318   2          if (!checkCrc((uint8_t*)rxBuffer, len)) {
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 6   
 
   319   3            send_BAD_CRC_ACK();
   320   3            return;
@@ -406,7 +406,7 @@ stmt  level    source
   381   2      
   382   2          send_ACK();
   383   2          return;
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 7   
 
   384   2        }
   385   1      
@@ -474,7 +474,7 @@ stmt  level    source
   445   1      
   446   1      
   447   1        PWMB_PSCRL = 0x2F; // set Buck to 1MHz
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 8   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 8   
 
   448   1        PWMB_CNTRH = 0;
   449   1        PWMB_CNTRL = 0;
@@ -542,7 +542,7 @@ stmt  level    source
   510   1        //  delayMicroseconds(BITTIME);
   511   1        //}
   512   1      }
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 9   
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 9   
 
   513          
   514          void sendString(uint8_t *dat, int len){
@@ -610,7 +610,7 @@ stmt  level    source
   574   1        P0PD |= 0x02; //开启下拉电阻
   575   1      
   576   1        delayMicroseconds(500);
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 10  
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 10  
 
   577   1      
   578   1        for(i = 0 ; i < 500; i ++){
@@ -678,7 +678,7 @@ stmt  level    source
   639   1      
   640   1          SystemClock_Config();
   641   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 11  
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 11  
 
   642   1      
   643   1        IAP_TPS =48;  //设置IAP等待时间
@@ -746,7 +746,7 @@ stmt  level    source
   704   1        USBCKS2 = 0;      //USB时钟选择48Mhz
   705   1      
   706   1        EA = 1;
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 12  
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 12  
 
   707   1      }
   708          
@@ -815,7 +815,7 @@ Module Information          Static   Overlayable
   ebit size            =    ------     ------
   bitaddressable size  =    ------     ------
   ebitaddressable size =    ------     ------
-C251 COMPILER V5.60.0,  main                                                               21/10/24  11:27:03  PAGE 13  
+C251 COMPILER V5.60.0,  main                                                               21/10/24  11:28:38  PAGE 13  
 
   far data size        =    ------     ------
   huge data size       =    ------     ------
