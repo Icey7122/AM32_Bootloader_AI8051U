@@ -6,7 +6,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "nstdbool.h"
 #include "main.h"
-#include <stdio.h>
+// #include <stdio.h>
 //#define USE_ADC_INPUT      // will go right to application and ignore eeprom
 
 #include "nstdint.h"
@@ -14,10 +14,8 @@
 #include <string.h>
 #include "bootloader.h"
 
-#define DEBUG(x) printf(x) 
-
 #define STC32_FLASH_START 0x00000000
-#define FIRMWARE_RELATIVE_START 0x0000
+#define FIRMWARE_RELATIVE_START 0x1000
 #define EEPROM_RELATIVE_START 0xFFFF - 0x400
 
 uint8_t bootloader_version = BOOTLOADER_VERSION;
@@ -76,7 +74,7 @@ uint8_t port_letter;
 
 
 uint8_t pin_code = 0;
-uint8_t deviceInfo[9] = { 0 };      // stm32 device info
+uint8_t deviceInfo[9] = { 0x34,0x37,0x31,0x00,0x1f,0x06,0x06,0x01,0x30 };      // stm32 device info
 
 size_t str_len;
 char connected = 0;
@@ -184,14 +182,14 @@ void makeCrc(uint8_t* pBuff, uint16_t length){
 			xb = xb >> 1;
 		}
 	}
-	calculated_crc_low_byte = CRC_16.bytes[0];
-	calculated_crc_high_byte = CRC_16.bytes[1];
+	calculated_crc_low_byte = CRC_16.bytes[1];				//C251是大端编译模式
+	calculated_crc_high_byte = CRC_16.bytes[0];
 }
 
 char checkCrc(uint8_t* pBuff, uint16_t length){
 
-	char received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
-	char received_crc_high_byte2 = pBuff[length+1];
+	uint8_t received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
+	uint8_t received_crc_high_byte2 = pBuff[length+1];
 	makeCrc(pBuff,length);
 	if((calculated_crc_low_byte==received_crc_low_byte2)   && (calculated_crc_high_byte==received_crc_high_byte2)){
 		return 1;
@@ -241,7 +239,7 @@ bool checkAddressWritable(uint32_t address) {
 	return address >= APPLICATION_ADDRESS;
 }
 
-void decodeInput(){
+void decodeInput(void){
 	if(incoming_payload_no_command){
 		len = payload_buffer_size;
 	//	received_crc_low_byte = rxBuffer[len];          // one higher than len in buffer
@@ -263,7 +261,6 @@ void decodeInput(){
 	}
 
 	cmd = rxBuffer[0];
-	printf("cmd:%X\n",cmd);
 
 	if(rxBuffer[16] == 0x7d){
 		if(rxBuffer[8] == 13 && rxBuffer[9] == 66){
@@ -320,7 +317,6 @@ void decodeInput(){
 		len = 4;  // package without 2 byte crc
 		if (!checkCrc((uint8_t*)rxBuffer, len)) {
 			send_BAD_CRC_ACK();
-
 			return;
 		}
 
@@ -418,7 +414,7 @@ void decodeInput(){
         read_data[out_buffer_size + 1] = calculated_crc_high_byte;
         read_data[out_buffer_size + 2] = 0x30;
         sendString(read_data, out_buffer_size+3);
-
+		
 		setReceive();
 		free(read_data);
 		return;
@@ -552,9 +548,6 @@ void recieveBuffer(void){
 		}
 	}
 
-	for(i = 0; i < 30; i++)
-		printf("Buffer[%d]:%c\r\n",i,rxBuffer[i]);
-
 	decodeInput();
 }
 
@@ -562,7 +555,6 @@ void update_EEPROM(void){
 	
 	read_flash_bin(rxBuffer , EEPROM_START_ADD , 48);
 
-	// printf("Buffer:%s\n",rxBuffer);
 	if(BOOTLOADER_VERSION != rxBuffer[2]){
 		if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
 			return;
@@ -635,8 +627,6 @@ void Uart1_Init(void)	//921600bps@48MHz
 }
 
 
-uint8_t xdata MEMPOOL[512];
-
 int main(void)
 {
 	
@@ -652,25 +642,22 @@ int main(void)
    	GPIO_INPUT_INIT();     // init the pin with a pulldown
 
 	Uart1_Init();
-
-	init_mempool(MEMPOOL,512);
 	
    	checkForSignal();
 	
 	P0PD &= ~0x02;
 	P0PU |= 0x02;			//上拉输入
 
-  	deviceInfo[3] = 0x14;
+  	deviceInfo[3] = pin_code;
 
 	update_EEPROM();
   	while (1)
   	{
 	  	recieveBuffer();
-	  	if (invalid_command > 100){
-		  	// jump();
+	  	// if (invalid_command > 100){
+		//   	// jump();
 			
-	  	}
-		P20 = ~P20;
+	  	// }
   	}
 }
 

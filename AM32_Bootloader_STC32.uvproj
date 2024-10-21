@@ -52,7 +52,7 @@
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\</ListingPath>
+          <ListingPath>.\Objects\</ListingPath>
           <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -264,7 +264,7 @@
             <uUch>0</uUch>
             <uFlt64>1</uFlt64>
             <Fuzzy>3</Fuzzy>
-            <Optim>7</Optim>
+            <Optim>3</Optim>
             <wLevel>3</wLevel>
             <SizSpd>1</SizSpd>
             <AcaOpt>0</AcaOpt>
