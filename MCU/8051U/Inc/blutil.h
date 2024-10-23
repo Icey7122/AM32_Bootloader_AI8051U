@@ -21,13 +21,15 @@
 
 #define GPIO_PIN(n) (1U<<(n))
 
-#define GPIO_PULL_NONE 				LL_GPIO_PULL_NO
-#define GPIO_PULL_UP   				LL_GPIO_PULL_UP
-#define GPIO_PULL_DOWN 				LL_GPIO_PULL_DOWN
+#define GPIO_PULL_NONE 				PULL_NO_REGISTER
+#define GPIO_PULL_UP   				PULL_UP_REGISTER
+#define GPIO_PULL_DOWN 				PULL_DOWN_REGISTER
 
-#define GPIO_OUTPUT_PUSH_PULL 		LL_GPIO_OUTPUT_PUSHPULL
+#define GPIO_OUTPUT_PUSH_PULL 		PUSHPULL_REGISTER
 
+#define gpio_mode_set_input(pin,pull_up_down)	pull_up_down
 
+#define gpio_mode_set_output(pin,output_mode)	output_mode
 
 #define gpio_set(input_pin)  	input_pin = 1
 
@@ -35,7 +37,9 @@
 
 #define gpio_read(input_pin)  	input_pin
 
-
+/*
+  initialise timer for 1us per tick
+ */
 #define PWMB_Timer_Init()\
 {\
 	PWMB_ENO = 0x00;	\	
@@ -76,8 +80,10 @@
 
 #define bl_timer_reset() 	PWMB_CNTRH = 0; PWMB_CNTRL = 0
 
-
-#define SystemClock_Config()\
+/*
+  initialise clocks
+ */
+#define bl_clock_config()\
 {\
 	EA = 0;						\
 	CKCON = 0x00;				\			      
@@ -140,6 +146,8 @@
 
 // 	EA = 1;
 // }
+
+#define bl_gpio_init()			GPIO_INIT_REGISTER
 
 #define bl_was_software_reset()
 

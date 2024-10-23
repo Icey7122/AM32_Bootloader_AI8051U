@@ -69,6 +69,13 @@
 #define input_port       P0
 #define PIN_NUMBER       0
 #define PORT_LETTER      0
+
+#define PULL_NO_REGISTER	    P0PU &= ~0x01;P0PD &= ~0x01 
+#define PULL_UP_REGISTER		P0PU |= 0x01; P0PD &= ~0x01
+#define PULL_DOWN_REGISTER		P0PU &= ~0x01; P0PD |= 0x01
+#define PUSHPULL_REGISTER		P0M0 |= 0x01; P0M1 &= ~0x01
+#define GPIO_INIT_REGISTER		P0NCS &= ~0x01; P0IE |= 0x01
+
 #elif defined(USE_P02)
 #define input_pin         P02
 #define input_port        P0
@@ -214,7 +221,7 @@ static uint8_t payLoadBuffer[256];
 static char rxbyte;
 static uint32_t address;
 
-typedef union __attribute__ ((packed)) {
+typedef union {
     uint8_t bytes[2];
     uint16_t word;
 } uint8_16_u;
@@ -228,7 +235,7 @@ static char incoming_payload_no_command;
 /* USER CODE BEGIN PFP */
 static void sendString(const uint8_t dat[], int len);
 static void receiveBuffer();
-static void serialwriteChar(uint8_t dat);
+static void serialwriteChar(const uint8_t dat);
 
 #define BAUDRATE      19200
 #define BITTIME          52 // 1000000/BAUDRATE
@@ -705,7 +712,7 @@ static void serialwriteChar(char dat)
     */
 }
 
-static void sendString(const uint8_t *dat, int len){
+static void sendString(const uint8_t dat[], int len){
 	int i;
 	for(i = 0; i < len; i++){
 		serialwriteChar(dat[i]);
