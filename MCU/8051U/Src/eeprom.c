@@ -9,7 +9,7 @@
  *
  */
 
-#include "bootloader.h"
+#include "eeprom.h"
 #include <string.h>
 
 

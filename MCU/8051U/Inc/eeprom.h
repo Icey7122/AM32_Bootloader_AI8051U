@@ -9,7 +9,10 @@
 
 #ifndef INC_BOOTLOADER_H_
 #define INC_BOOTLOADER_H_
+
 #endif /* INC_BOOTLOADER_H_ */
+
+#include "nstdbool.h"
 
 #define		IAP_STANDBY()	IAP_CMD = 0		
 #define		IAP_READ()		IAP_CMD = 1		

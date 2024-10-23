@@ -14,6 +14,8 @@
 		"STDLIB.H": "cpp",
 		"STC8051U.H": "cpp",
 		"stdio.h": "c",
-		"STDIO.H": "cpp"
+		"STDIO.H": "cpp",
+		"eeprom.h": "c",
+		"version.h": "c"
 	}
 }
