@@ -74,23 +74,44 @@
 #define PULL_UP_REGISTER		P0PU |= 0x01; P0PD &= ~0x01
 #define PULL_DOWN_REGISTER		P0PU &= ~0x01; P0PD |= 0x01
 #define PUSHPULL_REGISTER		P0M0 |= 0x01; P0M1 &= ~0x01
-#define GPIO_INIT_REGISTER		P0NCS &= ~0x01; P0IE |= 0x01
-
+#define GPIO_INIT_REGISTER		P0NCS &= ~0x01; P0IE |= 0x01;\
+								P0M0 &= ~0x01; P0M1 |= 0x01
 #elif defined(USE_P02)
 #define input_pin         P02
 #define input_port        P0
 #define PIN_NUMBER        2
 #define PORT_LETTER       0
+
+#define PULL_NO_REGISTER	    P0PU &= ~0x04;P0PD &= ~0x04 
+#define PULL_UP_REGISTER		P0PU |= 0x04; P0PD &= ~0x04
+#define PULL_DOWN_REGISTER		P0PU &= ~0x04; P0PD |= 0x04
+#define PUSHPULL_REGISTER		P0M0 |= 0x04; P0M1 &= ~0x04
+#define GPIO_INIT_REGISTER		P0NCS &= ~0x04; P0IE |= 0x04;\
+								P0M0 &= ~0x04; P0M1 |= 0x04
 #elif defined(USE_P04)
 #define input_pin         P04
 #define input_port        P0
 #define PIN_NUMBER        4
 #define PORT_LETTER       0
+
+#define PULL_NO_REGISTER	    P0PU &= ~0x10;P0PD &= ~0x10 
+#define PULL_UP_REGISTER		P0PU |= 0x10; P0PD &= ~0x10
+#define PULL_DOWN_REGISTER		P0PU &= ~0x10; P0PD |= 0x10
+#define PUSHPULL_REGISTER		P0M0 |= 0x10; P0M1 &= ~0x10
+#define GPIO_INIT_REGISTER		P0NCS &= ~0x10; P0IE |= 0x10;\
+								P0M0 &= ~0x10; P0M1 |= 0x10
 #elif defined(USE_P06)
 #define input_pin         P06
 #define input_port        P0
 #define PIN_NUMBER        6
 #define PORT_LETTER       0
+
+#define PULL_NO_REGISTER	    P0PU &= ~0x40;P0PD &= ~0x40 
+#define PULL_UP_REGISTER		P0PU |= 0x40; P0PD &= ~0x40
+#define PULL_DOWN_REGISTER		P0PU &= ~0x40; P0PD |= 0x40
+#define PUSHPULL_REGISTER		P0M0 |= 0x40; P0M1 &= ~0x40
+#define GPIO_INIT_REGISTER		P0NCS &= ~0x40; P0IE |= 0x40;\
+								P0M0 &= ~0x40; P0M1 |= 0x40
 #elif defined(USE_P10)
 #define input_pin         P10
 #define input_port        P1
