@@ -16,6 +16,7 @@
 		"stdio.h": "c",
 		"STDIO.H": "cpp",
 		"eeprom.h": "c",
+		"blutil.h": "c",
 		"version.h": "c"
 	}
 }

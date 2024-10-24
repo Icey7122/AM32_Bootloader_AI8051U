@@ -21,24 +21,27 @@ Target DLL:      STCMON251.DLL V0, 1, 0, 8
 Dialog DLL:      TCORE51.DLL V2.66.4.0
  
 <h2>Project:</h2>
-C:\Users\17263\Desktop\AM32_Bootloader_STC8051U\AM32_Bootloader_STC8051U.uvproj
-Project File Date:  10/21/2024
+c:\Users\17263\Desktop\AM32_Bootloader_STC8051U\AM32_Bootloader_STC8051U.uvproj
+Project File Date:  10/24/2024
 
 <h2>Output:</h2>
 Rebuild target 'Bootloader'
-compiling bootloader.c...
 compiling main.c...
-Bootloader\src\main.c(532): warning C173: '==': signed/unsigned type mismatch
-Bootloader\src\main.c(637): warning C138: expression with possibly no effect
+bootloader\main.c(824): warning C173: '==': signed/unsigned type mismatch
+compiling eeprom.c...
+Mcu\8051U\Src\eeprom.c(71): warning C188: 'parameter 1': value truncated
+Mcu\8051U\Src\eeprom.c(72): warning C188: 'parameter 3': value truncated
+Mcu\8051U\Src\eeprom.c(74): warning C188: 'parameter 3': value truncated
+Mcu\8051U\Src\eeprom.c(74): warning C188: 'parameter 3': value truncated
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    Uart1_Init?_/main
 *** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
     NAME:    putchar/main
-Program Size: data=8.0 edata+hdata=828 xdata=1024 const=80 code=3165
+Program Size: data=8.0 edata+hdata=803 xdata=1024 const=17 code=3532
 creating hex file from ".\Objects\AM32_Bootloader_STC8051U"...
-".\Objects\AM32_Bootloader_STC8051U" - 0 Error(s), 4 Warning(s).
-Build Time Elapsed:  00:00:01
+".\Objects\AM32_Bootloader_STC8051U" - 0 Error(s), 7 Warning(s).
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

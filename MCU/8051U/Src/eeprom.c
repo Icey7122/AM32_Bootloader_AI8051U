@@ -10,14 +10,17 @@
  */
 
 #include "eeprom.h"
+#include "stdlib.h"
 #include <string.h>
-
 
 #define page_size 0x200                   // 512 bytes for STC8051U
 
-extern void delayMicroseconds(uint32_t micros);
+bool save_flash_nolib(const uint8_t* dat, uint32_t length, uint32_t add)
+{
+	uint32_t i;
+	const uint8_t *p = dat;
+	uint8_t* data_check;
 
-void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 
 	IAP_ENABLE();                       	
 	// unlock flash
@@ -42,14 +45,15 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 	}
 
 	IAP_WRITE();  			//宏调用, 送字节写命令
-	do
-    {
+
+	for (i = 0; i < length; i++)
+	{
 		CMD_FAIL = 0;
 
-        IAP_ADDRE = (uint8_t)(add >> 16); 
-        IAP_ADDRH = (uint8_t)(add >> 8);  
-        IAP_ADDRL = (uint8_t)add;         
-        IAP_DATA  = *dat;      
+        IAP_ADDRE = (uint8_t)((add + i) >> 16); 
+        IAP_ADDRH = (uint8_t)((add + i) >> 8);  
+        IAP_ADDRL = (uint8_t)(add + i);         
+        IAP_DATA  = *p;      
 
 		IAP_TRIG = 0x5A;
 		IAP_TRIG = 0xA5;                   
@@ -59,17 +63,26 @@ void save_flash_nolib(uint8_t *dat, int length, uint32_t add){
 		_nop_();
 
 		while(CMD_FAIL);
-
-        add++;                     //下一个地址
-        dat++;                    //下一个数据
-    }
-    while(--length);                    //直到结束
-
-
+        p++;                    //下一个数据
+	}
+	
 	IAP_DISABLE();                      //关闭IAP
+
+	data_check = (uint8_t *)malloc(length);
+	read_flash_bin(data_check, add, length);
+
+	if (memcmp(dat, data_check, length) == 0){
+		free(data_check);
+		return true;
+	}
+	else{
+		free(data_check);
+		return false;
+	}
 }
 
-void read_flash_bin(uint8_t*  dat , uint32_t add , int out_buff_len){
+void read_flash_bin(uint8_t* dat, uint32_t add, int out_buff_len)
+{
 	int i;
 	IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
     IAP_READ();                             //送字节读命令，命令不需改变时，不需重新送命令

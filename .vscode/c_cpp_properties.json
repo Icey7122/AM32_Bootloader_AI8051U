@@ -3,10 +3,12 @@
         {
             "name": "Bootloader",
             "includePath": [
-                "c:\\Users\\17263\\Desktop\\AM32_Bootloader_STC8051U\\Bootloader\\inc",
+                "c:\\Users\\17263\\Desktop\\AM32_Bootloader_STC8051U\\Inc",
+                "c:\\Users\\17263\\Desktop\\AM32_Bootloader_STC8051U\\Mcu\\8051U\\Inc",
                 "D:\\Compiler\\Keil_v5\\C251\\INC",
                 "D:\\Compiler\\Keil_v5\\C251\\INC\\STC",
-                "c:\\Users\\17263\\Desktop\\AM32_Bootloader_STC8051U\\Bootloader\\src",
+                "c:\\Users\\17263\\Desktop\\AM32_Bootloader_STC8051U\\bootloader",
+                "c:\\Users\\17263\\Desktop\\AM32_Bootloader_STC8051U\\Mcu\\8051U\\Src",
                 "${default}",
                 "${workspaceFolder}/**"
             ],

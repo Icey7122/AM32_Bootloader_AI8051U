@@ -4,60 +4,60 @@
 /*
   based on https://github.com/AlkaMotors/AM32_Bootloader_F051/blob/main/Core/
  */
-#pragma once
+#ifndef __BLUTIL_H
+#define __BLUTIL_H
 
-/*
-  2k ram + 32k xram
- */
+// /*
+//   34k ram
+//  */
 #define RAM_BASE 0x0000
-#define RAM_SIZE 2
-#define XRAM_SIZE 32
+#define RAM_SIZE 34*1024
 
-
-/*
-  use 64k of flash
- */
+// /*
+//   use 32k of flash
+//  */
 #define BOARD_FLASH_SIZE 64
 
 #define GPIO_PIN(n) (1U<<(n))
 
-#define GPIO_PULL_NONE 				PULL_NO_REGISTER
-#define GPIO_PULL_UP   				PULL_UP_REGISTER
-#define GPIO_PULL_DOWN 				PULL_DOWN_REGISTER
+#define GPIO_PULL_NONE          PULL_NO_RESIGTER
+#define GPIO_PULL_UP            PULL_UP_RESIGTER
+#define GPIO_PULL_DOWN          PULL_DOWN_RESIGTER
 
-#define GPIO_OUTPUT_PUSH_PULL 		PUSHPULL_REGISTER
+#define GPIO_OUTPUT_PUSH_PULL   PUSHPULL_RESIGTER
 
-#define gpio_mode_set_input(pin,pull_up_down)	pull_up_down
+// uint32_t SystemCoreClock = 8000000U;
 
-#define gpio_mode_set_output(pin,output_mode)	output_mode
+#define gpio_mode_set_input(pin,pull_up_down) pull_up_down
 
-#define gpio_set(input_pin)  	input_pin = 1
+#define gpio_mode_set_output(pin,output_mode) output_mode
 
-#define gpio_clear(input_pin)  	input_pin = 0
+#define gpio_set(set_pin) set_pin = 1
 
-#define gpio_read(input_pin)  	input_pin
+#define gpio_clear(clear_pin) clear_pin = 0
+
+#define gpio_read(read_pin) read_pin
+
 
 /*
   initialise timer for 1us per tick
  */
-#define PWMB_Timer_Init()\
+#define bl_timer_init()\
 {\
-	PWMB_ENO = 0x00;	\	
-	PWMB_IOAUX = 0x00;	\		
-	PWMB_ARRH = 0xFF;	\
-	PWMB_ARRL = 0xFF;	\	
-	PWMB_CNTRH = 0x00;	\
-	PWMB_CNTRL = 0x00;	\		
-	PWMB_PSCRH = 0x00;	\		
-	PWMB_PSCRL = 47;	\	
-	PWMB_IER = 0x00;	\		
-	PWMB_CR1 = 0x01;	\		
+	PWMB_ENO = 0x00;\		
+	PWMB_IOAUX = 0x00;\		
+	PWMB_ARRH = 0xFF;\
+	PWMB_ARRL = 0xFF;\
+	PWMB_CNTRH = 0x00;\
+	PWMB_CNTRL = 0x00;\
+	PWMB_PSCRH = 0x00;\	
+	PWMB_PSCRL = 47;\		
+	PWMB_IER = 0x00;\
+	PWMB_CR1 = 0x01;\
 }
 
-// static void PWMB_Timer_Init(void)
+// void bl_timer_init(void)
 // {
-// //由于未开启高速PWM所以PWMB的时钟源为48Mhz
-
 // 	PWMB_ENO = 0x00;		//禁止PWMB的PWM输出
 // 	PWMB_IOAUX = 0x00;		//禁止PWMB
 
@@ -71,44 +71,46 @@
 // 	PWMB_CR1 = 0x01;		//使能计数器
 // }
 
+
 /*
   disable timer ready for app start
  */
-#define bl_timer_disable()	PWMB_CR1 &= 0xFE 
+#define bl_timer_disable() PWMB_CR1 &= ~0x01		//使能计数器
 
-#define bl_timer_us()		((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL)
 
-#define bl_timer_reset() 	PWMB_CNTRH = 0; PWMB_CNTRL = 0
+#define bl_timer_us() ((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL)
+
+
+#define bl_timer_reset() PWMB_CNTRH = 0; PWMB_CNTRL = 0
 
 /*
   initialise clocks
  */
 #define bl_clock_config()\
 {\
-	EA = 0;						\
-	CKCON = 0x00;				\			      
-	WTST = 1;    				\           	
-	P_SW2 = 0x80;				\			    
-	CLKDIV = 0x04;				\		
-	IRTRIM = CHIPID12;    		\ 		
-	HIRCSEL1 = 1;				\
-	HIRCSEL0 = 0;				\
-	HIRCCR = 0x80;				\
-	while (!(HIRCCR & 0x01));	\
-	CLKSEL = 0x40; 				\
-	USBCLK &= 0x0F;				\
-	USBCLK |= 0xA0;				\
-	NOP(5);						\
-	CLKDIV = 0X01;				\
-	CLKSEL |= 0x08;				\
-	HSCLKDIV = 0x01;			\
-	USBCKS = 1;					\
-	USBCKS2 = 0;				\
-	EA = 1;						\
+  EA = 0;\
+  CKCON = 0x00;\
+  WTST = 1;\     	
+  P_SW2 = 0x80;\	  
+  CLKDIV = 0x04;\	
+  IRTRIM = CHIPID12;\
+  HIRCSEL1 = 1;\
+  HIRCSEL0 = 0;\
+  HIRCCR = 0x80;\
+  while (!(HIRCCR & 0x01));\
+  CLKSEL = 0x40;\
+  USBCLK &= 0x0F;\
+  USBCLK |= 0xA0;\
+  NOP(5);\
+  CLKDIV = 0X01;\	
+  CLKSEL |= 0x08;\
+  HSCLKDIV = 0x01;\
+  USBCKS = 1;\
+  USBCKS2 = 0;\
+  EA = 1;\
 }
 
-
-// void SystemClock_Config(void)
+// void bl_clock_config(void)
 // {
 // 	EA = 0;
 
@@ -147,9 +149,18 @@
 // 	EA = 1;
 // }
 
-#define bl_gpio_init()			GPIO_INIT_REGISTER
+#define bl_gpio_init()  GPIO_INIT_RESIGTER
 
-#define bl_was_software_reset()
+/*
+  return true if the MCU booted under a software reset
+ */
+#define bl_was_software_reset() 0
 
-#define JumpToApplication() 	IAP_CONTR = 0x20
+/*
+  jump from the bootloader to the application code
+ */
+#define jump_to_application() 	IAP_CONTR = 0x20
 
+
+
+#endif // !__BLUTIL_H

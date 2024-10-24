@@ -272,7 +272,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Bootloader\inc</IncludePath>
+              <IncludePath>.\Inc;.\Mcu\8051U\Inc</IncludePath>
             </VariousControls>
           </C251>
           <Ax51>
@@ -322,42 +322,52 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>inc</GroupName>
+          <GroupName>Inc</GroupName>
           <Files>
-            <File>
-              <FileName>nstdint.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Bootloader\inc\nstdint.h</FilePath>
-            </File>
             <File>
               <FileName>nstdbool.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Bootloader\inc\nstdbool.h</FilePath>
+              <FilePath>.\Inc\nstdbool.h</FilePath>
+            </File>
+            <File>
+              <FileName>nstdint.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\nstdint.h</FilePath>
+            </File>
+            <File>
+              <FileName>version.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\version.h</FilePath>
+            </File>
+            <File>
+              <FileName>blutil.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Mcu\8051U\Inc\blutil.h</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Mcu\8051U\Inc\eeprom.h</FilePath>
             </File>
             <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Bootloader\inc\main.h</FilePath>
-            </File>
-            <File>
-              <FileName>bootloader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Bootloader\inc\bootloader.h</FilePath>
+              <FilePath>.\Mcu\8051U\Inc\main.h</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>src</GroupName>
+          <GroupName>Src</GroupName>
           <Files>
-            <File>
-              <FileName>bootloader.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Bootloader\src\bootloader.c</FilePath>
-            </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Bootloader\src\main.c</FilePath>
+              <FilePath>.\bootloader\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Mcu\8051U\Src\eeprom.c</FilePath>
             </File>
           </Files>
         </Group>

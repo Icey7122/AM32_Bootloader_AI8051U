@@ -1,5 +1,5 @@
-".\Objects\bootloader.obj",
-".\Objects\main.obj" 
+".\Objects\main.obj",
+".\Objects\eeprom.obj" 
 TO ".\Objects\AM32_Bootloader_STC8051U" 
 PRINT(".\Listings\AM32_Bootloader_STC8051U.map") CASE 
 CLASSES (EDATA (0x0-0x7FF), 
