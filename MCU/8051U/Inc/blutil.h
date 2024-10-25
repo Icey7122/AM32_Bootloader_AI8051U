@@ -105,6 +105,7 @@
   CLKDIV = 0X01;\	
   CLKSEL |= 0x08;\
   HSCLKDIV = 0x01;\
+  TFPU_CLKDIV = 0x01;\
   USBCKS = 1;\
   USBCKS2 = 0;\
   EA = 1;\

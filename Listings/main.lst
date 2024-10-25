@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -66,7 +66,7 @@ stmt  level    source
    55            should we update the bootloader version in eeprom?
    56           */
    57          #define UPDATE_EEPROM_ENABLE 1
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 2   
 
    58          
    59          #include <string.h>
@@ -134,7 +134,7 @@ stmt  level    source
                #define PORT_LETTER       0
                
                #define PULL_NO_RESIGTER  P1PU &= ~0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 3   
 
                #define PULL_UP_RESIGTER  P1PU |= 0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
                #define PULL_DOWN_RESIGTER  P1PU &= ~0x01; P1PD |= 0x01;P1M0 = 0x00; P1M1 = 0x01
@@ -202,7 +202,7 @@ stmt  level    source
                #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x04; P2IE |= 0x04; P2NCS = 0x00; P2PU |= 0x04
                
                #elif defined(USE_P24)
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 4   
 
                #define input_pin         P24
                #define input_port        P2
@@ -270,7 +270,7 @@ stmt  level    source
   253            supports this feature
   254           */
   255          #define DEVINFO_MAGIC1 0x5925e3da
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 5   
 
   256          #define DEVINFO_MAGIC2 0x4eb863d9
   257          
@@ -338,7 +338,7 @@ stmt  level    source
   319          
   320          static void delayMicroseconds(uint32_t micros)
   321          {
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 6   
 
   322   1          bl_timer_reset();
   323   1          while (bl_timer_us() < micros) {
@@ -406,7 +406,7 @@ stmt  level    source
   383   3            if (((xb & 0x01) ^ (CRC_16.word & 0x0001)) !=0 ) {
   384   4              CRC_16.word = CRC_16.word >> 1;
   385   4              CRC_16.word = CRC_16.word ^ 0xA001;
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 7   
 
   386   4            } else {
   387   4              CRC_16.word = CRC_16.word >> 1;
@@ -474,7 +474,7 @@ stmt  level    source
   448   1          sendString(devinfo.deviceInfo,sizeof(devinfo.deviceInfo));
   449   1          setReceive();
   450   1      }
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 8   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 8   
 
   451          
   452          static bool checkAddressWritable(uint32_t address)
@@ -542,7 +542,7 @@ stmt  level    source
   514   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
   515   3            send_BAD_CRC_ACK();
   516   3      
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 9   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 9   
 
   517   3            return;
   518   3        }
@@ -610,7 +610,7 @@ stmt  level    source
   580   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
   581   3            send_BAD_CRC_ACK();
   582   3      
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 10  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 10  
 
   583   3            return;
   584   3        }
@@ -678,7 +678,7 @@ stmt  level    source
   644   2              read_data[out_buffer_size + 1] = calculated_crc_high_byte;
   645   2              read_data[out_buffer_size + 2] = 0x30;
   646   2              sendString(read_data, out_buffer_size+3);
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 11  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 11  
 
   647   2      
   648   2        setReceive();
@@ -746,7 +746,7 @@ stmt  level    source
   710   2          }
   711   1      
   712   1          // wait to get the center of bit time. We want to sample at the
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 12  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 12  
 
   713   1          // middle of each bit
   714   1          delayMicroseconds(HALFBITTIME);
@@ -814,7 +814,7 @@ stmt  level    source
   776   1      
   777   1          /*
   778   1            note that we skip the delay by BITTIME for the full stop bit and
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 13  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 13  
 
   779   1            do it in sendString() instead to ensure when sending an ACK
   780   1            immediately followed by a setReceive() on a slow MCU that we
@@ -882,7 +882,7 @@ stmt  level    source
   840   2        if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
   841   3            return;
   842   3        }
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 14  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 14  
 
   843   2        rxBuffer[2] = BOOTLOADER_VERSION;
   844   2        save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
@@ -950,7 +950,7 @@ stmt  level    source
   906   1      
   907   1          if (low_pin_count > 0) {
   908   2        jump();
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 15  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 15  
 
   909   2          }
   910   1      }
@@ -1018,7 +1018,7 @@ stmt  level    source
                #endif
   973   1      
   974   1      #ifdef UPDATE_EEPROM_ENABLE
-C251 COMPILER V5.60.0,  main                                                               25/10/24  21:52:27  PAGE 16  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  21:56:06  PAGE 16  
 
   975   1           update_EEPROM();
   976   1      #endif
@@ -1066,7 +1066,7 @@ stmt  level    source
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      2719     ------
+  code size            =      2732     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
