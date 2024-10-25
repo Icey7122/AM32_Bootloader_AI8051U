@@ -259,7 +259,7 @@ static const struct {
     uint32_t magic1;
     uint32_t magic2;
     const uint8_t deviceInfo[9];
-} devinfo = {
+} devinfo _at_ (MCU_FLASH_START + FIRMWARE_RELATIVE_START - 32) = {
         {DEVINFO_MAGIC1},
         {DEVINFO_MAGIC2},
         {'4','7','1',PIN_CODE,FLASH_SIZE_CODE,0x06,0x06,0x01,0x30}
@@ -330,7 +330,7 @@ static void jump()
 {
 #ifndef DISABLE_JUMP
 #if CHECK_EEPROM_BEFORE_JUMP
-	uint8_t value = (unsigned char far*)EEPROM_START_ADD;
+	uint8_t value = *(unsigned char far*)EEPROM_START_ADD;
 #endif
 #ifndef DISABLE_APP_HEADER_CHECKS
     const uint32_t *app = (unsigned char far*)(MCU_FLASH_START + FIRMWARE_RELATIVE_START);

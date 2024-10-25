@@ -160,7 +160,7 @@
 /*
   jump from the bootloader to the application code
  */
-#define jump_to_application() 	IAP_CONTR = 0x20
+#define jump_to_application() ((void (far *)())(MCU_FLASH_START + FIRMWARE_RELATIVE_START))();
 
 
 
