@@ -10,7 +10,6 @@
  */
 
 #include "eeprom.h"
-#include "stdlib.h"
 #include <string.h>
 
 #define page_size 0x200                   // 512 bytes for STC8051U
@@ -18,9 +17,6 @@
 bool save_flash_nolib(const uint8_t* dat, uint32_t length, uint32_t add)
 {
 	uint32_t i;
-	const uint8_t *p = dat;
-	uint8_t* data_check;
-
 
 	IAP_ENABLE();                       	
 	// unlock flash
@@ -53,7 +49,7 @@ bool save_flash_nolib(const uint8_t* dat, uint32_t length, uint32_t add)
         IAP_ADDRE = (uint8_t)((add + i) >> 16); 
         IAP_ADDRH = (uint8_t)((add + i) >> 8);  
         IAP_ADDRL = (uint8_t)(add + i);         
-        IAP_DATA  = *p;      
+        IAP_DATA  = *(dat + i);      
 
 		IAP_TRIG = 0x5A;
 		IAP_TRIG = 0xA5;                   
@@ -63,47 +59,16 @@ bool save_flash_nolib(const uint8_t* dat, uint32_t length, uint32_t add)
 		_nop_();
 
 		while(CMD_FAIL);
-        p++;                    //下一个数据
 	}
 	
 	IAP_DISABLE();                      //关闭IAP
 
-	data_check = (uint8_t *)malloc(length);
-	read_flash_bin(data_check, add, length);
-
-	if (memcmp(dat, data_check, length) == 0){
-		free(data_check);
-		return true;
-	}
-	else{
-		free(data_check);
-		return false;
-	}
+	return memcmp(dat, (unsigned char far *)add, length) == 0;
 }
 
 void read_flash_bin(uint8_t* dat, uint32_t add, int out_buff_len)
 {
-	int i;
-	IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
-    IAP_READ();                             //送字节读命令，命令不需改变时，不需重新送命令
-	for (i = 0; i < out_buff_len ; i ++){
-		CMD_FAIL = 0;
-        IAP_ADDRE = (uint8_t)((add+i) >> 16); //送地址高字节（地址需要改变时才需重新送地址）
-        IAP_ADDRH = (uint8_t)((add+i) >> 8);  //送地址中字节（地址需要改变时才需重新送地址）
-        IAP_ADDRL = (uint8_t)(add+i);         //送地址低字节（地址需要改变时才需重新送地址）
-
-		IAP_TRIG = 0x5A;
-		IAP_TRIG = 0xA5;                   
-		_nop_();   
-		_nop_();
-		_nop_();
-		_nop_();
-		while(CMD_FAIL);
-
-        dat[i] = IAP_DATA;            //读出的数据送往
-	}
-
-	IAP_DISABLE();                      
+	memcpy(dat, (unsigned char far*)add, out_buff_len);               
 }
 
 

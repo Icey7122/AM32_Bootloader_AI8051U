@@ -59,7 +59,7 @@
 #include <string.h>
 
 #ifndef MCU_FLASH_START
-#define MCU_FLASH_START 0x0000
+#define MCU_FLASH_START 0xFF0000
 #endif
 
 #ifndef FIRMWARE_RELATIVE_START
@@ -309,9 +309,9 @@ static uint16_t payload_buffer_size;
 static char incoming_payload_no_command;
 
 /* USER CODE BEGIN PFP */
+static void sendString(const uint8_t dat[], int len);
 static void receiveBuffer();
 static void serialwriteChar(uint8_t dat);
-static void sendString(const uint8_t dat[], int len);
 
 #define BAUDRATE      19200
 #define BITTIME          52 // 1000000/BAUDRATE
@@ -330,31 +330,16 @@ static void jump()
 {
 #ifndef DISABLE_JUMP
 #if CHECK_EEPROM_BEFORE_JUMP
-	uint8_t value;
+	uint8_t value = (unsigned char far*)EEPROM_START_ADD;
 #endif
 #ifndef DISABLE_APP_HEADER_CHECKS
-    const uint32_t *app = (uint32_t*)(MCU_FLASH_START + FIRMWARE_RELATIVE_START);
-    const uint32_t ram_start = 0x20000000;
+    const uint32_t *app = (unsigned char far*)(MCU_FLASH_START + FIRMWARE_RELATIVE_START);
+    const uint32_t ram_start = 0x000000;
     const uint32_t ram_limit_kb = 64;
     const uint32_t ram_end = ram_start+ram_limit_kb*1024;
 	const uint32_t flash_limit_kb = 256;
 #endif
 #if CHECK_EEPROM_BEFORE_JUMP
-	EA = 0;
-	IAP_ENABLE();                           //设置等待时间，允许IAP操作，送一次就够
-    IAP_READ();                             
-	IAP_ADDRE = (uint8_t)(EEPROM_START_ADD >> 16); 
-	IAP_ADDRH = (uint8_t)(EEPROM_START_ADD >> 8);  
-	IAP_ADDRL = (uint8_t)EEPROM_START_ADD;         
-	IAP_TRIG = 0x5A;
-	IAP_TRIG = 0xA5;                   
-	_nop_();   
-	_nop_();
-	_nop_();
-	_nop_();
-	while(CMD_FAIL);
-	value = IAP_DATA;            //读出的数据送往
-	IAP_DISABLE();
 	if (value != 0x01) {      // check first byte of eeprom to see if its programmed, if not do not jump
 		invalid_command = 0;
 		return;
