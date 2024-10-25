@@ -29,7 +29,7 @@
 
 // use this to check the string output code. When enabled
 // the string HELLO_WORLD is output every 10ms
-//#define BOOTLOADER_TEST_STRING
+// #define BOOTLOADER_TEST_STRING
 
 // when there is no app fw yet, disable jump()
 //#define DISABLE_JUMP
@@ -936,7 +936,7 @@ static void test_string(void)
     setTransmit();
     while (1) {
         delayMicroseconds(10000);
-        sendString((uint8_t*)"HELLO_WORLD",11);
+        sendString((uint8_t*)"HELLO_WORLD\n",13);
     }
 }
 #endif // BOOTLOADER_TEST_STRING

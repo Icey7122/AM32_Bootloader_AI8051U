@@ -44,44 +44,39 @@
  */
 #define bl_timer_init()\
 {\
-	PWMB_ENO = 0x00;\		
-	PWMB_IOAUX = 0x00;\		
-	PWMB_ARRH = 0xFF;\
-	PWMB_ARRL = 0xFF;\
-	PWMB_CNTRH = 0x00;\
-	PWMB_CNTRL = 0x00;\
-	PWMB_PSCRH = 0x00;\	
-	PWMB_PSCRL = 47;\		
-	PWMB_IER = 0x00;\
-	PWMB_CR1 = 0x01;\
+	TM0PS = 47;\
+	AUXR |= 0x80;\
+	TMOD &= 0xF0;\	
+	TMOD |= 0x01;\		
+	TL0 = 0;\	
+	TH0 = 0;\	
+	TF0 = 0;\	
+	TR0 = 1;\
 }
 
 // void bl_timer_init(void)
 // {
-// 	PWMB_ENO = 0x00;		//禁止PWMB的PWM输出
-// 	PWMB_IOAUX = 0x00;		//禁止PWMB
-
-// 	PWMB_ARRH = 0xFF;
-// 	PWMB_ARRL = 0xFF;		//设置PWMB周期为65535
-// 	PWMB_CNTRH = 0x00;
-// 	PWMB_CNTRL = 0x00;		//清零计数器
-// 	PWMB_PSCRH = 0x00;		
-// 	PWMB_PSCRL = 47;		//PWMB时钟源分频到1Mhz
-// 	PWMB_IER = 0x00;		//禁止PWMB中断
-// 	PWMB_CR1 = 0x01;		//使能计数器
+// TM0PS = 47;			//设置定时器分频系数
+// AUXR |= 0x80;			//定时器时钟1T模式
+// TMOD &= 0xF0;			//设置定时器模式
+// TMOD |= 0x01;			//设置定时器模式
+// TL0 = 0xD0;				//设置定时初始值
+// TH0 = 0xFF;				//设置定时初始值
+// TF0 = 0;				//清除TF0标志
+// TR0 = 1;				//定时器0开始计时
 // }
 
 
 /*
   disable timer ready for app start
  */
-#define bl_timer_disable() PWMB_CR1 &= ~0x01		//使能计数器
+#define bl_timer_disable() TR0 = 0
 
 
-#define bl_timer_us() ((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL)
+#define bl_timer_us() ((uint16_t)TH0 << 8 | TL0)
 
 
-#define bl_timer_reset() PWMB_CNTRH = 0; PWMB_CNTRL = 0
+#define bl_timer_reset() TH0 = 0; TL0 = 0
 
 /*
   initialise clocks

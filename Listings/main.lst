@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -40,7 +40,7 @@ stmt  level    source
    29          
    30          // use this to check the string output code. When enabled
    31          // the string HELLO_WORLD is output every 10ms
-   32          //#define BOOTLOADER_TEST_STRING
+   32          // #define BOOTLOADER_TEST_STRING
    33          
    34          // when there is no app fw yet, disable jump()
    35          //#define DISABLE_JUMP
@@ -66,7 +66,7 @@ stmt  level    source
    55            should we update the bootloader version in eeprom?
    56           */
    57          #define UPDATE_EEPROM_ENABLE 1
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 2   
 
    58          
    59          #include <string.h>
@@ -134,7 +134,7 @@ stmt  level    source
                #define PORT_LETTER       0
                
                #define PULL_NO_RESIGTER  P1PU &= ~0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 3   
 
                #define PULL_UP_RESIGTER  P1PU |= 0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
                #define PULL_DOWN_RESIGTER  P1PU &= ~0x01; P1PD |= 0x01;P1M0 = 0x00; P1M1 = 0x01
@@ -202,7 +202,7 @@ stmt  level    source
                #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x04; P2IE |= 0x04; P2NCS = 0x00; P2PU |= 0x04
                
                #elif defined(USE_P24)
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 4   
 
                #define input_pin         P24
                #define input_port        P2
@@ -270,7 +270,7 @@ stmt  level    source
   253            supports this feature
   254           */
   255          #define DEVINFO_MAGIC1 0x5925e3da
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 5   
 
   256          #define DEVINFO_MAGIC2 0x4eb863d9
   257          
@@ -338,7 +338,7 @@ stmt  level    source
   319          
   320          static void delayMicroseconds(uint32_t micros)
   321          {
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 6   
 
   322   1          bl_timer_reset();
   323   1          while (bl_timer_us() < micros) {
@@ -406,7 +406,7 @@ stmt  level    source
   385   4              CRC_16.word = CRC_16.word ^ 0xA001;
   386   4            } else {
   387   4              CRC_16.word = CRC_16.word >> 1;
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 7   
 
   388   4            }
   389   3            xb = xb >> 1;
@@ -474,7 +474,7 @@ stmt  level    source
   450   1      }
   451          
   452          static bool checkAddressWritable(uint32_t address)
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 8   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 8   
 
   453          {
   454   1          return address >= APPLICATION_ADDRESS;
@@ -542,7 +542,7 @@ stmt  level    source
   516   3      
   517   3            return;
   518   3        }
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 9   
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 9   
 
   519   2      
   520   2        if (!checkAddressWritable(address)) {
@@ -610,7 +610,7 @@ stmt  level    source
   582   3      
   583   3            return;
   584   3        }
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 10  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 10  
 
   585   2      
   586   2        setTransmit();
@@ -678,7 +678,7 @@ stmt  level    source
   646   2              sendString(read_data, out_buffer_size+3);
   647   2      
   648   2        setReceive();
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 11  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 11  
 
   649   2      
   650   2        return;
@@ -746,7 +746,7 @@ stmt  level    source
   712   1          // wait to get the center of bit time. We want to sample at the
   713   1          // middle of each bit
   714   1          delayMicroseconds(HALFBITTIME);
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 12  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 12  
 
   715   1          if (gpio_read(input_pin)) {
   716   2        // bad framing, we should be half-way through the start bit
@@ -814,7 +814,7 @@ stmt  level    source
   778   1            note that we skip the delay by BITTIME for the full stop bit and
   779   1            do it in sendString() instead to ensure when sending an ACK
   780   1            immediately followed by a setReceive() on a slow MCU that we
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 13  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 13  
 
   781   1            start on the receive as soon as possible.
   782   1          */
@@ -882,7 +882,7 @@ stmt  level    source
   842   3        }
   843   2        rxBuffer[2] = BOOTLOADER_VERSION;
   844   2        save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 14  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 14  
 
   845   2          }
   846   1      }
@@ -950,7 +950,7 @@ stmt  level    source
   908   2        jump();
   909   2          }
   910   1      }
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 15  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 15  
 
   911          
   912          #ifdef BOOTLOADER_TEST_CLOCK
@@ -980,7 +980,7 @@ stmt  level    source
                    setTransmit();
                    while (1) {
                        delayMicroseconds(10000);
-                       sendString((uint8_t*)"HELLO_WORLD",11);
+                       sendString((uint8_t*)"HELLO_WORLD\n",13);
                    }
                }
                #endif // BOOTLOADER_TEST_STRING
@@ -1018,7 +1018,7 @@ stmt  level    source
   974   1      #ifdef UPDATE_EEPROM_ENABLE
   975   1           update_EEPROM();
   976   1      #endif
-C251 COMPILER V5.60.0,  main                                                               25/10/24  22:52:22  PAGE 16  
+C251 COMPILER V5.60.0,  main                                                               25/10/24  23:46:53  PAGE 16  
 
   977   1      
   978   1          while (1) {
@@ -1064,7 +1064,7 @@ stmt  level    source
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      2748     ------
+  code size            =      2523     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
