@@ -3,4 +3,5 @@
 TO ".\Objects\AM32_Bootloader_STC8051U" 
 PRINT(".\Listings\AM32_Bootloader_STC8051U.map") CASE 
 CLASSES (EDATA (0x0-0x7FF), 
-HDATA (0x0-0x7FF)) 
+HDATA (0x0-0x7FF) , 
+XDATA(0x10000-0x17FFF)) 

@@ -1,19 +1,13 @@
 Rebuild target 'Bootloader'
 compiling main.c...
-bootloader\main.c(824): warning C173: '==': signed/unsigned type mismatch
+bootloader\main.c(825): warning C173: '==': signed/unsigned type mismatch
 compiling eeprom.c...
 Mcu\8051U\Src\eeprom.c(71): warning C188: 'parameter 1': value truncated
 Mcu\8051U\Src\eeprom.c(72): warning C188: 'parameter 3': value truncated
 Mcu\8051U\Src\eeprom.c(74): warning C188: 'parameter 3': value truncated
 Mcu\8051U\Src\eeprom.c(74): warning C188: 'parameter 3': value truncated
 linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    NAME:    Uart1_Init?_/main
-
-*** WARNING L57: UNCALLED FUNCTION, IGNORED FOR OVERLAY PROCESS
-    NAME:    putchar/main
-
-Program Size: data=8.0 edata+hdata=803 xdata=1024 const=17 code=3532
+Program Size: data=8.0 edata+hdata=289 xdata=1538 const=17 code=3575
 creating hex file from ".\Objects\AM32_Bootloader_STC8051U"...
-".\Objects\AM32_Bootloader_STC8051U" - 0 Error(s), 7 Warning(s).
-Build Time Elapsed:  00:00:00
+".\Objects\AM32_Bootloader_STC8051U" - 0 Error(s), 5 Warning(s).
+Build Time Elapsed:  00:00:01

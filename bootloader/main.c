@@ -1,7 +1,7 @@
 /*
   bootloader for AM32 ESC firmware
 
-  based on https://github.com/AlkaMotors/AT32F051_AM32_Bootloader
+  based on https://github.com/AlkaMotors/AT32F421_AM32_Bootloader
  */
 #include "main.h"
 #include <stdio.h>
@@ -264,6 +264,7 @@ static const struct {
         {DEVINFO_MAGIC2},
         {'4','7','1',PIN_CODE,FLASH_SIZE_CODE,0x06,0x06,0x01,0x30}
 };
+
 typedef void (*pFunction)(void);
 
 #define APPLICATION_ADDRESS     (uint32_t)(MCU_FLASH_START + FIRMWARE_RELATIVE_START)
@@ -291,8 +292,8 @@ static int cmd;
 static char eeprom_req;
 static int received;
 
-static uint8_t rxBuffer[258];
-static uint8_t payLoadBuffer[256];
+static uint8_t xdata rxBuffer[258];
+static uint8_t xdata payLoadBuffer[256];
 static char rxbyte;
 static uint32_t address;
 
@@ -998,31 +999,31 @@ int main(void)
 }
 
 
-void Uart1_Init(void)	//921600bps@48MHz
-{
-	SCON = 0x50;		//8位数据,可变波特率
-	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
-	AUXR |= 0x04;		//定时器时钟1T模式
-	T2L = 0xF3;			//设置定时初始值
-	T2H = 0xFF;			//设置定时初始值
-	AUXR |= 0x10;		//定时器2开始计时
+// void Uart1_Init(void)	//921600bps@48MHz
+// {
+// 	SCON = 0x50;		//8位数据,可变波特率
+// 	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
+// 	AUXR |= 0x04;		//定时器时钟1T模式
+// 	T2L = 0xF3;			//设置定时初始值
+// 	T2H = 0xFF;			//设置定时初始值
+// 	AUXR |= 0x10;		//定时器2开始计时
 
 
-	P3M0 |= 0x03; P3M1 &= ~0x03; 
-	P2M0 |= 0x03; P2M1 &= ~0x03; 
-}
+// 	P3M0 |= 0x03; P3M1 &= ~0x03; 
+// 	P2M0 |= 0x03; P2M1 &= ~0x03; 
+// }
 
 
 
-#pragma FUNCTIONS (static)
-char putchar(char c)
-{
-	// serialwriteChar(c);
-	SBUF = c;
-	while (!TI);
-	TI = 0;
-	return c;
-}
+// #pragma FUNCTIONS (static)
+// char putchar(char c)
+// {
+// 	// serialwriteChar(c);
+// 	SBUF = c;
+// 	while (!TI);
+// 	TI = 0;
+// 	return c;
+// }
 
 
 
