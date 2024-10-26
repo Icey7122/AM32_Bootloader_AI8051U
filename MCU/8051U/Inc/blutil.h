@@ -44,39 +44,24 @@
  */
 #define bl_timer_init()\
 {\
-	TM0PS = 47;\
-	AUXR |= 0x80;\
-	TMOD &= 0xF0;\	
-	TMOD |= 0x01;\		
-	TL0 = 0;\	
-	TH0 = 0;\	
-	TF0 = 0;\	
-	TR0 = 1;\
+  PWMB_PSCRH = 0x00;\
+  PWMB_PSCRL = 47;\
+  PWMB_ARRH = 0xFF;\
+  PWMB_ARRL = 0xFF;\
+  PWMB_CNTRH = 0xFF;\
+  PWMB_CNTRL = 0xFF;\
+  PWMB_CR1 |= 0x01;\
 }
-
-// void bl_timer_init(void)
-// {
-// TM0PS = 47;			//设置定时器分频系数
-// AUXR |= 0x80;			//定时器时钟1T模式
-// TMOD &= 0xF0;			//设置定时器模式
-// TMOD |= 0x01;			//设置定时器模式
-// TL0 = 0xD0;				//设置定时初始值
-// TH0 = 0xFF;				//设置定时初始值
-// TF0 = 0;				//清除TF0标志
-// TR0 = 1;				//定时器0开始计时
-// }
 
 
 /*
   disable timer ready for app start
  */
-#define bl_timer_disable() TR0 = 0
+#define bl_timer_disable() PWMB_CR1 &= ~0x01
 
+#define bl_timer_us() ((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL)
 
-#define bl_timer_us() ((uint16_t)TH0 << 8 | TL0)
-
-
-#define bl_timer_reset() TH0 = 0; TL0 = 0
+#define bl_timer_reset() PWMB_CNTRH = 0; PWMB_CNTRL = 0
 
 /*
   initialise clocks
