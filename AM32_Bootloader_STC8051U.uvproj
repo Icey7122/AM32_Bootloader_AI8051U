@@ -301,7 +301,7 @@
             <Assign></Assign>
             <ReserveString></ReserveString>
             <CClasses></CClasses>
-            <UserClasses>XDATA(0x10000-0x17FFF)</UserClasses>
+            <UserClasses></UserClasses>
             <CSection></CSection>
             <UserSection></UserSection>
             <CodeBaseAddress></CodeBaseAddress>

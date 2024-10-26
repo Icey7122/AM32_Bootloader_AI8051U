@@ -20,6 +20,8 @@
 
 #define USE_P00
 
+#define DISABLE_APP_HEADER_CHECKS
+
 //#define USE_ADC_INPUT      // will go right to application and ignore eeprom
 //#define UPDATE_EEPROM_ENABLE
 
@@ -983,7 +985,6 @@ int main(void)
     }
 }
 
-
 // void Uart1_Init(void)	//921600bps@48MHz
 // {
 // 	SCON = 0x50;		//8位数据,可变波特率
@@ -997,7 +998,6 @@ int main(void)
 // 	P3M0 |= 0x03; P3M1 &= ~0x03; 
 // 	P2M0 |= 0x03; P2M1 &= ~0x03; 
 // }
-
 
 
 // #pragma FUNCTIONS (static)
