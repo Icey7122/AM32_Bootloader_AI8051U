@@ -1,4 +1,4 @@
-L251 LINKER/LOCATER V4.66.93.0                                                          10/26/2024  16:58:11  PAGE 1
+L251 LINKER/LOCATER V4.66.93.0                                                          10/26/2024  17:51:15  PAGE 1
 
 
 L251 LINKER/LOCATER V4.66.93.0, INVOKED BY:
@@ -67,7 +67,7 @@ FF04E7H   FF0608H   000122H   BYTE   INSEG    CODE           ?PR?CHECKFORSIGNAL?
 FF0609H   FF0702H   0000FAH   BYTE   INSEG    CODE           ?PR?SERIALREADCHAR?_?MAIN
 FF0703H   FF07C7H   0000C5H   BYTE   INSEG    CODE           ?PR?SAVE_FLASH_NOLIB?_?EEPROM
 FF07C8H   FF0889H   0000C2H   BYTE   INSEG    CODE           ?PR?RECEIVEBUFFER?_?MAIN
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 2
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 2
 
 
 FF088AH   FF08F2H   000069H   BYTE   INSEG    CODE           ?PR?MAKECRC?_?MAIN
@@ -135,7 +135,7 @@ FUNCTION/MODULE                   BIT_GROUP   DATA_GROUP
 
 *** NEW ROOT *******************
 
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 3
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 3
 
 
 ?C_C51STARTUP?3                  ----- -----  ----- -----
@@ -203,7 +203,7 @@ decodeInput?_/main               ----- -----  ----- -----
   +--> sendString?_/main
 
 checkCrc?_/main                  ----- -----  ----- -----
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 4
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 4
 
 
   +--> makeCrc?_/main
@@ -271,7 +271,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00000001H   NUMBER   ---       ?C?XDATASEG
       00FF0000H   CODE     ---       ?C_STARTUP
       00000125H   HDATA    ---       __mp__
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 5
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 5
 
 
 *SFR* 000000E0H   DATA     BYTE      ACC
@@ -339,7 +339,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
 *SFR* 000000F8H   DATA     BYTE      P7
 *SFR* 000000A2H   DATA     BYTE      P_SW1
 *SFR* 000000BAH   DATA     BYTE      P_SW2
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 6
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 6
 
 
 *SFR* 000000BBH   DATA     BYTE      P_SW3
@@ -407,7 +407,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000089H   SFRSYM    DATA     BYTE      TMOD
       00000098H   SFRSYM    DATA     BYTE      SCON
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 7
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 7
 
 
       000000F5H   SFRSYM    DATA     BYTE      IAP_TPS
@@ -475,7 +475,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       0000001BH   SYMBOL    EDATA    WORD      address_expected_increment
       0000001DH   SYMBOL    EDATA    DWORD     address
       00000021H   SYMBOL    EDATA    WORD      payload_buffer_size
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 8
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 8
 
 
       00010000H   SYMBOL    XDATA    ---       payLoadBuffer
@@ -543,7 +543,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       ---         BLOCKEND  ---      ---       LVL=1
       00FF0A51H   LINE      CODE     ---       #398
       00FF0A57H   LINE      CODE     ---       #399
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 9
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 9
 
 
       00FF0A57H   LINE      CODE     ---       #400
@@ -611,7 +611,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF0BE8H   LINE      CODE     ---       #457
       ---         BLOCKEND  ---      ---       LVL=0
 
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 10
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 10
 
 
       00FF0003H   BLOCK     CODE     ---       LVL=0
@@ -679,7 +679,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF015DH   LINE      CODE     ---       #532
       00FF015DH   LINE      CODE     ---       #534
       00FF0160H   LINE      CODE     ---       #535
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 11
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 11
 
 
       00FF0160H   LINE      CODE     ---       #537
@@ -747,7 +747,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF02C8H   LINE      CODE     ---       #633
       00FF02CCH   LINE      CODE     ---       #634
       00FF02D0H   LINE      CODE     ---       #635
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 12
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 12
 
 
       00FF02D0H   LINE      CODE     ---       #636
@@ -815,7 +815,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       ---         BLOCKEND  ---      ---       LVL=1
       00FF0A20H   LINE      CODE     ---       #755
       00FF0A24H   LINE      CODE     ---       #756
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 13
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 13
 
 
       00FF0A24H   LINE      CODE     ---       #759
@@ -883,7 +883,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF0873H   LINE      CODE     ---       #831
       00FF087EH   LINE      CODE     ---       #832
       00FF0884H   LINE      CODE     ---       #833
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 14
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 14
 
 
       00FF0887H   LINE      CODE     ---       #834
@@ -951,7 +951,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF036BH   BLOCK     CODE     ---       LVL=0
       00010202H   SYMBOL    XDATA    ---       MEMPOOL
       00FF036BH   LINE      CODE     ---       #948
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 15
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 15
 
 
       00FF036BH   LINE      CODE     ---       #949
@@ -1019,7 +1019,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       000000A2H   SFRSYM    DATA     BYTE      P_SW1
       000000CEH   SFRSYM    DATA     BYTE      SPCTL
       000000F8H   SFRSYM    DATA     BYTE      P7
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 16
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 16
 
 
       000000E8H   SFRSYM    DATA     BYTE      P6
@@ -1087,7 +1087,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       ---         MODULE    ---      ---       AI8051U_32_TFPU
       00FF0C2DH   PUBLIC    CODE     ---       ?C?CASTF
       00FF0C33H   PUBLIC    CODE     ---       ?C?FCASTC
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 17
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 17
 
 
       00FF0C39H   PUBLIC    CODE     ---       ?C?FCASTI
@@ -1155,7 +1155,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF0C6BH   BLOCK     CODE     NEAR LAB  LVL=0
       00FF0C6BH   LINE      CODE     ---       #91
       00FF0C6EH   LINE      CODE     ---       #92
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 18
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 18
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -1223,7 +1223,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00FF0C2DH   LINE      CODE     ---       #220
       00FF0C30H   LINE      CODE     ---       #221
       00FF0C32H   LINE      CODE     ---       #222
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 19
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 19
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -1291,7 +1291,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
       00000004H   SYMBOL    NUMBER   ---       DMA_ULDIV
 
       00FF0C93H   BLOCK     CODE     NEAR LAB  LVL=0
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 20
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 20
 
 
       00FF0C93H   LINE      CODE     ---       #20
@@ -1359,7 +1359,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    SQRT/AI8051U_32_TFPU
 
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 21
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 21
 
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
@@ -1427,7 +1427,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\AM32_Bootloader_STC8051U (main)
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    ULIDIV/AI8051U_32_MDU32
-L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  16:58:11  PAGE 22
+L251 LINKER/LOCATER V4.66.93.0                                                        10/26/2024  17:51:15  PAGE 22
 
 
 

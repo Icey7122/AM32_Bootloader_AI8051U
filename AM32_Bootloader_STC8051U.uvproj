@@ -272,7 +272,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\Inc;.\Mcu\8051U\Inc</IncludePath>
+              <IncludePath>.\Inc;.\Mcu\8051u\Inc</IncludePath>
             </VariousControls>
           </C251>
           <Ax51>

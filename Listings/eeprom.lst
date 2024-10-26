@@ -1,10 +1,10 @@
-C251 COMPILER V5.60.0,  eeprom                                                             26/10/24  16:58:10  PAGE 1   
+C251 COMPILER V5.60.0,  eeprom                                                             26/10/24  17:51:15  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE eeprom
 OBJECT MODULE PLACED IN .\Objects\eeprom.obj
 COMPILER INVOKED BY: D:\Compiler\Keil_v5\C251\BIN\C251.EXE Mcu\8051U\Src\eeprom.c XSMALL FUNCTIONS(REENTRANT) FLOAT64 WA
-                    -RNINGLEVEL(3) OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Inc;.\Mcu\8051U\Inc) DEBUG PRINT(.\Listings\eeprom.lst) TABS(2) OBJECT(.
+                    -RNINGLEVEL(3) OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Inc;.\Mcu\8051u\Inc) DEBUG PRINT(.\Listings\eeprom.lst) TABS(2) OBJECT(.
                     -\Objects\eeprom.obj) 
 
 stmt  level    source
@@ -66,7 +66,7 @@ stmt  level    source
    55   2          IAP_TRIG = 0xA5;                   
    56   2          _nop_();   
    57   2          _nop_();
-C251 COMPILER V5.60.0,  eeprom                                                             26/10/24  16:58:10  PAGE 2   
+C251 COMPILER V5.60.0,  eeprom                                                             26/10/24  17:51:15  PAGE 2   
 
    58   2          _nop_();
    59   2          _nop_();
