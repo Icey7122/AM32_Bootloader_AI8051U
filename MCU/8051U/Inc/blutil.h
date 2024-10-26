@@ -61,7 +61,7 @@
 
 #define bl_timer_us() ((uint16_t)PWMB_CNTRH << 8 | PWMB_CNTRL)
 
-#define bl_timer_reset() PWMB_CNTRH = 0; PWMB_CNTRL = 0
+#define bl_timer_reset() PWMB_EGR = 0x01
 
 /*
   initialise clocks
