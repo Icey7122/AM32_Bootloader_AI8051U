@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"bootloader.h": "c",
+			"main.h": "c",
+			"nstdint.h": "c",
+			"stc8051u.h": "c",
+			"INTRINS.H": "cpp",
+			"stdbool.h": "c",
+			"nstdbool.h": "c",
+			"stdint.h": "c",
+			"string.h": "c",
+			"STRING.H": "cpp",
+			"stdlib.h": "c",
+			"STDLIB.H": "cpp",
+			"STC8051U.H": "cpp",
+			"stdio.h": "c",
+			"STDIO.H": "cpp",
+			"eeprom.h": "c",
+			"blutil.h": "c",
+			"version.h": "c"
+		}
+	}
+}
