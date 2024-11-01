@@ -235,7 +235,7 @@ static uint16_t invalid_command;
 #define ADDRESS_SHIFT 0
 
 #elif BOARD_FLASH_SIZE == 64
-#define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0xf800)
+#define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0xF800)
 #define FLASH_SIZE_CODE 0x35
 #define ADDRESS_SHIFT 0
 
@@ -956,7 +956,7 @@ int main(void)
     bl_timer_init();
     bl_gpio_init();
 
-	IAP_TPS = 48;
+	IAP_TPS = 40;
 
 #ifdef BOOTLOADER_TEST_CLOCK
     test_clock();

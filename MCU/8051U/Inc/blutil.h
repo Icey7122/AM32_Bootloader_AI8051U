@@ -45,7 +45,7 @@
 #define bl_timer_init()\
 {\
   PWMB_PSCRH = 0x00;\
-  PWMB_PSCRL = 47;\
+  PWMB_PSCRL = 39;\
   PWMB_ARRH = 0xFF;\
   PWMB_ARRL = 0xFF;\
   PWMB_CNTRH = 0xFF;\
@@ -70,25 +70,20 @@
 {\
   EA = 0;\
   CKCON = 0x00;\
-  WTST = 1;\     	
+  WTST = 0;\     	
   P_SW2 = 0x80;\	  
-  CLKDIV = 0x04;\	
-  IRTRIM = CHIPID12;\
-  HIRCSEL1 = 1;\
-  HIRCSEL0 = 0;\
-  HIRCCR = 0x80;\
-  while (!(HIRCCR & 0x01));\
-  CLKSEL = 0x40;\
-  USBCLK &= 0x0F;\
-  USBCLK |= 0xA0;\
-  NOP(5);\
-  CLKDIV = 0X01;\	
-  CLKSEL |= 0x08;\
-  HSCLKDIV = 0x01;\
-  TFPU_CLKDIV = 0x01;\
-  USBCKS = 1;\
-  USBCKS2 = 0;\
-  EA = 1;\
+	USBCLK |= (1<<7);\
+	USBCLK &= ~(3<<5);\
+	USBCLK |= (2<<5);\
+	NOP(5);\
+	CLKSEL |= (1<<7);\
+	CLKSEL |= (1<<6);\
+	MCLKOCR = 0x01;\
+	IRC48MCR = 0x80;\
+	while(!(IRC48MCR&1));\
+	IRCBAND &= ~(3<<6);\
+	IRCBAND |= (2<<6);\
+	EA = 1;\
 }
 
 // void bl_clock_config(void)
