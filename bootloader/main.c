@@ -18,7 +18,7 @@
 #include "eeprom.h"
 
 
-#define USE_P00
+#define USE_P01
 
 #define DISABLE_APP_HEADER_CHECKS
 
@@ -68,149 +68,54 @@
 #define FIRMWARE_RELATIVE_START 0x1000
 #endif
 
-#ifdef USE_P00
-#define input_pin        P00
+#ifdef USE_P01
+#define input_pin        P01
 #define input_port       P0
-#define PIN_NUMBER       0
+#define PIN_NUMBER       1
 #define PORT_LETTER      0
 
-#define PULL_NO_RESIGTER 	P0PU &= ~0x01; P0PD &= ~0x01;P0M0 = 0x00; P0M1 = 0x01
-#define PULL_UP_RESIGTER 	P0PU |= 0x01; P0PD &= ~0x01;P0M0 = 0x00; P0M1 = 0x01
-#define PULL_DOWN_RESIGTER 	P0PU &= ~0x01; P0PD |= 0x01;P0M0 = 0x00; P0M1 = 0x01
-#define PUSHPULL_RESIGTER 	P0PU &= ~0x01; P0PD &= ~0x01;P0M0 |= 0x01; P0M1 &= ~0x01
-#define GPIO_INIT_RESIGTER 	P0M0 = 0x00; P0M1 = 0x01; P0IE |= 0x01; P0NCS = 0x00; P0PU |= 0x01
+#define PULL_NO_RESIGTER 	P0PU &= ~0x02; P0PD &= ~0x02;P0M0 = 0x00; P0M1 = 0x02
+#define PULL_UP_RESIGTER 	P0PU |= 0x02; P0PD &= ~0x02;P0M0 = 0x00; P0M1 = 0x02
+#define PULL_DOWN_RESIGTER 	P0PU &= ~0x02; P0PD |= 0x02;P0M0 = 0x00; P0M1 = 0x02
+#define PUSHPULL_RESIGTER 	P0PU &= ~0x02; P0PD &= ~0x02;P0M0 |= 0x02; P0M1 &= ~0x02
+#define GPIO_INIT_RESIGTER 	P0M0 = 0x00; P0M1 = 0x02; P0IE |= 0x02; P0NCS = 0x00; P0PU |= 0x02
 
-#elif defined(USE_P02)
-#define input_pin        P02
-#define input_port       P0
-#define PIN_NUMBER       2
+#elif defined(USE_P11)
+#define input_pin        P11
+#define input_port       P1
+#define PIN_NUMBER       1
 #define PORT_LETTER      0
 
-#define PULL_NO_RESIGTER 	P0PU &= ~0x04; P0PD &= ~0x04;P0M0 = 0x00; P0M1 = 0x04
-#define PULL_UP_RESIGTER 	P0PU |= 0x04; P0PD &= ~0x04;P0M0 = 0x00; P0M1 = 0x04
-#define PULL_DOWN_RESIGTER 	P0PU &= ~0x04; P0PD |= 0x04;P0M0 = 0x00; P0M1 = 0x04
-#define PUSHPULL_RESIGTER 	P0PU &= ~0x04; P0PD &= ~0x04;P0M0 |= 0x04; P0M1 &= ~0x04
-#define GPIO_INIT_RESIGTER 	P0M0 = 0x00; P0M1 = 0x04; P0IE |= 0x04; P0NCS = 0x00; P0PU |= 0x04
+#define PULL_NO_RESIGTER 	P1PU &= ~0x02; P1PD &= ~0x02;P1M0 = 0x00; P1M1 = 0x02
+#define PULL_UP_RESIGTER 	P1PU |= 0x02; P1PD &= ~0x02;P1M0 = 0x00; P1M1 = 0x02
+#define PULL_DOWN_RESIGTER 	P1PU &= ~0x02; P1PD |= 0x02;P1M0 = 0x00; P1M1 = 0x02
+#define PUSHPULL_RESIGTER 	P1PU &= ~0x02; P1PD &= ~0x02;P1M0 |= 0x02; P1M1 &= ~0x02
+#define GPIO_INIT_RESIGTER 	P1M0 = 0x00; P1M1 = 0x02; P1IE |= 0x02; P1NCS = 0x00; P1PU |= 0x02
 
-#elif defined(USE_P04)
-#define input_pin         P04
-#define input_port        P0
-#define PIN_NUMBER        4
-#define PORT_LETTER       0
+#elif defined(USE_P21)
+#define input_pin        P21
+#define input_port       P2
+#define PIN_NUMBER       1
+#define PORT_LETTER      0
 
-#define PULL_NO_RESIGTER 	P0PU &= ~0x10; P0PD &= ~0x10;P0M0 = 0x00; P0M1 = 0x10
-#define PULL_UP_RESIGTER 	P0PU |= 0x10; P0PD &= ~0x10;P0M0 = 0x00; P0M1 = 0x10
-#define PULL_DOWN_RESIGTER 	P0PU &= ~0x10; P0PD |= 0x10;P0M0 = 0x00; P0M1 = 0x10
-#define PUSHPULL_RESIGTER 	P0PU &= ~0x10; P0PD &= ~0x10;P0M0 |= 0x10; P0M1 &= ~0x10
-#define GPIO_INIT_RESIGTER 	P0M0 = 0x00; P0M1 = 0x10; P0IE |= 0x10; P0NCS = 0x00; P0PU |= 0x10
+#define PULL_NO_RESIGTER 	P2PU &= ~0x02; P2PD &= ~0x02;P2M0 = 0x00; P2M1 = 0x02
+#define PULL_UP_RESIGTER 	P2PU |= 0x02; P2PD &= ~0x02;P2M0 = 0x00; P2M1 = 0x02
+#define PULL_DOWN_RESIGTER 	P2PU &= ~0x02; P2PD |= 0x02;P2M0 = 0x00; P2M1 = 0x02
+#define PUSHPULL_RESIGTER 	P2PU &= ~0x02; P2PD &= ~0x02;P2M0 |= 0x02; P2M1 &= ~0x02
+#define GPIO_INIT_RESIGTER 	P2M0 = 0x00; P2M1 = 0x02; P2IE |= 0x02; P2NCS = 0x00; P2PU |= 0x02
 
-#elif defined(USE_P06)
-#define input_pin         P06
-#define input_port        P0
-#define PIN_NUMBER        6
-#define PORT_LETTER       0
+#elif defined(USE_P50)
+#define input_pin        P50
+#define input_port       P5
+#define PIN_NUMBER       5
+#define PORT_LETTER      0
 
-#define PULL_NO_RESIGTER 	P0PU &= ~0x40; P0PD &= ~0x40;P0M0 = 0x00; P0M1 = 0x40
-#define PULL_UP_RESIGTER 	P0PU |= 0x40; P0PD &= ~0x40;P0M0 = 0x00; P0M1 = 0x40
-#define PULL_DOWN_RESIGTER 	P0PU &= ~0x40; P0PD |= 0x40;P0M0 = 0x00; P0M1 = 0x40
-#define PUSHPULL_RESIGTER 	P0PU &= ~0x40; P0PD &= ~0x40;P0M0 |= 0x40; P0M1 &= ~0x40
-#define GPIO_INIT_RESIGTER 	P0M0 = 0x00; P0M1 = 0x40; P0IE |= 0x40; P0NCS = 0x00; P0PU |= 0x40
+#define PULL_NO_RESIGTER 	P5PU &= ~0x01; P5PD &= ~0x01;P5M0 = 0x00; P5M1 = 0x01
+#define PULL_UP_RESIGTER 	P5PU |= 0x01; P5PD &= ~0x01;P5M0 = 0x00; P5M1 = 0x01
+#define PULL_DOWN_RESIGTER 	P5PU &= ~0x01; P5PD |= 0x01;P5M0 = 0x00; P5M1 = 0x01
+#define PUSHPULL_RESIGTER 	P5PU &= ~0x01; P5PD &= ~0x01;P5M0 |= 0x01; P5M1 &= ~0x01
+#define GPIO_INIT_RESIGTER 	P5M0 = 0x00; P5M1 = 0x01; P5IE |= 0x01; P5NCS = 0x00; P5PU |= 0x01
 
-#elif defined(USE_P10)
-#define input_pin         P10
-#define input_port        P1
-#define PIN_NUMBER        0
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P1PU &= ~0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
-#define PULL_UP_RESIGTER 	P1PU |= 0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
-#define PULL_DOWN_RESIGTER 	P1PU &= ~0x01; P1PD |= 0x01;P1M0 = 0x00; P1M1 = 0x01
-#define PUSHPULL_RESIGTER 	P1PU &= ~0x01; P1PD &= ~0x01;P1M0 |= 0x01; P1M1 &= ~0x01
-#define GPIO_INIT_RESIGTER 	P1M0 = 0x00; P1M1 = 0x01; P1IE |= 0x01; P1NCS = 0x00; P1PU |= 0x01
-
-#elif defined(USE_P12)
-#define input_pin         P12
-#define input_port        P1
-#define PIN_NUMBER        2
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P1PU &= ~0x04; P1PD &= ~0x04;P1M0 = 0x00; P1M1 = 0x04
-#define PULL_UP_RESIGTER 	P1PU |= 0x04; P1PD &= ~0x04;P1M0 = 0x00; P1M1 = 0x04
-#define PULL_DOWN_RESIGTER 	P1PU &= ~0x04; P1PD |= 0x04;P1M0 = 0x00; P1M1 = 0x04
-#define PUSHPULL_RESIGTER 	P1PU &= ~0x04; P1PD &= ~0x04;P1M0 |= 0x04; P1M1 &= ~0x04
-#define GPIO_INIT_RESIGTER 	P1M0 = 0x00; P1M1 = 0x04; P1IE |= 0x04; P1NCS = 0x00; P1PU |= 0x04
-
-#elif defined(USE_P14)
-#define input_pin         P14
-#define input_port        P1
-#define PIN_NUMBER        4
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P1PU &= ~0x10; P1PD &= ~0x10;P1M0 = 0x00; P1M1 = 0x10
-#define PULL_UP_RESIGTER 	P1PU |= 0x10; P1PD &= ~0x10;P1M0 = 0x00; P1M1 = 0x10
-#define PULL_DOWN_RESIGTER 	P1PU &= ~0x10; P1PD |= 0x10;P1M0 = 0x00; P1M1 = 0x10
-#define PUSHPULL_RESIGTER 	P1PU &= ~0x10; P1PD &= ~0x10;P1M0 |= 0x10; P1M1 &= ~0x10
-#define GPIO_INIT_RESIGTER 	P1M0 = 0x00; P1M1 = 0x10; P1IE |= 0x10; P1NCS = 0x00; P1PU |= 0x10
-
-#elif defined(USE_P16)
-#define input_pin         P16
-#define input_port        P1
-#define PIN_NUMBER        6
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P1PU &= ~0x40; P1PD &= ~0x40;P1M0 = 0x00; P1M1 = 0x40
-#define PULL_UP_RESIGTER 	P1PU |= 0x40; P1PD &= ~0x40;P1M0 = 0x00; P1M1 = 0x40
-#define PULL_DOWN_RESIGTER 	P1PU &= ~0x40; P1PD |= 0x40;P1M0 = 0x00; P1M1 = 0x40
-#define PUSHPULL_RESIGTER 	P1PU &= ~0x40; P1PD &= ~0x40;P1M0 |= 0x40; P1M1 &= ~0x40
-#define GPIO_INIT_RESIGTER 	P1M0 = 0x00; P1M1 = 0x40; P1IE |= 0x40; P1NCS = 0x00; P1PU |= 0x40
-
-#elif defined(USE_P20)
-#define input_pin         P20
-#define input_port        P2
-#define PIN_NUMBER        0
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P2PU &= ~0x01; P2PD &= ~0x01;P2M0 = 0x00; P2M1 = 0x01
-#define PULL_UP_RESIGTER 	P2PU |= 0x01; P2PD &= ~0x01;P2M0 = 0x00; P2M1 = 0x01
-#define PULL_DOWN_RESIGTER 	P2PU &= ~0x01; P2PD |= 0x01;P2M0 = 0x00; P2M1 = 0x01
-#define PUSHPULL_RESIGTER 	P2PU &= ~0x01; P2PD &= ~0x01;P2M0 |= 0x01; P2M1 &= ~0x01
-#define GPIO_INIT_RESIGTER 	P2M0 = 0x00; P2M1 = 0x01; P2IE |= 0x01; P2NCS = 0x00; P2PU |= 0x01
-
-#elif defined(USE_P22)
-#define input_pin         P22
-#define input_port        P2
-#define PIN_NUMBER        2
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P2PU &= ~0x04; P2PD &= ~0x04;P2M0 = 0x00; P2M1 = 0x04
-#define PULL_UP_RESIGTER 	P2PU |= 0x04; P2PD &= ~0x04;P2M0 = 0x00; P2M1 = 0x04
-#define PULL_DOWN_RESIGTER 	P2PU &= ~0x04; P2PD |= 0x04;P2M0 = 0x00; P2M1 = 0x04
-#define PUSHPULL_RESIGTER 	P2PU &= ~0x04; P2PD &= ~0x04;P2M0 |= 0x04; P2M1 &= ~0x04
-#define GPIO_INIT_RESIGTER 	P2M0 = 0x00; P2M1 = 0x04; P2IE |= 0x04; P2NCS = 0x00; P2PU |= 0x04
-
-#elif defined(USE_P24)
-#define input_pin         P24
-#define input_port        P2
-#define PIN_NUMBER        4
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P2PU &= ~0x10; P2PD &= ~0x10;P2M0 = 0x00; P2M1 = 0x10
-#define PULL_UP_RESIGTER 	P2PU |= 0x10; P2PD &= ~0x10;P2M0 = 0x00; P2M1 = 0x10
-#define PULL_DOWN_RESIGTER 	P2PU &= ~0x10; P2PD |= 0x10;P2M0 = 0x00; P2M1 = 0x10
-#define PUSHPULL_RESIGTER 	P2PU &= ~0x10; P2PD &= ~0x10;P2M0 |= 0x10; P2M1 &= ~0x10
-#define GPIO_INIT_RESIGTER 	P2M0 = 0x00; P2M1 = 0x10; P2IE |= 0x10; P2NCS = 0x00; P2PU |= 0x10
-
-#elif defined(USE_P26)
-#define input_pin         P26
-#define input_port        P2
-#define PIN_NUMBER        6
-#define PORT_LETTER       0
-
-#define PULL_NO_RESIGTER 	P2PU &= ~0x40; P2PD &= ~0x40;P2M0 = 0x00; P2M1 = 0x40
-#define PULL_UP_RESIGTER 	P2PU |= 0x40; P2PD &= ~0x40;P2M0 = 0x00; P2M1 = 0x40
-#define PULL_DOWN_RESIGTER 	P2PU &= ~0x40; P2PD |= 0x40;P2M0 = 0x00; P2M1 = 0x40
-#define PUSHPULL_RESIGTER 	P2PU &= ~0x40; P2PD &= ~0x40;P2M0 |= 0x40; P2M1 &= ~0x40
-#define GPIO_INIT_RESIGTER 	P2M0 = 0x00; P2M1 = 0x40; P2IE |= 0x40; P2NCS = 0x00; P2PU |= 0x40
 
 #else
 #error "Bootloader comms pin not defined"

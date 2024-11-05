@@ -1,11 +1,11 @@
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
 OBJECT MODULE PLACED IN .\Objects\main.obj
 COMPILER INVOKED BY: D:\Compiler\Keil_v5\C251\BIN\C251.EXE bootloader\main.c XSMALL FUNCTIONS(REENTRANT) FLOAT64 WARNING
-                    -LEVEL(3) OPTIMIZE(3,SPEED) BROWSE INCDIR(.\Inc;.\Mcu\8051u\Inc) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\Object
-                    -s\main.obj) 
+                    -LEVEL(3) OPTIMIZE(3,SPEED) BROWSE ORDER INCDIR(.\Inc;.\Mcu\8051u\Inc) DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\
+                    -Objects\main.obj) 
 
 stmt  level    source
 
@@ -29,7 +29,7 @@ stmt  level    source
    18          #include "eeprom.h"
    19          
    20          
-   21          #define USE_P00
+   21          #define USE_P01
    22          
    23          #define DISABLE_APP_HEADER_CHECKS
    24          
@@ -66,7 +66,7 @@ stmt  level    source
    55          
    56          /*
    57            should we update the bootloader version in eeprom?
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 2   
 
    58           */
    59          #define UPDATE_EEPROM_ENABLE 1
@@ -81,294 +81,197 @@ stmt  level    source
    68          #define FIRMWARE_RELATIVE_START 0x1000
    69          #endif
    70          
-   71          #ifdef USE_P00
-   72          #define input_pin        P00
+   71          #ifdef USE_P01
+   72          #define input_pin        P01
    73          #define input_port       P0
-   74          #define PIN_NUMBER       0
+   74          #define PIN_NUMBER       1
    75          #define PORT_LETTER      0
    76          
-   77          #define PULL_NO_RESIGTER  P0PU &= ~0x01; P0PD &= ~0x01;P0M0 = 0x00; P0M1 = 0x01
-   78          #define PULL_UP_RESIGTER  P0PU |= 0x01; P0PD &= ~0x01;P0M0 = 0x00; P0M1 = 0x01
-   79          #define PULL_DOWN_RESIGTER  P0PU &= ~0x01; P0PD |= 0x01;P0M0 = 0x00; P0M1 = 0x01
-   80          #define PUSHPULL_RESIGTER   P0PU &= ~0x01; P0PD &= ~0x01;P0M0 |= 0x01; P0M1 &= ~0x01
-   81          #define GPIO_INIT_RESIGTER  P0M0 = 0x00; P0M1 = 0x01; P0IE |= 0x01; P0NCS = 0x00; P0PU |= 0x01
+   77          #define PULL_NO_RESIGTER  P0PU &= ~0x02; P0PD &= ~0x02;P0M0 = 0x00; P0M1 = 0x02
+   78          #define PULL_UP_RESIGTER  P0PU |= 0x02; P0PD &= ~0x02;P0M0 = 0x00; P0M1 = 0x02
+   79          #define PULL_DOWN_RESIGTER  P0PU &= ~0x02; P0PD |= 0x02;P0M0 = 0x00; P0M1 = 0x02
+   80          #define PUSHPULL_RESIGTER   P0PU &= ~0x02; P0PD &= ~0x02;P0M0 |= 0x02; P0M1 &= ~0x02
+   81          #define GPIO_INIT_RESIGTER  P0M0 = 0x00; P0M1 = 0x02; P0IE |= 0x02; P0NCS = 0x00; P0PU |= 0x02
    82          
-   83          #elif defined(USE_P02)
-               #define input_pin        P02
-               #define input_port       P0
-               #define PIN_NUMBER       2
+   83          #elif defined(USE_P11)
+               #define input_pin        P11
+               #define input_port       P1
+               #define PIN_NUMBER       1
                #define PORT_LETTER      0
                
-               #define PULL_NO_RESIGTER  P0PU &= ~0x04; P0PD &= ~0x04;P0M0 = 0x00; P0M1 = 0x04
-               #define PULL_UP_RESIGTER  P0PU |= 0x04; P0PD &= ~0x04;P0M0 = 0x00; P0M1 = 0x04
-               #define PULL_DOWN_RESIGTER  P0PU &= ~0x04; P0PD |= 0x04;P0M0 = 0x00; P0M1 = 0x04
-               #define PUSHPULL_RESIGTER   P0PU &= ~0x04; P0PD &= ~0x04;P0M0 |= 0x04; P0M1 &= ~0x04
-               #define GPIO_INIT_RESIGTER  P0M0 = 0x00; P0M1 = 0x04; P0IE |= 0x04; P0NCS = 0x00; P0PU |= 0x04
+               #define PULL_NO_RESIGTER  P1PU &= ~0x02; P1PD &= ~0x02;P1M0 = 0x00; P1M1 = 0x02
+               #define PULL_UP_RESIGTER  P1PU |= 0x02; P1PD &= ~0x02;P1M0 = 0x00; P1M1 = 0x02
+               #define PULL_DOWN_RESIGTER  P1PU &= ~0x02; P1PD |= 0x02;P1M0 = 0x00; P1M1 = 0x02
+               #define PUSHPULL_RESIGTER   P1PU &= ~0x02; P1PD &= ~0x02;P1M0 |= 0x02; P1M1 &= ~0x02
+               #define GPIO_INIT_RESIGTER  P1M0 = 0x00; P1M1 = 0x02; P1IE |= 0x02; P1NCS = 0x00; P1PU |= 0x02
                
-               #elif defined(USE_P04)
-               #define input_pin         P04
-               #define input_port        P0
-               #define PIN_NUMBER        4
-               #define PORT_LETTER       0
+               #elif defined(USE_P21)
+               #define input_pin        P21
+               #define input_port       P2
+               #define PIN_NUMBER       1
+               #define PORT_LETTER      0
                
-               #define PULL_NO_RESIGTER  P0PU &= ~0x10; P0PD &= ~0x10;P0M0 = 0x00; P0M1 = 0x10
-               #define PULL_UP_RESIGTER  P0PU |= 0x10; P0PD &= ~0x10;P0M0 = 0x00; P0M1 = 0x10
-               #define PULL_DOWN_RESIGTER  P0PU &= ~0x10; P0PD |= 0x10;P0M0 = 0x00; P0M1 = 0x10
-               #define PUSHPULL_RESIGTER   P0PU &= ~0x10; P0PD &= ~0x10;P0M0 |= 0x10; P0M1 &= ~0x10
-               #define GPIO_INIT_RESIGTER  P0M0 = 0x00; P0M1 = 0x10; P0IE |= 0x10; P0NCS = 0x00; P0PU |= 0x10
+               #define PULL_NO_RESIGTER  P2PU &= ~0x02; P2PD &= ~0x02;P2M0 = 0x00; P2M1 = 0x02
+               #define PULL_UP_RESIGTER  P2PU |= 0x02; P2PD &= ~0x02;P2M0 = 0x00; P2M1 = 0x02
+               #define PULL_DOWN_RESIGTER  P2PU &= ~0x02; P2PD |= 0x02;P2M0 = 0x00; P2M1 = 0x02
+               #define PUSHPULL_RESIGTER   P2PU &= ~0x02; P2PD &= ~0x02;P2M0 |= 0x02; P2M1 &= ~0x02
+               #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x02; P2IE |= 0x02; P2NCS = 0x00; P2PU |= 0x02
                
-               #elif defined(USE_P06)
-               #define input_pin         P06
-               #define input_port        P0
-               #define PIN_NUMBER        6
-               #define PORT_LETTER       0
+               #elif defined(USE_P50)
+               #define input_pin        P50
+               #define input_port       P5
+               #define PIN_NUMBER       5
+               #define PORT_LETTER      0
                
-               #define PULL_NO_RESIGTER  P0PU &= ~0x40; P0PD &= ~0x40;P0M0 = 0x00; P0M1 = 0x40
-               #define PULL_UP_RESIGTER  P0PU |= 0x40; P0PD &= ~0x40;P0M0 = 0x00; P0M1 = 0x40
-               #define PULL_DOWN_RESIGTER  P0PU &= ~0x40; P0PD |= 0x40;P0M0 = 0x00; P0M1 = 0x40
-               #define PUSHPULL_RESIGTER   P0PU &= ~0x40; P0PD &= ~0x40;P0M0 |= 0x40; P0M1 &= ~0x40
-               #define GPIO_INIT_RESIGTER  P0M0 = 0x00; P0M1 = 0x40; P0IE |= 0x40; P0NCS = 0x00; P0PU |= 0x40
+               #define PULL_NO_RESIGTER  P5PU &= ~0x01; P5PD &= ~0x01;P5M0 = 0x00; P5M1 = 0x01
+               #define PULL_UP_RESIGTER  P5PU |= 0x01; P5PD &= ~0x01;P5M0 = 0x00; P5M1 = 0x01
+               #define PULL_DOWN_RESIGTER  P5PU &= ~0x01; P5PD |= 0x01;P5M0 = 0x00; P5M1 = 0x01
+               #define PUSHPULL_RESIGTER   P5PU &= ~0x01; P5PD &= ~0x01;P5M0 |= 0x01; P5M1 &= ~0x01
+               #define GPIO_INIT_RESIGTER  P5M0 = 0x00; P5M1 = 0x01; P5IE |= 0x01; P5NCS = 0x00; P5PU |= 0x01
                
-               #elif defined(USE_P10)
-               #define input_pin         P10
-               #define input_port        P1
-               #define PIN_NUMBER        0
-               #define PORT_LETTER       0
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 3   
-
-               
-               #define PULL_NO_RESIGTER  P1PU &= ~0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
-               #define PULL_UP_RESIGTER  P1PU |= 0x01; P1PD &= ~0x01;P1M0 = 0x00; P1M1 = 0x01
-               #define PULL_DOWN_RESIGTER  P1PU &= ~0x01; P1PD |= 0x01;P1M0 = 0x00; P1M1 = 0x01
-               #define PUSHPULL_RESIGTER   P1PU &= ~0x01; P1PD &= ~0x01;P1M0 |= 0x01; P1M1 &= ~0x01
-               #define GPIO_INIT_RESIGTER  P1M0 = 0x00; P1M1 = 0x01; P1IE |= 0x01; P1NCS = 0x00; P1PU |= 0x01
-               
-               #elif defined(USE_P12)
-               #define input_pin         P12
-               #define input_port        P1
-               #define PIN_NUMBER        2
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P1PU &= ~0x04; P1PD &= ~0x04;P1M0 = 0x00; P1M1 = 0x04
-               #define PULL_UP_RESIGTER  P1PU |= 0x04; P1PD &= ~0x04;P1M0 = 0x00; P1M1 = 0x04
-               #define PULL_DOWN_RESIGTER  P1PU &= ~0x04; P1PD |= 0x04;P1M0 = 0x00; P1M1 = 0x04
-               #define PUSHPULL_RESIGTER   P1PU &= ~0x04; P1PD &= ~0x04;P1M0 |= 0x04; P1M1 &= ~0x04
-               #define GPIO_INIT_RESIGTER  P1M0 = 0x00; P1M1 = 0x04; P1IE |= 0x04; P1NCS = 0x00; P1PU |= 0x04
-               
-               #elif defined(USE_P14)
-               #define input_pin         P14
-               #define input_port        P1
-               #define PIN_NUMBER        4
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P1PU &= ~0x10; P1PD &= ~0x10;P1M0 = 0x00; P1M1 = 0x10
-               #define PULL_UP_RESIGTER  P1PU |= 0x10; P1PD &= ~0x10;P1M0 = 0x00; P1M1 = 0x10
-               #define PULL_DOWN_RESIGTER  P1PU &= ~0x10; P1PD |= 0x10;P1M0 = 0x00; P1M1 = 0x10
-               #define PUSHPULL_RESIGTER   P1PU &= ~0x10; P1PD &= ~0x10;P1M0 |= 0x10; P1M1 &= ~0x10
-               #define GPIO_INIT_RESIGTER  P1M0 = 0x00; P1M1 = 0x10; P1IE |= 0x10; P1NCS = 0x00; P1PU |= 0x10
-               
-               #elif defined(USE_P16)
-               #define input_pin         P16
-               #define input_port        P1
-               #define PIN_NUMBER        6
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P1PU &= ~0x40; P1PD &= ~0x40;P1M0 = 0x00; P1M1 = 0x40
-               #define PULL_UP_RESIGTER  P1PU |= 0x40; P1PD &= ~0x40;P1M0 = 0x00; P1M1 = 0x40
-               #define PULL_DOWN_RESIGTER  P1PU &= ~0x40; P1PD |= 0x40;P1M0 = 0x00; P1M1 = 0x40
-               #define PUSHPULL_RESIGTER   P1PU &= ~0x40; P1PD &= ~0x40;P1M0 |= 0x40; P1M1 &= ~0x40
-               #define GPIO_INIT_RESIGTER  P1M0 = 0x00; P1M1 = 0x40; P1IE |= 0x40; P1NCS = 0x00; P1PU |= 0x40
-               
-               #elif defined(USE_P20)
-               #define input_pin         P20
-               #define input_port        P2
-               #define PIN_NUMBER        0
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P2PU &= ~0x01; P2PD &= ~0x01;P2M0 = 0x00; P2M1 = 0x01
-               #define PULL_UP_RESIGTER  P2PU |= 0x01; P2PD &= ~0x01;P2M0 = 0x00; P2M1 = 0x01
-               #define PULL_DOWN_RESIGTER  P2PU &= ~0x01; P2PD |= 0x01;P2M0 = 0x00; P2M1 = 0x01
-               #define PUSHPULL_RESIGTER   P2PU &= ~0x01; P2PD &= ~0x01;P2M0 |= 0x01; P2M1 &= ~0x01
-               #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x01; P2IE |= 0x01; P2NCS = 0x00; P2PU |= 0x01
-               
-               #elif defined(USE_P22)
-               #define input_pin         P22
-               #define input_port        P2
-               #define PIN_NUMBER        2
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P2PU &= ~0x04; P2PD &= ~0x04;P2M0 = 0x00; P2M1 = 0x04
-               #define PULL_UP_RESIGTER  P2PU |= 0x04; P2PD &= ~0x04;P2M0 = 0x00; P2M1 = 0x04
-               #define PULL_DOWN_RESIGTER  P2PU &= ~0x04; P2PD |= 0x04;P2M0 = 0x00; P2M1 = 0x04
-               #define PUSHPULL_RESIGTER   P2PU &= ~0x04; P2PD &= ~0x04;P2M0 |= 0x04; P2M1 &= ~0x04
-               #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x04; P2IE |= 0x04; P2NCS = 0x00; P2PU |= 0x04
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 4   
-
-               
-               #elif defined(USE_P24)
-               #define input_pin         P24
-               #define input_port        P2
-               #define PIN_NUMBER        4
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P2PU &= ~0x10; P2PD &= ~0x10;P2M0 = 0x00; P2M1 = 0x10
-               #define PULL_UP_RESIGTER  P2PU |= 0x10; P2PD &= ~0x10;P2M0 = 0x00; P2M1 = 0x10
-               #define PULL_DOWN_RESIGTER  P2PU &= ~0x10; P2PD |= 0x10;P2M0 = 0x00; P2M1 = 0x10
-               #define PUSHPULL_RESIGTER   P2PU &= ~0x10; P2PD &= ~0x10;P2M0 |= 0x10; P2M1 &= ~0x10
-               #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x10; P2IE |= 0x10; P2NCS = 0x00; P2PU |= 0x10
-               
-               #elif defined(USE_P26)
-               #define input_pin         P26
-               #define input_port        P2
-               #define PIN_NUMBER        6
-               #define PORT_LETTER       0
-               
-               #define PULL_NO_RESIGTER  P2PU &= ~0x40; P2PD &= ~0x40;P2M0 = 0x00; P2M1 = 0x40
-               #define PULL_UP_RESIGTER  P2PU |= 0x40; P2PD &= ~0x40;P2M0 = 0x00; P2M1 = 0x40
-               #define PULL_DOWN_RESIGTER  P2PU &= ~0x40; P2PD |= 0x40;P2M0 = 0x00; P2M1 = 0x40
-               #define PUSHPULL_RESIGTER   P2PU &= ~0x40; P2PD &= ~0x40;P2M0 |= 0x40; P2M1 &= ~0x40
-               #define GPIO_INIT_RESIGTER  P2M0 = 0x00; P2M1 = 0x40; P2IE |= 0x40; P2NCS = 0x00; P2PU |= 0x40
                
                #else
                #error "Bootloader comms pin not defined"
                #endif
-  218          
-  219          static uint16_t invalid_command;
-  220          
-  221          #include "blutil.h"
-  222          
-  223          #ifndef BOARD_FLASH_SIZE
+  123          
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 3   
+
+  124          static uint16_t invalid_command;
+  125          
+  126          #include "blutil.h"
+  127          
+  128          #ifndef BOARD_FLASH_SIZE
                #error "must define BOARD_FLASH_SIZE"
                #endif
-  226          
-  227          #define PIN_CODE (PORT_LETTER << 4 | PIN_NUMBER)
-  228          
-  229          /*
-  230            currently only support 32, 64 or 128 k flash
-  231           */
-  232          #if BOARD_FLASH_SIZE == 32
+  131          
+  132          #define PIN_CODE (PORT_LETTER << 4 | PIN_NUMBER)
+  133          
+  134          /*
+  135            currently only support 32, 64 or 128 k flash
+  136           */
+  137          #if BOARD_FLASH_SIZE == 32
                #define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0x7c00)
                #define FLASH_SIZE_CODE 0x1f
                #define ADDRESS_SHIFT 0
                
                #elif BOARD_FLASH_SIZE == 64
-  238          #define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0xF800)
-  239          #define FLASH_SIZE_CODE 0x35
-  240          #define ADDRESS_SHIFT 0
-  241          
-  242          #elif BOARD_FLASH_SIZE == 128
+  143          #define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0xF800)
+  144          #define FLASH_SIZE_CODE 0x35
+  145          #define ADDRESS_SHIFT 0
+  146          
+  147          #elif BOARD_FLASH_SIZE == 128
                #define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0x1f800)
                #define FLASH_SIZE_CODE 0x2B
                #define ADDRESS_SHIFT 2 // addresses from the bl client are shifted 2 bits before being used
                #else
                #error "unsupported BOARD_FLASH_SIZE"
                #endif
-  249          
-  250          /*
-  251            the devinfo structure tells the configuration client our pin code,
-  252            flash size and device type. It can also be used by the main firmware
-  253            to confirm we have the right eeprom address and pin code. We have 2
-  254            32bit magic values so the main firmware can confirm the bootloader
-  255            supports this feature
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 5   
+  154          
+  155          /*
+  156            the devinfo structure tells the configuration client our pin code,
+  157            flash size and device type. It can also be used by the main firmware
+  158            to confirm we have the right eeprom address and pin code. We have 2
+  159            32bit magic values so the main firmware can confirm the bootloader
+  160            supports this feature
+  161           */
+  162          #define DEVINFO_MAGIC1 0x5925e3da
+  163          #define DEVINFO_MAGIC2 0x4eb863d9
+  164          
+  165          static const struct {
+  166              uint32_t magic1;
+  167              uint32_t magic2;
+  168              const uint8_t deviceInfo[9];
+  169          } devinfo _at_ (MCU_FLASH_START + FIRMWARE_RELATIVE_START - 32) = {
+  170                  {DEVINFO_MAGIC1},
+  171                  {DEVINFO_MAGIC2},
+  172                  {'4','7','1',PIN_CODE,FLASH_SIZE_CODE,0x06,0x06,0x01,0x30}
+  173          };
+  174          
+  175          typedef void (*pFunction)(void);
+  176          
+  177          #define APPLICATION_ADDRESS     (uint32_t)(MCU_FLASH_START + FIRMWARE_RELATIVE_START)
+  178          
+  179          #define CMD_RUN             0x00
+  180          #define CMD_PROG_FLASH      0x01
+  181          #define CMD_ERASE_FLASH     0x02
+  182          #define CMD_READ_FLASH_SIL  0x03
+  183          #define CMD_VERIFY_FLASH    0x03
+  184          #define CMD_VERIFY_FLASH_ARM 0x04
+  185          #define CMD_READ_EEPROM     0x04
+  186          #define CMD_PROG_EEPROM     0x05
+  187          #define CMD_READ_SRAM       0x06
+  188          #define CMD_READ_FLASH_ATM  0x07
+  189          #define CMD_KEEP_ALIVE      0xFD
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 4   
 
-  256           */
-  257          #define DEVINFO_MAGIC1 0x5925e3da
-  258          #define DEVINFO_MAGIC2 0x4eb863d9
-  259          
-  260          static const struct {
-  261              uint32_t magic1;
-  262              uint32_t magic2;
-  263              const uint8_t deviceInfo[9];
-  264          } devinfo _at_ (MCU_FLASH_START + FIRMWARE_RELATIVE_START - 32) = {
-  265                  {DEVINFO_MAGIC1},
-  266                  {DEVINFO_MAGIC2},
-  267                  {'4','7','1',PIN_CODE,FLASH_SIZE_CODE,0x06,0x06,0x01,0x30}
-  268          };
-  269          
-  270          typedef void (*pFunction)(void);
-  271          
-  272          #define APPLICATION_ADDRESS     (uint32_t)(MCU_FLASH_START + FIRMWARE_RELATIVE_START)
-  273          
-  274          #define CMD_RUN             0x00
-  275          #define CMD_PROG_FLASH      0x01
-  276          #define CMD_ERASE_FLASH     0x02
-  277          #define CMD_READ_FLASH_SIL  0x03
-  278          #define CMD_VERIFY_FLASH    0x03
-  279          #define CMD_VERIFY_FLASH_ARM 0x04
-  280          #define CMD_READ_EEPROM     0x04
-  281          #define CMD_PROG_EEPROM     0x05
-  282          #define CMD_READ_SRAM       0x06
-  283          #define CMD_READ_FLASH_ATM  0x07
-  284          #define CMD_KEEP_ALIVE      0xFD
-  285          #define CMD_SET_ADDRESS     0xFF
-  286          #define CMD_SET_BUFFER      0xFE
-  287          
-  288          static uint16_t low_pin_count;
-  289          static char receiveByte;
-  290          static int count;
-  291          static char messagereceived;
-  292          static uint16_t address_expected_increment;
-  293          static int cmd;
-  294          static char eeprom_req;
-  295          static int received;
-  296          
-  297          static uint8_t xdata rxBuffer[258];
-  298          static uint8_t xdata payLoadBuffer[256];
-  299          static char rxbyte;
-  300          static uint32_t address;
-  301          
-  302          typedef union {
-  303              uint8_t bytes[2];
-  304              uint16_t word;
-  305          } uint8_16_u;
-  306          
-  307          static uint16_t len;
-  308          static uint8_t calculated_crc_low_byte;
-  309          static uint8_t calculated_crc_high_byte;
-  310          static uint16_t payload_buffer_size;
-  311          static char incoming_payload_no_command;
-  312          
-  313          /* USER CODE BEGIN PFP */
-  314          static void sendString(const uint8_t dat[], int len);
-  315          static void receiveBuffer();
-  316          static void serialwriteChar(uint8_t dat);
-  317          
-  318          #define BAUDRATE      19200
-  319          #define BITTIME          52 // 1000000/BAUDRATE
-  320          #define HALFBITTIME      26 // 500000/BAUDRATE
-  321          
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 6   
-
-  322          static void delayMicroseconds(uint32_t micros)
-  323          {
-  324   1          bl_timer_reset();
-  325   1          while (bl_timer_us() < micros) {
-  326   2          }
-  327   1      }
-  328          /*
-  329            jump to the application firmware
-  330           */
-  331          static void jump()
-  332          {
-  333   1      #ifndef DISABLE_JUMP
-  334   1      #if CHECK_EEPROM_BEFORE_JUMP
-  335   1        uint8_t value = *(unsigned char far*)EEPROM_START_ADD;
-  336   1      #endif
-  337   1      #ifndef DISABLE_APP_HEADER_CHECKS
+  190          #define CMD_SET_ADDRESS     0xFF
+  191          #define CMD_SET_BUFFER      0xFE
+  192          
+  193          static uint16_t low_pin_count;
+  194          static char receiveByte;
+  195          static int count;
+  196          static char messagereceived;
+  197          static uint16_t address_expected_increment;
+  198          static int cmd;
+  199          static char eeprom_req;
+  200          static int received;
+  201          
+  202          static uint8_t xdata rxBuffer[258];
+  203          static uint8_t xdata payLoadBuffer[256];
+  204          static char rxbyte;
+  205          static uint32_t address;
+  206          
+  207          typedef union {
+  208              uint8_t bytes[2];
+  209              uint16_t word;
+  210          } uint8_16_u;
+  211          
+  212          static uint16_t len;
+  213          static uint8_t calculated_crc_low_byte;
+  214          static uint8_t calculated_crc_high_byte;
+  215          static uint16_t payload_buffer_size;
+  216          static char incoming_payload_no_command;
+  217          
+  218          /* USER CODE BEGIN PFP */
+  219          static void sendString(const uint8_t dat[], int len);
+  220          static void receiveBuffer();
+  221          static void serialwriteChar(uint8_t dat);
+  222          
+  223          #define BAUDRATE      19200
+  224          #define BITTIME          52 // 1000000/BAUDRATE
+  225          #define HALFBITTIME      26 // 500000/BAUDRATE
+  226          
+  227          static void delayMicroseconds(uint32_t micros)
+  228          {
+  229   1          bl_timer_reset();
+  230   1          while (bl_timer_us() < micros) {
+  231   2          }
+  232   1      }
+  233          /*
+  234            jump to the application firmware
+  235           */
+  236          static void jump()
+  237          {
+  238   1      #ifndef DISABLE_JUMP
+  239   1      #if CHECK_EEPROM_BEFORE_JUMP
+  240   1        uint8_t value = *(unsigned char far*)EEPROM_START_ADD;
+  241   1      #endif
+  242   1      #ifndef DISABLE_APP_HEADER_CHECKS
                    const uint32_t *app = (unsigned char far*)(MCU_FLASH_START + FIRMWARE_RELATIVE_START);
                    const uint32_t ram_start = 0x000000;
                    const uint32_t ram_limit_kb = 64;
                    const uint32_t ram_end = ram_start+ram_limit_kb*1024;
                  const uint32_t flash_limit_kb = 256;
                #endif
-  344   1      #if CHECK_EEPROM_BEFORE_JUMP
-  345   1        if (value != 0x01) {      // check first byte of eeprom to see if its programmed, if not do not jump
-  346   2          invalid_command = 0;
-  347   2          return;
-  348   2          }
-  349   1      #endif
-  350   1      #ifndef DISABLE_APP_HEADER_CHECKS
+  249   1      #if CHECK_EEPROM_BEFORE_JUMP
+  250   1        if (value != 0x01) {      // check first byte of eeprom to see if its programmed, if not do not jump
+  251   2          invalid_command = 0;
+  252   2          return;
+  253   2          }
+  254   1      #endif
+  255   1      #ifndef DISABLE_APP_HEADER_CHECKS
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 5   
+
                    /*
                      first word of the app is the stack pointer - make sure that it is in range
                     */
@@ -386,314 +289,312 @@ stmt  level    source
                  return;
                    }
                #endif
-  368   1        jump_to_application();
-  369   1      #endif
-  370   1      }
-  371          
-  372          
-  373          static void makeCrc(uint8_t* pBuff, uint16_t length)
-  374          {
-  375   1        uint16_t i;
-  376   1        uint8_t xb;
-  377   1        static uint8_16_u CRC_16;
-  378   1        
-  379   1        CRC_16.word=0;
-  380   1        for(i = 0; i < length; i++) {
-  381   2          uint8_t j;
-  382   2          xb = pBuff[i];
-  383   2          for ( j = 0; j < 8; j++)
-  384   2          {
-  385   3            if (((xb & 0x01) ^ (CRC_16.word & 0x0001)) !=0 ) {
-  386   4              CRC_16.word = CRC_16.word >> 1;
-  387   4              CRC_16.word = CRC_16.word ^ 0xA001;
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 7   
-
-  388   4            } else {
-  389   4              CRC_16.word = CRC_16.word >> 1;
-  390   4            }
-  391   3            xb = xb >> 1;
-  392   3          }
-  393   2        }
-  394   1        calculated_crc_low_byte = CRC_16.bytes[1];        //C251是大端编译模式
-  395   1        calculated_crc_high_byte = CRC_16.bytes[0];
-  396   1      }
-  397          
-  398          static char checkCrc(uint8_t* pBuff, uint16_t length)
-  399          {
-  400   1        uint8_t received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
-  401   1        uint8_t received_crc_high_byte2 = pBuff[length+1];
-  402   1        makeCrc(pBuff,length);
-  403   1        if((calculated_crc_low_byte==received_crc_low_byte2)   && (calculated_crc_high_byte==received_crc_high_b
+  273   1        jump_to_application();
+  274   1      #endif
+  275   1      }
+  276          
+  277          
+  278          static void makeCrc(uint8_t* pBuff, uint16_t length)
+  279          {
+  280   1        uint16_t i;
+  281   1        uint8_t xb;
+  282   1        static uint8_16_u CRC_16;
+  283   1        
+  284   1        CRC_16.word=0;
+  285   1        for(i = 0; i < length; i++) {
+  286   2          uint8_t j;
+  287   2          xb = pBuff[i];
+  288   2          for ( j = 0; j < 8; j++)
+  289   2          {
+  290   3            if (((xb & 0x01) ^ (CRC_16.word & 0x0001)) !=0 ) {
+  291   4              CRC_16.word = CRC_16.word >> 1;
+  292   4              CRC_16.word = CRC_16.word ^ 0xA001;
+  293   4            } else {
+  294   4              CRC_16.word = CRC_16.word >> 1;
+  295   4            }
+  296   3            xb = xb >> 1;
+  297   3          }
+  298   2        }
+  299   1        calculated_crc_low_byte = CRC_16.bytes[1];        //C251是大端编译模式
+  300   1        calculated_crc_high_byte = CRC_16.bytes[0];
+  301   1      }
+  302          
+  303          static char checkCrc(uint8_t* pBuff, uint16_t length)
+  304          {
+  305   1        uint8_t received_crc_low_byte2 = pBuff[length];          // one higher than len in buffer
+  306   1        uint8_t received_crc_high_byte2 = pBuff[length+1];
+  307   1        makeCrc(pBuff,length);
+  308   1        if((calculated_crc_low_byte==received_crc_low_byte2)   && (calculated_crc_high_byte==received_crc_high_b
              -yte2)){
-  404   2          return 1;
-  405   2        }else{
-  406   2          return 0;
-  407   2        }
-  408   1      }
-  409          
-  410          static void setReceive()
-  411          {
-  412   1          gpio_mode_set_input(input_pin, GPIO_PULL_UP);
-  413   1          received = 0;
-  414   1      }
-  415          
-  416          static void setTransmit()
-  417          {
-  418   1          // set high before we set as output to guarantee idle high
-  419   1          gpio_set(input_pin);
-  420   1          gpio_mode_set_output(input_pin, GPIO_OUTPUT_PUSH_PULL);
-  421   1      
-  422   1          // delay a bit to let the sender get setup for receiving
-  423   1          delayMicroseconds(BITTIME);
-  424   1      }
-  425          
-  426          static void send_ACK()
-  427          {
-  428   1          setTransmit();
-  429   1          serialwriteChar(0x30);             // good ack!
-  430   1          setReceive();
-  431   1      }
-  432          
-  433          static void send_BAD_ACK()
-  434          {
-  435   1          setTransmit();
-  436   1          serialwriteChar(0xC1);                // bad command message.
-  437   1          setReceive();
-  438   1      }
-  439          
-  440          static void send_BAD_CRC_ACK()
-  441          {
-  442   1          setTransmit();
-  443   1          serialwriteChar(0xC2);                // bad command message.
-  444   1          setReceive();
-  445   1      }
-  446          
-  447          static void sendDeviceInfo()
-  448          {
-  449   1          setTransmit();
-  450   1          sendString(devinfo.deviceInfo,sizeof(devinfo.deviceInfo));
-  451   1          setReceive();
-  452   1      }
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 8   
+  309   2          return 1;
+  310   2        }else{
+  311   2          return 0;
+  312   2        }
+  313   1      }
+  314          
+  315          static void setReceive()
+  316          {
+  317   1          gpio_mode_set_input(input_pin, GPIO_PULL_UP);
+  318   1          received = 0;
+  319   1      }
+  320          
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 6   
 
-  453          
-  454          static bool checkAddressWritable(uint32_t address)
-  455          {
-  456   1          return address >= APPLICATION_ADDRESS;
-  457   1      }
-  458          
-  459          
-  460          static void decodeInput()
-  461          {
-  462   1          if (incoming_payload_no_command) {
-  463   2        uint16_t i;
-  464   2        len = payload_buffer_size;
-  465   2        if (checkCrc(rxBuffer,len)) {
-  466   3            memset(payLoadBuffer, 0, sizeof(payLoadBuffer));             // reset buffer
-  467   3      
-  468   3            for(i = 0; i < len; i++){
-  469   4          payLoadBuffer[i]= rxBuffer[i];
-  470   4            }
-  471   3            send_ACK();
-  472   3            incoming_payload_no_command = 0;
-  473   3            return;
-  474   3        }else{
-  475   3            send_BAD_CRC_ACK();
-  476   3            return;
-  477   3        }
-  478   2          }
-  479   1      
-  480   1          cmd = rxBuffer[0];
-  481   1      
-  482   1          if (rxBuffer[16] == 0x7d) {
-  483   2        if(rxBuffer[8] == 13 && rxBuffer[9] == 66) {
-  484   3            sendDeviceInfo();
-  485   3            rxBuffer[20]= 0;
-  486   3      
-  487   3        }
-  488   2        return;
-  489   2          }
-  490   1      
-  491   1          if (rxBuffer[20] == 0x7d) {
-  492   2        if(rxBuffer[12] == 13 && rxBuffer[13] == 66) {
-  493   3            sendDeviceInfo();
-  494   3            rxBuffer[20]= 0;
-  495   3            return;
-  496   3        }
-  497   2      
+  321          static void setTransmit()
+  322          {
+  323   1          // set high before we set as output to guarantee idle high
+  324   1          gpio_set(input_pin);
+  325   1          gpio_mode_set_output(input_pin, GPIO_OUTPUT_PUSH_PULL);
+  326   1      
+  327   1          // delay a bit to let the sender get setup for receiving
+  328   1          delayMicroseconds(BITTIME);
+  329   1      }
+  330          
+  331          static void send_ACK()
+  332          {
+  333   1          setTransmit();
+  334   1          serialwriteChar(0x30);             // good ack!
+  335   1          setReceive();
+  336   1      }
+  337          
+  338          static void send_BAD_ACK()
+  339          {
+  340   1          setTransmit();
+  341   1          serialwriteChar(0xC1);                // bad command message.
+  342   1          setReceive();
+  343   1      }
+  344          
+  345          static void send_BAD_CRC_ACK()
+  346          {
+  347   1          setTransmit();
+  348   1          serialwriteChar(0xC2);                // bad command message.
+  349   1          setReceive();
+  350   1      }
+  351          
+  352          static void sendDeviceInfo()
+  353          {
+  354   1          setTransmit();
+  355   1          sendString(devinfo.deviceInfo,sizeof(devinfo.deviceInfo));
+  356   1          setReceive();
+  357   1      }
+  358          
+  359          static bool checkAddressWritable(uint32_t address)
+  360          {
+  361   1          return address >= APPLICATION_ADDRESS;
+  362   1      }
+  363          
+  364          
+  365          static void decodeInput()
+  366          {
+  367   1          if (incoming_payload_no_command) {
+  368   2        uint16_t i;
+  369   2        len = payload_buffer_size;
+  370   2        if (checkCrc(rxBuffer,len)) {
+  371   3            memset(payLoadBuffer, 0, sizeof(payLoadBuffer));             // reset buffer
+  372   3      
+  373   3            for(i = 0; i < len; i++){
+  374   4          payLoadBuffer[i]= rxBuffer[i];
+  375   4            }
+  376   3            send_ACK();
+  377   3            incoming_payload_no_command = 0;
+  378   3            return;
+  379   3        }else{
+  380   3            send_BAD_CRC_ACK();
+  381   3            return;
+  382   3        }
+  383   2          }
+  384   1      
+  385   1          cmd = rxBuffer[0];
+  386   1      
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 7   
+
+  387   1          if (rxBuffer[16] == 0x7d) {
+  388   2        if(rxBuffer[8] == 13 && rxBuffer[9] == 66) {
+  389   3            sendDeviceInfo();
+  390   3            rxBuffer[20]= 0;
+  391   3      
+  392   3        }
+  393   2        return;
+  394   2          }
+  395   1      
+  396   1          if (rxBuffer[20] == 0x7d) {
+  397   2        if(rxBuffer[12] == 13 && rxBuffer[13] == 66) {
+  398   3            sendDeviceInfo();
+  399   3            rxBuffer[20]= 0;
+  400   3            return;
+  401   3        }
+  402   2      
+  403   2          }
+  404   1          if (rxBuffer[40] == 0x7d) {
+  405   2        if (rxBuffer[32] == 13 && rxBuffer[33] == 66) {
+  406   3            sendDeviceInfo();
+  407   3            rxBuffer[20]= 0;
+  408   3            return;
+  409   3        }
+  410   2          }
+  411   1      
+  412   1          if (cmd == CMD_RUN) {
+  413   2        // starts the main app
+  414   2        if((rxBuffer[1] == 0) && (rxBuffer[2] == 0) && (rxBuffer[3] == 0)) {
+  415   3            invalid_command = 101;
+  416   3        }
+  417   2          }
+  418   1      
+  419   1          if (cmd == CMD_PROG_FLASH) {
+  420   2        len = 2;
+  421   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
+  422   3            send_BAD_CRC_ACK();
+  423   3      
+  424   3            return;
+  425   3        }
+  426   2      
+  427   2        if (!checkAddressWritable(address)) {
+  428   3            send_BAD_ACK();
+  429   3      
+  430   3            return;
+  431   3        }
+  432   2      
+  433   2        if (!save_flash_nolib((uint8_t*)payLoadBuffer, payload_buffer_size,address)) {
+  434   3            send_BAD_ACK();
+  435   3        } else {
+  436   3            send_ACK();
+  437   3        }
+  438   2      
+  439   2        return;
+  440   2          }
+  441   1      
+  442   1          if (cmd == CMD_SET_ADDRESS) {
+  443   2        // command set addressinput format is: CMD, 00 , High byte
+  444   2        // address, Low byte address, crclb ,crchb
+  445   2        len = 4;  // package without 2 byte crc
+  446   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
+  447   3            send_BAD_CRC_ACK();
+  448   3      
+  449   3            return;
+  450   3        }
+  451   2      
+  452   2      
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 8   
+
+  453   2        // will send Ack 0x30 and read input after transfer out callback
+  454   2        invalid_command = 0;
+  455   2        address = MCU_FLASH_START + ((rxBuffer[2] << 8 | rxBuffer[3]) << ADDRESS_SHIFT);
+  456   2        send_ACK();
+  457   2      
+  458   2        return;
+  459   2          }
+  460   1      
+  461   1          if (cmd == CMD_SET_BUFFER) {
+  462   2        // for writing buffer rx buffer 0 = command byte.  command set
+  463   2        // address, input , format is CMD, 00 , 00 or 01 (if buffer is 256),
+  464   2        // buffer_size,
+  465   2        len = 4;  // package without 2 byte crc
+  466   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
+  467   3            send_BAD_CRC_ACK();
+  468   3      
+  469   3            return;
+  470   3        }
+  471   2      
+  472   2              // no ack with command set buffer;
+  473   2              if(rxBuffer[2] == 0x01){
+  474   3            payload_buffer_size = 256;                          // if nothing in this buffer
+  475   3              }else{
+  476   3            payload_buffer_size = rxBuffer[3];
+  477   3              }
+  478   2        incoming_payload_no_command = 1;
+  479   2        address_expected_increment = 256;
+  480   2              setReceive();
+  481   2      
+  482   2              return;
+  483   2          }
+  484   1      
+  485   1          if (cmd == CMD_KEEP_ALIVE) {
+  486   2        len = 2;
+  487   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
+  488   3            send_BAD_CRC_ACK();
+  489   3      
+  490   3            return;
+  491   3        }
+  492   2      
+  493   2        setTransmit();
+  494   2        serialwriteChar(0xC1);                // bad command message.
+  495   2        setReceive();
+  496   2      
+  497   2        return;
   498   2          }
-  499   1          if (rxBuffer[40] == 0x7d) {
-  500   2        if (rxBuffer[32] == 13 && rxBuffer[33] == 66) {
-  501   3            sendDeviceInfo();
-  502   3            rxBuffer[20]= 0;
-  503   3            return;
-  504   3        }
-  505   2          }
-  506   1      
-  507   1          if (cmd == CMD_RUN) {
-  508   2        // starts the main app
-  509   2        if((rxBuffer[1] == 0) && (rxBuffer[2] == 0) && (rxBuffer[3] == 0)) {
-  510   3            invalid_command = 101;
-  511   3        }
-  512   2          }
-  513   1      
-  514   1          if (cmd == CMD_PROG_FLASH) {
-  515   2        len = 2;
-  516   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
-  517   3            send_BAD_CRC_ACK();
-  518   3      
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 9   
+  499   1      
+  500   1          if (cmd == CMD_ERASE_FLASH) {
+  501   2        len = 2;
+  502   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
+  503   3            send_BAD_CRC_ACK();
+  504   3      
+  505   3            return;
+  506   3        }
+  507   2      
+  508   2        if (!checkAddressWritable(address)) {
+  509   3            send_BAD_ACK();
+  510   3      
+  511   3            return;
+  512   3        }
+  513   2      
+  514   2        send_ACK();
+  515   2        return;
+  516   2          }
+  517   1      
+  518   1          if (cmd == CMD_READ_EEPROM) {
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 9   
 
-  519   3            return;
-  520   3        }
-  521   2      
-  522   2        if (!checkAddressWritable(address)) {
-  523   3            send_BAD_ACK();
-  524   3      
-  525   3            return;
-  526   3        }
-  527   2      
-  528   2        if (!save_flash_nolib((uint8_t*)payLoadBuffer, payload_buffer_size,address)) {
-  529   3            send_BAD_ACK();
-  530   3        } else {
-  531   3            send_ACK();
-  532   3        }
-  533   2      
-  534   2        return;
-  535   2          }
-  536   1      
-  537   1          if (cmd == CMD_SET_ADDRESS) {
-  538   2        // command set addressinput format is: CMD, 00 , High byte
-  539   2        // address, Low byte address, crclb ,crchb
-  540   2        len = 4;  // package without 2 byte crc
-  541   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
-  542   3            send_BAD_CRC_ACK();
-  543   3      
-  544   3            return;
-  545   3        }
-  546   2      
-  547   2      
-  548   2        // will send Ack 0x30 and read input after transfer out callback
-  549   2        invalid_command = 0;
-  550   2        address = MCU_FLASH_START + ((rxBuffer[2] << 8 | rxBuffer[3]) << ADDRESS_SHIFT);
-  551   2        send_ACK();
-  552   2      
-  553   2        return;
-  554   2          }
-  555   1      
-  556   1          if (cmd == CMD_SET_BUFFER) {
-  557   2        // for writing buffer rx buffer 0 = command byte.  command set
-  558   2        // address, input , format is CMD, 00 , 00 or 01 (if buffer is 256),
-  559   2        // buffer_size,
-  560   2        len = 4;  // package without 2 byte crc
-  561   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
-  562   3            send_BAD_CRC_ACK();
-  563   3      
-  564   3            return;
-  565   3        }
-  566   2      
-  567   2              // no ack with command set buffer;
-  568   2              if(rxBuffer[2] == 0x01){
-  569   3            payload_buffer_size = 256;                          // if nothing in this buffer
-  570   3              }else{
-  571   3            payload_buffer_size = rxBuffer[3];
-  572   3              }
-  573   2        incoming_payload_no_command = 1;
-  574   2        address_expected_increment = 256;
-  575   2              setReceive();
-  576   2      
-  577   2              return;
-  578   2          }
-  579   1      
-  580   1          if (cmd == CMD_KEEP_ALIVE) {
-  581   2        len = 2;
-  582   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
-  583   3            send_BAD_CRC_ACK();
-  584   3      
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 10  
-
-  585   3            return;
-  586   3        }
-  587   2      
-  588   2        setTransmit();
-  589   2        serialwriteChar(0xC1);                // bad command message.
-  590   2        setReceive();
-  591   2      
-  592   2        return;
-  593   2          }
-  594   1      
-  595   1          if (cmd == CMD_ERASE_FLASH) {
-  596   2        len = 2;
-  597   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
-  598   3            send_BAD_CRC_ACK();
-  599   3      
-  600   3            return;
-  601   3        }
-  602   2      
-  603   2        if (!checkAddressWritable(address)) {
-  604   3            send_BAD_ACK();
-  605   3      
-  606   3            return;
-  607   3        }
-  608   2      
-  609   2        send_ACK();
-  610   2        return;
-  611   2          }
-  612   1      
-  613   1          if (cmd == CMD_READ_EEPROM) {
-  614   2        eeprom_req = 1;
-  615   2          }
-  616   1      
-  617   1          if (cmd == CMD_READ_FLASH_SIL) {
-  618   2        // for sending contents of flash memory at the memory location set in
-  619   2        // bootloader.c need to still set memory with data from set mem
-  620   2        // command
-  621   2        uint16_t out_buffer_size;
-  622   2        uint8_t xdata* read_data;
-  623   2      
-  624   2        len = 2;
-  625   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
-  626   3            send_BAD_CRC_ACK();
-  627   3      
-  628   3            return;
-  629   3        }
-  630   2      
-  631   2        count++;
-  632   2        out_buffer_size = rxBuffer[1];//
-  633   2        if(out_buffer_size == 0){
-  634   3            out_buffer_size = 256;
-  635   3        }
-  636   2        address_expected_increment = 128;
-  637   2      
-  638   2        setTransmit();
-  639   2        read_data = (uint8_t xdata*)malloc(out_buffer_size + 3);        // make buffer 3 larger to fit CRC and A
+  519   2        eeprom_req = 1;
+  520   2          }
+  521   1      
+  522   1          if (cmd == CMD_READ_FLASH_SIL) {
+  523   2        // for sending contents of flash memory at the memory location set in
+  524   2        // bootloader.c need to still set memory with data from set mem
+  525   2        // command
+  526   2        uint16_t out_buffer_size;
+  527   2        uint8_t xdata* read_data;
+  528   2      
+  529   2        len = 2;
+  530   2        if (!checkCrc((uint8_t*)rxBuffer, len)) {
+  531   3            send_BAD_CRC_ACK();
+  532   3      
+  533   3            return;
+  534   3        }
+  535   2      
+  536   2        count++;
+  537   2        out_buffer_size = rxBuffer[1];//
+  538   2        if(out_buffer_size == 0){
+  539   3            out_buffer_size = 256;
+  540   3        }
+  541   2        address_expected_increment = 128;
+  542   2      
+  543   2        setTransmit();
+  544   2        read_data = (uint8_t xdata*)malloc(out_buffer_size + 3);        // make buffer 3 larger to fit CRC and A
              -CK
-  640   2        memset(read_data, 0, sizeof(read_data));
-  641   2              //    read_flash((uint8_t*)read_data , address);                 // make sure read_flash reads tw
+  545   2        memset(read_data, 0, sizeof(read_data));
+  546   2              //    read_flash((uint8_t*)read_data , address);                 // make sure read_flash reads tw
              -o less than buffer.
-  642   2        read_flash_bin((uint8_t xdata*)read_data , address, out_buffer_size);
-  643   2      
-  644   2              makeCrc(read_data,out_buffer_size);
-  645   2              read_data[out_buffer_size] = calculated_crc_low_byte;
-  646   2              read_data[out_buffer_size + 1] = calculated_crc_high_byte;
-  647   2              read_data[out_buffer_size + 2] = 0x30;
-  648   2              sendString(read_data, out_buffer_size+3);
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 11  
-
-  649   2      
-  650   2        setReceive();
-  651   2      
-  652   2        return;
-  653   2          }
-  654   1      
-  655   1          setTransmit();
-  656   1      
-  657   1          serialwriteChar(0xC1);                // bad command message.
-  658   1          invalid_command++;
-  659   1          setReceive();
-  660   1      }
-  661          
-  662          #ifdef SERIAL_STATS
+  547   2        read_flash_bin((uint8_t xdata*)read_data , address, out_buffer_size);
+  548   2      
+  549   2              makeCrc(read_data,out_buffer_size);
+  550   2              read_data[out_buffer_size] = calculated_crc_low_byte;
+  551   2              read_data[out_buffer_size + 1] = calculated_crc_high_byte;
+  552   2              read_data[out_buffer_size + 2] = 0x30;
+  553   2              sendString(read_data, out_buffer_size+3);
+  554   2      
+  555   2        setReceive();
+  556   2      
+  557   2        return;
+  558   2          }
+  559   1      
+  560   1          setTransmit();
+  561   1      
+  562   1          serialwriteChar(0xC1);                // bad command message.
+  563   1          invalid_command++;
+  564   1          setReceive();
+  565   1      }
+  566          
+  567          #ifdef SERIAL_STATS
                // stats for debugging serial protocol
                struct {
                    uint32_t no_idle;
@@ -703,259 +604,259 @@ stmt  level    source
                    uint32_t good;
                } stats;
                #endif
-  672          
-  673          
-  674          /*
-  675            read one byte from the input pin, 19200, not inverted, one stop bit
-  676          
-  677            return false if we can't get a byte, or the byte has bad framing
-  678           */
-  679          static bool serialreadChar()
-  680          {
-  681   1        int bits_to_read;
-  682   1          rxbyte=0;
-  683   1          bl_timer_reset();
-  684   1      
-  685   1          // UART is idle high, wait for it to be in the idle state
-  686   1          while (~gpio_read(input_pin)) { // wait for rx to go high
-  687   2        if (bl_timer_us() > 20000) {
-  688   3            /*
-  689   3              if we don't get a command for 20ms then assume we should
-  690   3              be trying to boot the main firmware, invalid_command 101
-  691   3              triggers the jump immediately
-  692   3             */
-  693   3            invalid_command = 101;
-  694   3      #ifdef SERIAL_STATS
+  577          
+  578          
+  579          /*
+  580            read one byte from the input pin, 19200, not inverted, one stop bit
+  581          
+  582            return false if we can't get a byte, or the byte has bad framing
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 10  
+
+  583           */
+  584          static bool serialreadChar()
+  585          {
+  586   1        int bits_to_read;
+  587   1          rxbyte=0;
+  588   1          bl_timer_reset();
+  589   1      
+  590   1          // UART is idle high, wait for it to be in the idle state
+  591   1          while (~gpio_read(input_pin)) { // wait for rx to go high
+  592   2        if (bl_timer_us() > 20000) {
+  593   3            /*
+  594   3              if we don't get a command for 20ms then assume we should
+  595   3              be trying to boot the main firmware, invalid_command 101
+  596   3              triggers the jump immediately
+  597   3             */
+  598   3            invalid_command = 101;
+  599   3      #ifdef SERIAL_STATS
                      stats.no_idle++;
                #endif
-  697   3            return false;
-  698   3        }
-  699   2          }
-  700   1      
-  701   1          // now we need to wait for the start bit leading edge, which is low
-  702   1          bl_timer_reset();
-  703   1          while (gpio_read(input_pin)) {
-  704   2        if (bl_timer_us() > 5*BITTIME && messagereceived) {
-  705   3            // we've been waiting too long, don't allow for long gaps
-  706   3            // between bytes
-  707   3      #ifdef SERIAL_STATS
+  602   3            return false;
+  603   3        }
+  604   2          }
+  605   1      
+  606   1          // now we need to wait for the start bit leading edge, which is low
+  607   1          bl_timer_reset();
+  608   1          while (gpio_read(input_pin)) {
+  609   2        if (bl_timer_us() > 5*BITTIME && messagereceived) {
+  610   3            // we've been waiting too long, don't allow for long gaps
+  611   3            // between bytes
+  612   3      #ifdef SERIAL_STATS
                      stats.no_start++;
                #endif
-  710   3            return false;
-  711   3        }
-  712   2          }
-  713   1      
-  714   1          // wait to get the center of bit time. We want to sample at the
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 12  
-
-  715   1          // middle of each bit
-  716   1          delayMicroseconds(HALFBITTIME);
-  717   1          if (gpio_read(input_pin)) {
-  718   2        // bad framing, we should be half-way through the start bit
-  719   2        // which should still be low
-  720   2      #ifdef SERIAL_STATS
+  615   3            return false;
+  616   3        }
+  617   2          }
+  618   1      
+  619   1          // wait to get the center of bit time. We want to sample at the
+  620   1          // middle of each bit
+  621   1          delayMicroseconds(HALFBITTIME);
+  622   1          if (gpio_read(input_pin)) {
+  623   2        // bad framing, we should be half-way through the start bit
+  624   2        // which should still be low
+  625   2      #ifdef SERIAL_STATS
                  stats.bad_start++;
                #endif
-  723   2        return false;
-  724   2          }
-  725   1      
-  726   1          /*
-  727   1            now sample the 8 data bits
-  728   1           */
-  729   1          bits_to_read = 0;
-  730   1          while (bits_to_read < 8) {
-  731   2        delayMicroseconds(BITTIME);
-  732   2        rxbyte = rxbyte | (uint8_t)gpio_read(input_pin) << bits_to_read;
-  733   2        bits_to_read++;
-  734   2          }
-  735   1      
-  736   1          // wait till middle of stop bit, so we can check that too
-  737   1          delayMicroseconds(BITTIME);
-  738   1          if (~gpio_read(input_pin)) {
-  739   2        // bad framing, stop bit should be high
-  740   2      #ifdef SERIAL_STATS
+  628   2        return false;
+  629   2          }
+  630   1      
+  631   1          /*
+  632   1            now sample the 8 data bits
+  633   1           */
+  634   1          bits_to_read = 0;
+  635   1          while (bits_to_read < 8) {
+  636   2        delayMicroseconds(BITTIME);
+  637   2        rxbyte = rxbyte | (uint8_t)gpio_read(input_pin) << bits_to_read;
+  638   2        bits_to_read++;
+  639   2          }
+  640   1      
+  641   1          // wait till middle of stop bit, so we can check that too
+  642   1          delayMicroseconds(BITTIME);
+  643   1          if (~gpio_read(input_pin)) {
+  644   2        // bad framing, stop bit should be high
+  645   2      #ifdef SERIAL_STATS
                  stats.bad_stop++;
                #endif
-  743   2        return false;
-  744   2          }
-  745   1      
-  746   1          // we got a good byte
-  747   1          messagereceived = 1;
-  748   1          receiveByte = rxbyte;
-  749   1      #ifdef SERIAL_STATS
+  648   2        return false;
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 11  
+
+  649   2          }
+  650   1      
+  651   1          // we got a good byte
+  652   1          messagereceived = 1;
+  653   1          receiveByte = rxbyte;
+  654   1      #ifdef SERIAL_STATS
                    stats.good++;
                #endif
-  752   1          return true;
-  753   1      }
-  754          
-  755          static void serialwriteChar(uint8_t dat)
-  756          {
-  757   1        uint8_t bits_written;
-  758   1          // start bit is low
-  759   1          gpio_clear(input_pin);
-  760   1          delayMicroseconds(BITTIME);
-  761   1      
-  762   1          // send data bits
-  763   1          bits_written = 0;
-  764   1          while (bits_written < 8) {
-  765   2        if (dat & 0x01) {
-  766   3            gpio_set(input_pin);
-  767   3        } else {
-  768   3            // GPIO_BC(input_port) = input_pin;
-  769   3            gpio_clear(input_pin);
-  770   3        }
-  771   2        bits_written++;
-  772   2        dat = dat >> 1;
-  773   2        delayMicroseconds(BITTIME);
-  774   2          }
-  775   1      
-  776   1          // send stop bit
-  777   1          gpio_set(input_pin);
-  778   1      
-  779   1          /*
-  780   1            note that we skip the delay by BITTIME for the full stop bit and
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 13  
+  657   1          return true;
+  658   1      }
+  659          
+  660          static void serialwriteChar(uint8_t dat)
+  661          {
+  662   1        uint8_t bits_written;
+  663   1          // start bit is low
+  664   1          gpio_clear(input_pin);
+  665   1          delayMicroseconds(BITTIME);
+  666   1      
+  667   1          // send data bits
+  668   1          bits_written = 0;
+  669   1          while (bits_written < 8) {
+  670   2        if (dat & 0x01) {
+  671   3            gpio_set(input_pin);
+  672   3        } else {
+  673   3            // GPIO_BC(input_port) = input_pin;
+  674   3            gpio_clear(input_pin);
+  675   3        }
+  676   2        bits_written++;
+  677   2        dat = dat >> 1;
+  678   2        delayMicroseconds(BITTIME);
+  679   2          }
+  680   1      
+  681   1          // send stop bit
+  682   1          gpio_set(input_pin);
+  683   1      
+  684   1          /*
+  685   1            note that we skip the delay by BITTIME for the full stop bit and
+  686   1            do it in sendString() instead to ensure when sending an ACK
+  687   1            immediately followed by a setReceive() on a slow MCU that we
+  688   1            start on the receive as soon as possible.
+  689   1          */
+  690   1      }
+  691          
+  692          static void sendString(const uint8_t dat[], int len)
+  693          {
+  694   1        int i;
+  695   1          for(i = 0; i < len; i++){
+  696   2              serialwriteChar(dat[i]);
+  697   2              // for multi-byte writes we add the stop bit delay
+  698   2              delayMicroseconds(BITTIME);
+  699   2          }
+  700   1      }
+  701          
+  702          static void receiveBuffer()
+  703          {
+  704   1        uint32_t i;
+  705   1          count = 0;
+  706   1          messagereceived = 0;
+  707   1          memset(rxBuffer, 0, sizeof(rxBuffer));
+  708   1      
+  709   1          setReceive();
+  710   1      
+  711   1          for(i = 0; i < sizeof(rxBuffer); i++){
+  712   2        if (!serialreadChar()) {
+  713   3            break;
+  714   3        }
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 12  
 
-  781   1            do it in sendString() instead to ensure when sending an ACK
-  782   1            immediately followed by a setReceive() on a slow MCU that we
-  783   1            start on the receive as soon as possible.
-  784   1          */
-  785   1      }
-  786          
-  787          static void sendString(const uint8_t dat[], int len)
-  788          {
-  789   1        int i;
-  790   1          for(i = 0; i < len; i++){
-  791   2              serialwriteChar(dat[i]);
-  792   2              // for multi-byte writes we add the stop bit delay
-  793   2              delayMicroseconds(BITTIME);
-  794   2          }
-  795   1      }
-  796          
-  797          static void receiveBuffer()
-  798          {
-  799   1        uint32_t i;
-  800   1          count = 0;
-  801   1          messagereceived = 0;
-  802   1          memset(rxBuffer, 0, sizeof(rxBuffer));
-  803   1      
-  804   1          setReceive();
-  805   1      
-  806   1          for(i = 0; i < sizeof(rxBuffer); i++){
-  807   2        if (!serialreadChar()) {
-  808   3            break;
-  809   3        }
-  810   2      
-  811   2        if(incoming_payload_no_command) {
-  812   3            if(count == payload_buffer_size+2){
-*** WARNING C173 IN LINE 812 OF bootloader\main.c: '==': signed/unsigned type mismatch
-  813   4          break;
-  814   4            }
-  815   3            rxBuffer[i] = rxbyte;
-  816   3            count++;
-  817   3        } else {
-  818   3            if(bl_timer_us() > 250){
-  819   4        
-  820   4          count = 0;
-  821   4      
-  822   4          break;
-  823   4            } else {
-  824   4          rxBuffer[i] = rxbyte;
-  825   4          if(i == 257){
-  826   5              invalid_command+=20;       // needs one hundred to trigger a jump but will be reset on next set add
+  715   2      
+  716   2        if(incoming_payload_no_command) {
+  717   3            if(count == payload_buffer_size+2){
+*** WARNING C173 IN LINE 717 OF bootloader\main.c: '==': signed/unsigned type mismatch
+  718   4          break;
+  719   4            }
+  720   3            rxBuffer[i] = rxbyte;
+  721   3            count++;
+  722   3        } else {
+  723   3            if(bl_timer_us() > 250){
+  724   4        
+  725   4          count = 0;
+  726   4      
+  727   4          break;
+  728   4            } else {
+  729   4          rxBuffer[i] = rxbyte;
+  730   4          if(i == 257){
+  731   5              invalid_command+=20;       // needs one hundred to trigger a jump but will be reset on next set add
              -ress commmand
-  827   5      
-  828   5          }
-  829   4            }
-  830   3        }
-  831   2          }
-  832   1          if (messagereceived) {
-  833   2        decodeInput();
-  834   2          }
-  835   1      }
-  836          
-  837          #ifdef UPDATE_EEPROM_ENABLE
-  838          static void update_EEPROM()
-  839          {
-  840   1          read_flash_bin(rxBuffer , EEPROM_START_ADD , 48);
-  841   1          if (BOOTLOADER_VERSION != rxBuffer[2]) {
-  842   2        if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
-  843   3            return;
-  844   3        }
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 14  
-
-  845   2        rxBuffer[2] = BOOTLOADER_VERSION;
-  846   2        save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
-  847   2          }
-  848   1      }
-  849          #endif // UPDATE_EEPROM_ENABLE
-  850          
-  851          static void checkForSignal()
-  852          {
-  853   1        int i;
-  854   1          gpio_mode_set_input(input_pin, GPIO_PULL_DOWN);
-  855   1        
-  856   1          delayMicroseconds(500);
-  857   1      
-  858   1          for(i = 0 ; i < 500; i ++){
-  859   2        if(~gpio_read(input_pin)){
-  860   3            low_pin_count++;
-  861   3        }else{
-  862   3        }
-  863   2      
-  864   2        delayMicroseconds(10);
-  865   2          }
-  866   1          if (low_pin_count > 450) {
-  867   2      #if CHECK_SOFTWARE_RESET
-  868   2              if (!bl_was_software_reset()) {
-  869   3            jump();
-  870   3              }
-  871   2      #else
+  732   5      
+  733   5          }
+  734   4            }
+  735   3        }
+  736   2          }
+  737   1          if (messagereceived) {
+  738   2        decodeInput();
+  739   2          }
+  740   1      }
+  741          
+  742          #ifdef UPDATE_EEPROM_ENABLE
+  743          static void update_EEPROM()
+  744          {
+  745   1          read_flash_bin(rxBuffer , EEPROM_START_ADD , 48);
+  746   1          if (BOOTLOADER_VERSION != rxBuffer[2]) {
+  747   2        if (rxBuffer[2] == 0xFF || rxBuffer[2] == 0x00){
+  748   3            return;
+  749   3        }
+  750   2        rxBuffer[2] = BOOTLOADER_VERSION;
+  751   2        save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
+  752   2          }
+  753   1      }
+  754          #endif // UPDATE_EEPROM_ENABLE
+  755          
+  756          static void checkForSignal()
+  757          {
+  758   1        int i;
+  759   1          gpio_mode_set_input(input_pin, GPIO_PULL_DOWN);
+  760   1        
+  761   1          delayMicroseconds(500);
+  762   1      
+  763   1          for(i = 0 ; i < 500; i ++){
+  764   2        if(~gpio_read(input_pin)){
+  765   3            low_pin_count++;
+  766   3        }else{
+  767   3        }
+  768   2      
+  769   2        delayMicroseconds(10);
+  770   2          }
+  771   1          if (low_pin_count > 450) {
+  772   2      #if CHECK_SOFTWARE_RESET
+  773   2              if (!bl_was_software_reset()) {
+  774   3            jump();
+  775   3              }
+  776   2      #else
                        jump();
                #endif
-  874   2          }
-  875   1      
-  876   1          gpio_mode_set_input(input_pin, GPIO_PULL_UP);
-  877   1        
-  878   1          delayMicroseconds(500);
-  879   1      
-  880   1          for (i = 0 ; i < 500; i++) {
-  881   2        if( ~(gpio_read(input_pin))){
-  882   3            low_pin_count++;
-  883   3        }else{
-  884   3      
-  885   3        }
-  886   2        delayMicroseconds(10);
-  887   2          }
-  888   1          if (low_pin_count == 0) {
-  889   2        return;           // all high while pin is pulled low, bootloader signal
-  890   2          }
-  891   1      
-  892   1          low_pin_count = 0;
-  893   1      
-  894   1          gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
-  895   1      
-  896   1          delayMicroseconds(500);
-  897   1      
-  898   1          for (i = 0 ; i < 500; i ++) {
-  899   2        if( ~(gpio_read(input_pin))){
-  900   3            low_pin_count++;
-  901   3        }
-  902   2      
-  903   2        delayMicroseconds(10);
-  904   2          }
-  905   1          if (low_pin_count == 0) {
-  906   2        return;            // when floated all
-  907   2          }
-  908   1      
-  909   1          if (low_pin_count > 0) {
-  910   2        jump();
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 15  
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 13  
 
-  911   2          }
-  912   1      }
-  913          
-  914          #ifdef BOOTLOADER_TEST_CLOCK
+  779   2          }
+  780   1      
+  781   1          gpio_mode_set_input(input_pin, GPIO_PULL_UP);
+  782   1        
+  783   1          delayMicroseconds(500);
+  784   1      
+  785   1          for (i = 0 ; i < 500; i++) {
+  786   2        if( ~(gpio_read(input_pin))){
+  787   3            low_pin_count++;
+  788   3        }else{
+  789   3      
+  790   3        }
+  791   2        delayMicroseconds(10);
+  792   2          }
+  793   1          if (low_pin_count == 0) {
+  794   2        return;           // all high while pin is pulled low, bootloader signal
+  795   2          }
+  796   1      
+  797   1          low_pin_count = 0;
+  798   1      
+  799   1          gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
+  800   1      
+  801   1          delayMicroseconds(500);
+  802   1      
+  803   1          for (i = 0 ; i < 500; i ++) {
+  804   2        if( ~(gpio_read(input_pin))){
+  805   3            low_pin_count++;
+  806   3        }
+  807   2      
+  808   2        delayMicroseconds(10);
+  809   2          }
+  810   1          if (low_pin_count == 0) {
+  811   2        return;            // when floated all
+  812   2          }
+  813   1      
+  814   1          if (low_pin_count > 0) {
+  815   2        jump();
+  816   2          }
+  817   1      }
+  818          
+  819          #ifdef BOOTLOADER_TEST_CLOCK
                /*
                  this should provide a 2ms low followed by a 1ms high if the clock is correct
                 */
@@ -972,8 +873,8 @@ stmt  level    source
                    }
                }
                #endif // BOOTLOADER_TEST_CLOCK
-  931          
-  932          #ifdef BOOTLOADER_TEST_STRING
+  836          
+  837          #ifdef BOOTLOADER_TEST_STRING
                /*
                  this should send HELLO_WORLD continuously
                 */
@@ -981,90 +882,92 @@ stmt  level    source
                {
                    setTransmit();
                    while (1) {
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 14  
+
                        delayMicroseconds(10000);
                        sendString((uint8_t*)"HELLO_WORLD\n",13);
                    }
                }
                #endif // BOOTLOADER_TEST_STRING
-  945          
-  946          
-  947          
-  948          int main(void)
-  949          {
-  950   1      
-  951   1        //Prevent warnings
-  952   1        static uint8_t xdata MEMPOOL[1024];   //内存池
-  953   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
-  954   1        
-  955   1          bl_clock_config();
-  956   1          bl_timer_init();
-  957   1          bl_gpio_init();
-  958   1      
-  959   1        IAP_TPS = 40;
-  960   1      
-  961   1      #ifdef BOOTLOADER_TEST_CLOCK
+  850          
+  851          
+  852          
+  853          int main(void)
+  854          {
+  855   1      
+  856   1        //Prevent warnings
+  857   1        static uint8_t xdata MEMPOOL[1024];   //内存池
+  858   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
+  859   1        
+  860   1          bl_clock_config();
+  861   1          bl_timer_init();
+  862   1          bl_gpio_init();
+  863   1      
+  864   1        IAP_TPS = 40;
+  865   1      
+  866   1      #ifdef BOOTLOADER_TEST_CLOCK
                    test_clock();
                #endif
-  964   1      #ifdef BOOTLOADER_TEST_STRING
+  869   1      #ifdef BOOTLOADER_TEST_STRING
                    test_string();
                #endif
-  967   1      
-  968   1          checkForSignal();
-  969   1      
-  970   1          gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
-  971   1          
-  972   1      #ifdef USE_ADC_INPUT  // go right to application
+  872   1      
+  873   1          checkForSignal();
+  874   1      
+  875   1          gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
+  876   1          
+  877   1      #ifdef USE_ADC_INPUT  // go right to application
                    jump();
                #endif
-  975   1      
-  976   1      #ifdef UPDATE_EEPROM_ENABLE
-C251 COMPILER V5.60.0,  main                                                               01/11/24  11:30:51  PAGE 16  
+  880   1      
+  881   1      #ifdef UPDATE_EEPROM_ENABLE
+  882   1           update_EEPROM();
+  883   1      #endif
+  884   1      
+  885   1          while (1) {
+  886   2          receiveBuffer();
+  887   2          if (invalid_command > 100) {
+  888   3              jump();
+  889   3          }
+  890   2          }
+  891   1      }
+  892          
+  893          // void Uart1_Init(void)  //921600bps@48MHz
+  894          // {
+  895          //  SCON = 0x50;    //8位数据,可变波特率
+  896          //  AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
+  897          //  AUXR |= 0x04;   //定时器时钟1T模式
+  898          //  T2L = 0xF3;     //设置定时初始值
+  899          //  T2H = 0xFF;     //设置定时初始值
+  900          //  AUXR |= 0x10;   //定时器2开始计时
+  901          
+  902          
+  903          //  P3M0 |= 0x03; P3M1 &= ~0x03; 
+  904          //  P2M0 |= 0x03; P2M1 &= ~0x03; 
+  905          // }
+  906          
+  907          
+  908          // #pragma FUNCTIONS (static)
+  909          // char putchar(char c)
+  910          // {
+C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 15  
 
-  977   1           update_EEPROM();
-  978   1      #endif
-  979   1      
-  980   1          while (1) {
-  981   2          receiveBuffer();
-  982   2          if (invalid_command > 100) {
-  983   3              jump();
-  984   3          }
-  985   2          }
-  986   1      }
-  987          
-  988          // void Uart1_Init(void)  //921600bps@48MHz
-  989          // {
-  990          //  SCON = 0x50;    //8位数据,可变波特率
-  991          //  AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
-  992          //  AUXR |= 0x04;   //定时器时钟1T模式
-  993          //  T2L = 0xF3;     //设置定时初始值
-  994          //  T2H = 0xFF;     //设置定时初始值
-  995          //  AUXR |= 0x10;   //定时器2开始计时
-  996          
-  997          
-  998          //  P3M0 |= 0x03; P3M1 &= ~0x03; 
-  999          //  P2M0 |= 0x03; P2M1 &= ~0x03; 
- 1000          // }
- 1001          
- 1002          
- 1003          // #pragma FUNCTIONS (static)
- 1004          // char putchar(char c)
- 1005          // {
- 1006          //  // serialwriteChar(c);
- 1007          //  SBUF = c;
- 1008          //  while (!TI);
- 1009          //  TI = 0;
- 1010          //  return c;
- 1011          // }
- 1012          
- 1013          
- 1014          
- 1015          
- 1016          
+  911          //  // serialwriteChar(c);
+  912          //  SBUF = c;
+  913          //  while (!TI);
+  914          //  TI = 0;
+  915          //  return c;
+  916          // }
+  917          
+  918          
+  919          
+  920          
+  921          
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      2520     ------
+  code size            =      2529     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
