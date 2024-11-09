@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -66,7 +66,7 @@ stmt  level    source
    55          
    56          /*
    57            should we update the bootloader version in eeprom?
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 2   
 
    58           */
    59          #define UPDATE_EEPROM_ENABLE 1
@@ -134,7 +134,7 @@ stmt  level    source
                #error "Bootloader comms pin not defined"
                #endif
   123          
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 3   
 
   124          static uint16_t invalid_command;
   125          
@@ -202,7 +202,7 @@ stmt  level    source
   187          #define CMD_READ_SRAM       0x06
   188          #define CMD_READ_FLASH_ATM  0x07
   189          #define CMD_KEEP_ALIVE      0xFD
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 4   
 
   190          #define CMD_SET_ADDRESS     0xFF
   191          #define CMD_SET_BUFFER      0xFE
@@ -270,7 +270,7 @@ stmt  level    source
   253   2          }
   254   1      #endif
   255   1      #ifndef DISABLE_APP_HEADER_CHECKS
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 5   
 
                    /*
                      first word of the app is the stack pointer - make sure that it is in range
@@ -338,7 +338,7 @@ stmt  level    source
   318   1          received = 0;
   319   1      }
   320          
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 6   
 
   321          static void setTransmit()
   322          {
@@ -406,7 +406,7 @@ stmt  level    source
   384   1      
   385   1          cmd = rxBuffer[0];
   386   1      
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 7   
 
   387   1          if (rxBuffer[16] == 0x7d) {
   388   2        if(rxBuffer[8] == 13 && rxBuffer[9] == 66) {
@@ -474,7 +474,7 @@ stmt  level    source
   450   3        }
   451   2      
   452   2      
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 8   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 8   
 
   453   2        // will send Ack 0x30 and read input after transfer out callback
   454   2        invalid_command = 0;
@@ -542,7 +542,7 @@ stmt  level    source
   516   2          }
   517   1      
   518   1          if (cmd == CMD_READ_EEPROM) {
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 9   
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 9   
 
   519   2        eeprom_req = 1;
   520   2          }
@@ -610,7 +610,7 @@ stmt  level    source
   580            read one byte from the input pin, 19200, not inverted, one stop bit
   581          
   582            return false if we can't get a byte, or the byte has bad framing
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 10  
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 10  
 
   583           */
   584          static bool serialreadChar()
@@ -678,7 +678,7 @@ stmt  level    source
                  stats.bad_stop++;
                #endif
   648   2        return false;
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 11  
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 11  
 
   649   2          }
   650   1      
@@ -746,7 +746,7 @@ stmt  level    source
   712   2        if (!serialreadChar()) {
   713   3            break;
   714   3        }
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 12  
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 12  
 
   715   2      
   716   2        if(incoming_payload_no_command) {
@@ -814,7 +814,7 @@ stmt  level    source
   776   2      #else
                        jump();
                #endif
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 13  
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 13  
 
   779   2          }
   780   1      
@@ -882,7 +882,7 @@ stmt  level    source
                {
                    setTransmit();
                    while (1) {
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 14  
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 14  
 
                        delayMicroseconds(10000);
                        sendString((uint8_t*)"HELLO_WORLD\n",13);
@@ -890,67 +890,67 @@ stmt  level    source
                }
                #endif // BOOTLOADER_TEST_STRING
   850          
-  851          
-  852          
-  853          int main(void)
-  854          {
-  855   1      
-  856   1        //Prevent warnings
-  857   1        static uint8_t xdata MEMPOOL[1024];   //内存池
-  858   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
-  859   1        
-  860   1          bl_clock_config();
-  861   1          bl_timer_init();
-  862   1          bl_gpio_init();
-  863   1      
-  864   1        IAP_TPS = 40;
-  865   1      
-  866   1      #ifdef BOOTLOADER_TEST_CLOCK
+  851          // void Uart1_Init(void)  //921600bps@48MHz
+  852          // {
+  853          //  SCON = 0x50;    //8位数据,可变波特率
+  854          //  AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
+  855          //  AUXR |= 0x04;   //定时器时钟1T模式
+  856          //  T2L = 0xA9;     //设置定时初始值
+  857          //  T2H = 0xFF;     //设置定时初始值
+  858          //  AUXR |= 0x10;   //定时器2开始计时
+  859          
+  860          
+  861          //  P3M0 |= 0x03; P3M1 &= ~0x03; 
+  862          //  P2M0 |= 0x03; P2M1 &= ~0x03; 
+  863          // }
+  864          
+  865          
+  866          int main(void)
+  867          {
+  868   1      
+  869   1        //Prevent warnings
+  870   1        static uint8_t xdata MEMPOOL[1024];   //内存池
+  871   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
+  872   1        
+  873   1          bl_clock_config();
+  874   1          bl_timer_init();
+  875   1          bl_gpio_init();
+  876   1        // Uart1_Init();  
+  877   1        IAP_TPS = 40;
+  878   1      
+  879   1      #ifdef BOOTLOADER_TEST_CLOCK
                    test_clock();
                #endif
-  869   1      #ifdef BOOTLOADER_TEST_STRING
+  882   1      #ifdef BOOTLOADER_TEST_STRING
                    test_string();
                #endif
-  872   1      
-  873   1          checkForSignal();
-  874   1      
-  875   1          gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
-  876   1          
-  877   1      #ifdef USE_ADC_INPUT  // go right to application
+  885   1      
+  886   1          checkForSignal();
+  887   1      
+  888   1          gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
+  889   1          
+  890   1      #ifdef USE_ADC_INPUT  // go right to application
                    jump();
                #endif
-  880   1      
-  881   1      #ifdef UPDATE_EEPROM_ENABLE
-  882   1           update_EEPROM();
-  883   1      #endif
-  884   1      
-  885   1          while (1) {
-  886   2          receiveBuffer();
-  887   2          if (invalid_command > 100) {
-  888   3              jump();
-  889   3          }
-  890   2          }
-  891   1      }
-  892          
-  893          // void Uart1_Init(void)  //921600bps@48MHz
-  894          // {
-  895          //  SCON = 0x50;    //8位数据,可变波特率
-  896          //  AUXR |= 0x01;   //串口1选择定时器2为波特率发生器
-  897          //  AUXR |= 0x04;   //定时器时钟1T模式
-  898          //  T2L = 0xF3;     //设置定时初始值
-  899          //  T2H = 0xFF;     //设置定时初始值
-  900          //  AUXR |= 0x10;   //定时器2开始计时
-  901          
-  902          
-  903          //  P3M0 |= 0x03; P3M1 &= ~0x03; 
-  904          //  P2M0 |= 0x03; P2M1 &= ~0x03; 
-  905          // }
+  893   1      
+  894   1      #ifdef UPDATE_EEPROM_ENABLE
+  895   1           update_EEPROM();
+  896   1      #endif
+  897   1        // printf("Bootloader version: %d\n", BOOTLOADER_VERSION);
+  898   1          while (1) {
+  899   2          receiveBuffer();
+  900   2          if (invalid_command > 100) {
+  901   3              jump();
+  902   3          }
+  903   2          }
+  904   1      }
+  905          
   906          
   907          
   908          // #pragma FUNCTIONS (static)
   909          // char putchar(char c)
   910          // {
-C251 COMPILER V5.60.0,  main                                                               05/11/24  20:44:32  PAGE 15  
+C251 COMPILER V5.60.0,  main                                                               09/11/24  15:37:43  PAGE 15  
 
   911          //  // serialwriteChar(c);
   912          //  SBUF = c;

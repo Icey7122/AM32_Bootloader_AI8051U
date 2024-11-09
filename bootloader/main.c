@@ -848,6 +848,19 @@ static void test_string(void)
 }
 #endif // BOOTLOADER_TEST_STRING
 
+// void Uart1_Init(void)	//921600bps@48MHz
+// {
+// 	SCON = 0x50;		//8位数据,可变波特率
+// 	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
+// 	AUXR |= 0x04;		//定时器时钟1T模式
+// 	T2L = 0xA9;			//设置定时初始值
+// 	T2H = 0xFF;			//设置定时初始值
+// 	AUXR |= 0x10;		//定时器2开始计时
+
+
+// 	P3M0 |= 0x03; P3M1 &= ~0x03; 
+// 	P2M0 |= 0x03; P2M1 &= ~0x03; 
+// }
 
 
 int main(void)
@@ -860,7 +873,7 @@ int main(void)
     bl_clock_config();
     bl_timer_init();
     bl_gpio_init();
-
+	// Uart1_Init();	
 	IAP_TPS = 40;
 
 #ifdef BOOTLOADER_TEST_CLOCK
@@ -881,7 +894,7 @@ int main(void)
 #ifdef UPDATE_EEPROM_ENABLE
      update_EEPROM();
 #endif
-
+	// printf("Bootloader version: %d\n", BOOTLOADER_VERSION);
     while (1) {
 	  receiveBuffer();
 	  if (invalid_command > 100) {
@@ -890,19 +903,6 @@ int main(void)
     }
 }
 
-// void Uart1_Init(void)	//921600bps@48MHz
-// {
-// 	SCON = 0x50;		//8位数据,可变波特率
-// 	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
-// 	AUXR |= 0x04;		//定时器时钟1T模式
-// 	T2L = 0xF3;			//设置定时初始值
-// 	T2H = 0xFF;			//设置定时初始值
-// 	AUXR |= 0x10;		//定时器2开始计时
-
-
-// 	P3M0 |= 0x03; P3M1 &= ~0x03; 
-// 	P2M0 |= 0x03; P2M1 &= ~0x03; 
-// }
 
 
 // #pragma FUNCTIONS (static)

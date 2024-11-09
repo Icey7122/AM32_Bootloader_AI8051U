@@ -1,3 +1,4 @@
+".\Objects\isr.obj",
 ".\Objects\main.obj",
 ".\Objects\eeprom.obj",
 ".\MCU\8051U\Lib\AI8051U_32_TFPU.LIB"(AI8051U_32_TFPU),
