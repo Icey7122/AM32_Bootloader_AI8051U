@@ -1,4 +1,4 @@
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 1   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 1   
 
 
 C251 COMPILER V5.60.0, COMPILATION OF MODULE main
@@ -66,7 +66,7 @@ stmt  level    source
    55          
    56          /*
    57            should we update the bootloader version in eeprom?
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 2   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 2   
 
    58           */
    59          #define UPDATE_EEPROM_ENABLE 1
@@ -134,7 +134,7 @@ stmt  level    source
                #elif BOARD_FLASH_SIZE == 64
   122          #define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0xF800)
   123          #define FLASH_SIZE_CODE 0x35
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 3   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 3   
 
   124          #define ADDRESS_SHIFT 0
   125          
@@ -202,7 +202,7 @@ stmt  level    source
   187              uint8_t bytes[2];
   188              uint16_t word;
   189          } uint8_16_u;
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 4   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 4   
 
   190          
   191          static uint16_t len;
@@ -270,7 +270,7 @@ stmt  level    source
   253   1      #endif
   254   1      }
   255          
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 5   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 5   
 
   256          
   257          static void makeCrc(uint8_t* pBuff, uint16_t length)
@@ -338,7 +338,7 @@ stmt  level    source
   318          static void send_BAD_ACK()
   319          {
   320   1          setTransmit();
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 6   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 6   
 
   321   1          serialwriteChar(0xC1);                // bad command message.
   322   1          setReceive();
@@ -406,7 +406,7 @@ stmt  level    source
   384   1          if (rxBuffer[40] == 0x7d) {
   385   2        if (rxBuffer[32] == 13 && rxBuffer[33] == 66) {
   386   3            sendDeviceInfo();
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 7   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 7   
 
   387   3            rxBuffer[20]= 0;
   388   3            return;
@@ -474,7 +474,7 @@ stmt  level    source
   450   3        }
   451   2      
   452   2              // no ack with command set buffer;
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 8   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 8   
 
   453   2              if(rxBuffer[2] == 0x01){
   454   3            payload_buffer_size = 256;                          // if nothing in this buffer
@@ -542,7 +542,7 @@ stmt  level    source
   516   2        count++;
   517   2        out_buffer_size = rxBuffer[1];//
   518   2        if(out_buffer_size == 0){
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 9   
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 9   
 
   519   3            out_buffer_size = 256;
   520   3        }
@@ -610,7 +610,7 @@ stmt  level    source
                      stats.no_idle++;
                #endif
   582   3            return false;
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 10  
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 10  
 
   583   3        }
   584   2          }
@@ -678,7 +678,7 @@ stmt  level    source
   646   1      
   647   1          // send data bits
   648   1          bits_written = 0;
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 11  
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 11  
 
   649   1          while (bits_written < 8) {
   650   2        if (dat & 0x01) {
@@ -746,7 +746,7 @@ stmt  level    source
   711   5              invalid_command+=20;       // needs one hundred to trigger a jump but will be reset on next set add
              -ress commmand
   712   5      
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 12  
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 12  
 
   713   5          }
   714   4            }
@@ -814,7 +814,7 @@ stmt  level    source
   776   1      
   777   1          low_pin_count = 0;
   778   1      
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 13  
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 13  
 
   779   1          gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IN_FLOATING);
   780   1      
@@ -882,78 +882,77 @@ stmt  level    source
   842          //  P2M0 |= 0x03; P2M1 &= ~0x03; 
   843          // }
   844          
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 14  
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 14  
 
   845          
   846          int main(void)
   847          {
-  848   1      
-  849   1        //Prevent warnings
-  850   1        static uint8_t xdata MEMPOOL[1024];   //内存池
-  851   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
-  852   1      
-  853   1          bl_clock_config();
-  854   1          bl_timer_init();
-  855   1          bl_gpio_init();
-  856   1        // Uart1_Init();  
-  857   1        IAP_TPS = 40;
-  858   1      
-  859   1      #ifdef BOOTLOADER_TEST_CLOCK
+  848   1        //Prevent warnings
+  849   1        static uint8_t xdata MEMPOOL[1024];   //内存池
+  850   1        init_mempool(MEMPOOL, sizeof(MEMPOOL)); //初始化内存池
+  851   1      
+  852   1          bl_clock_config();
+  853   1          bl_timer_init();
+  854   1          bl_gpio_init();
+  855   1        // Uart1_Init();  
+  856   1        IAP_TPS = 40;
+  857   1      
+  858   1      #ifdef BOOTLOADER_TEST_CLOCK
                    test_clock();
                #endif
-  862   1      #ifdef BOOTLOADER_TEST_STRING
+  861   1      #ifdef BOOTLOADER_TEST_STRING
                    test_string();
                #endif
-  865   1      
-  866   1          checkForSignal();
-  867   1      
-  868   1          gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IN_FLOATING);
-  869   1          
-  870   1      #ifdef USE_ADC_INPUT  // go right to application
+  864   1      
+  865   1          checkForSignal();
+  866   1      
+  867   1          gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IN_FLOATING);
+  868   1          
+  869   1      #ifdef USE_ADC_INPUT  // go right to application
                    jump();
                #endif
-  873   1      
-  874   1      #ifdef UPDATE_EEPROM_ENABLE
-  875   1           update_EEPROM();
-  876   1      #endif
-  877   1        // printf("Bootloader version: %d\n", BOOTLOADER_VERSION);
-  878   1          while (1) {
-  879   2          receiveBuffer();
-  880   2          if (invalid_command > 100) {
-  881   3              jump();
-  882   3          }
-  883   2          }
-  884   1      }
+  872   1      
+  873   1      #ifdef UPDATE_EEPROM_ENABLE
+  874   1           update_EEPROM();
+  875   1      #endif
+  876   1        // printf("Bootloader version: %d\n", BOOTLOADER_VERSION);
+  877   1          while (1) {
+  878   2          receiveBuffer();
+  879   2          if (invalid_command > 100) {
+  880   3              jump();
+  881   3          }
+  882   2          }
+  883   1      }
+  884          
   885          
   886          
-  887          
-  888          // #pragma FUNCTIONS (static)
-  889          // char putchar(char c)
-  890          // {
-  891          //  // serialwriteChar(c);
-  892          //  SBUF = c;
-  893          //  while (!TI);
-  894          //  TI = 0;
-  895          //  return c;
-  896          // }
+  887          // #pragma FUNCTIONS (static)
+  888          // char putchar(char c)
+  889          // {
+  890          //  // serialwriteChar(c);
+  891          //  SBUF = c;
+  892          //  while (!TI);
+  893          //  TI = 0;
+  894          //  return c;
+  895          // }
+  896          
   897          
   898          
   899          
   900          
-  901          
 
 
 Module Information          Static   Overlayable
 ------------------------------------------------
-  code size            =      2500     ------
+  code size            =      2431     ------
   ecode size           =    ------     ------
   data size            =    ------     ------
   idata size           =    ------     ------
   pdata size           =    ------     ------
   xdata size           =      1538     ------
-C251 COMPILER V5.60.0,  main                                                               11/11/24  12:30:09  PAGE 15  
-
   xdata-const size     =    ------     ------
+C251 COMPILER V5.60.0,  main                                                               11/11/24  12:33:54  PAGE 15  
+
   edata size           =        29     ------
   bit size             =    ------     ------
   ebit size            =    ------     ------

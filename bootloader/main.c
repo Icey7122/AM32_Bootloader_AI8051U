@@ -845,7 +845,6 @@ static void test_string(void)
 
 int main(void)
 {
-
 	//Prevent warnings
 	static uint8_t xdata MEMPOOL[1024];		//内存池
 	init_mempool(MEMPOOL, sizeof(MEMPOOL));	//初始化内存池

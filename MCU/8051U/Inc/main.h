@@ -199,25 +199,17 @@
 #define	GPIO_ModePin_HIGH	0xF0	//IO高4位引脚
 #define	GPIO_ModePin_All	0xFF	//IO所有引脚
 
-#define	GPIO_Pin_0		0
-#define	GPIO_Pin_1		1
-#define	GPIO_Pin_2		2
-#define	GPIO_Pin_3		3
-#define	GPIO_Pin_4		4
-#define	GPIO_Pin_5		5
-#define	GPIO_Pin_6		6
-#define	GPIO_Pin_7		7
 
 #define GPIO_Mode_IN_REST(port,pin) 		port##_ST_ENABLE(pin),port##_DIGIT_IN_ENABLE(pin)
-#define GPIO_Mode_AIN(port,pin) 			port##_MODE_IN_HIZ(pin),port##_PULL_UP_DISABLE(pin),port##_PULL_DOWN_DISABLE(pin),port##_ST_DISABLE(pin),port##_DIGIT_IN_DISABLE(pin)
-#define GPIO_Mode_IN_FLOATING(port,pin) 	port##_MODE_IN_HIZ(pin),port##_PULL_UP_DISABLE(pin),port##_PULL_DOWN_DISABLE(pin)
+#define GPIO_Mode_AIN(port,pin) 			port##_MODE_IN_HIZ(pin),port##_PULL_DOWN_DISABLE(pin),port##_ST_DISABLE(pin),port##_DIGIT_IN_DISABLE(pin)
+#define GPIO_Mode_IN_FLOATING(port,pin) 	port##_MODE_IN_HIZ(pin),port##_PULL_DOWN_DISABLE(pin)
 #define GPIO_Mode_IPU(port,pin) 			port##_MODE_IO_PU(pin),port##_PULL_DOWN_DISABLE(pin)
 #define GPIO_Mode_IPD(port,pin) 			port##_MODE_IN_HIZ(pin),port##_PULL_DOWN_ENABLE(pin)
 
 #define GPIO_Mode_Out_REST(port,pin) 		port##_SPEED_LOW(pin),port##_DRIVE_MEDIUM(pin)
 #define GPIO_Mode_Out_FAST(port,pin) 		port##_SPEED_HIGH(pin),port##_DRIVE_HIGH(pin)
-#define GPIO_Mode_Out_PP(port,pin) 			port##_MODE_OUT_PP(pin),port##_PULL_UP_DISABLE(pin),port##_PULL_DOWN_DISABLE(pin)
-#define GPIO_Mode_Out_OD(port,pin) 			port##_MODE_OUT_OD(pin),port##_PULL_UP_DISABLE(pin),port##_PULL_DOWN_DISABLE(pin)
+#define GPIO_Mode_Out_PP(port,pin) 			port##_MODE_OUT_PP(pin),port##_PULL_DOWN_DISABLE(pin)
+#define GPIO_Mode_Out_OD(port,pin) 			port##_MODE_OUT_OD(pin),port##_PULL_DOWN_DISABLE(pin)
 
 #define gpio_mode_set(port,pin,mode) mode(port,pin)
 #define gpio_set(port,pin) pin = 1
