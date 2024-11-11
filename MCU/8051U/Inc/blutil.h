@@ -20,23 +20,8 @@
 
 #define GPIO_PIN(n) (1U<<(n))
 
-#define GPIO_PULL_NONE          PULL_NO_RESIGTER
-#define GPIO_PULL_UP            PULL_UP_RESIGTER
-#define GPIO_PULL_DOWN          PULL_DOWN_RESIGTER
-
-#define GPIO_OUTPUT_PUSH_PULL   PUSHPULL_RESIGTER
 
 // uint32_t SystemCoreClock = 8000000U;
-
-#define gpio_mode_set_input(pin,pull_up_down) pull_up_down
-
-#define gpio_mode_set_output(pin,output_mode) output_mode
-
-#define gpio_set(set_pin) set_pin = 1
-
-#define gpio_clear(clear_pin) clear_pin = 0
-
-#define gpio_read(read_pin) read_pin
 
 
 /*
@@ -128,12 +113,12 @@
 // 	EA = 1;
 // }
 
-#define bl_gpio_init()  GPIO_INIT_RESIGTER
+#define bl_gpio_init()  gpio_mode_set(input_port,mode_set_pin,GPIO_Mode_IPU)
 
 /*
   return true if the MCU booted under a software reset
  */
-#define bl_was_software_reset() 0
+#define bl_was_software_reset() RSTFLAG & 0x04
 
 /*
   jump from the bootloader to the application code

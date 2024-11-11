@@ -71,51 +71,30 @@
 #ifdef USE_P01
 #define input_pin        P01
 #define input_port       P0
+#define mode_set_pin 	 GPIO_ModePin_1 	
 #define PIN_NUMBER       1
 #define PORT_LETTER      0
-
-#define PULL_NO_RESIGTER 	P0PU &= ~0x02; P0PD &= ~0x02;P0M0 = 0x00; P0M1 = 0x02
-#define PULL_UP_RESIGTER 	P0PU |= 0x02; P0PD &= ~0x02;P0M0 = 0x00; P0M1 = 0x02
-#define PULL_DOWN_RESIGTER 	P0PU &= ~0x02; P0PD |= 0x02;P0M0 = 0x00; P0M1 = 0x02
-#define PUSHPULL_RESIGTER 	P0PU &= ~0x02; P0PD &= ~0x02;P0M0 |= 0x02; P0M1 &= ~0x02
-#define GPIO_INIT_RESIGTER 	P0M0 = 0x00; P0M1 = 0x02; P0IE |= 0x02; P0NCS = 0x00; P0PU |= 0x02
 
 #elif defined(USE_P11)
 #define input_pin        P11
 #define input_port       P1
+#define mode_set_pin 	 GPIO_ModePin_1 
 #define PIN_NUMBER       1
-#define PORT_LETTER      0
-
-#define PULL_NO_RESIGTER 	P1PU &= ~0x02; P1PD &= ~0x02;P1M0 = 0x00; P1M1 = 0x02
-#define PULL_UP_RESIGTER 	P1PU |= 0x02; P1PD &= ~0x02;P1M0 = 0x00; P1M1 = 0x02
-#define PULL_DOWN_RESIGTER 	P1PU &= ~0x02; P1PD |= 0x02;P1M0 = 0x00; P1M1 = 0x02
-#define PUSHPULL_RESIGTER 	P1PU &= ~0x02; P1PD &= ~0x02;P1M0 |= 0x02; P1M1 &= ~0x02
-#define GPIO_INIT_RESIGTER 	P1M0 = 0x00; P1M1 = 0x02; P1IE |= 0x02; P1NCS = 0x00; P1PU |= 0x02
+#define PORT_LETTER      1
 
 #elif defined(USE_P21)
 #define input_pin        P21
 #define input_port       P2
+#define mode_set_pin 	 GPIO_ModePin_1
 #define PIN_NUMBER       1
-#define PORT_LETTER      0
-
-#define PULL_NO_RESIGTER 	P2PU &= ~0x02; P2PD &= ~0x02;P2M0 = 0x00; P2M1 = 0x02
-#define PULL_UP_RESIGTER 	P2PU |= 0x02; P2PD &= ~0x02;P2M0 = 0x00; P2M1 = 0x02
-#define PULL_DOWN_RESIGTER 	P2PU &= ~0x02; P2PD |= 0x02;P2M0 = 0x00; P2M1 = 0x02
-#define PUSHPULL_RESIGTER 	P2PU &= ~0x02; P2PD &= ~0x02;P2M0 |= 0x02; P2M1 &= ~0x02
-#define GPIO_INIT_RESIGTER 	P2M0 = 0x00; P2M1 = 0x02; P2IE |= 0x02; P2NCS = 0x00; P2PU |= 0x02
+#define PORT_LETTER      2
 
 #elif defined(USE_P50)
 #define input_pin        P50
 #define input_port       P5
-#define PIN_NUMBER       5
-#define PORT_LETTER      0
-
-#define PULL_NO_RESIGTER 	P5PU &= ~0x01; P5PD &= ~0x01;P5M0 = 0x00; P5M1 = 0x01
-#define PULL_UP_RESIGTER 	P5PU |= 0x01; P5PD &= ~0x01;P5M0 = 0x00; P5M1 = 0x01
-#define PULL_DOWN_RESIGTER 	P5PU &= ~0x01; P5PD |= 0x01;P5M0 = 0x00; P5M1 = 0x01
-#define PUSHPULL_RESIGTER 	P5PU &= ~0x01; P5PD &= ~0x01;P5M0 |= 0x01; P5M1 &= ~0x01
-#define GPIO_INIT_RESIGTER 	P5M0 = 0x00; P5M1 = 0x01; P5IE |= 0x01; P5NCS = 0x00; P5PU |= 0x01
-
+#define mode_set_pin 	 GPIO_ModePin_0
+#define PIN_NUMBER       0
+#define PORT_LETTER      5
 
 #else
 #error "Bootloader comms pin not defined"
@@ -314,15 +293,16 @@ static char checkCrc(uint8_t* pBuff, uint16_t length)
 
 static void setReceive()
 {
-    gpio_mode_set_input(input_pin, GPIO_PULL_UP);
+    // gpio_mode_set_input(input_pin, GPIO_PULL_UP);
+	gpio_mode_set(input_port, mode_set_pin, GPIO_Mode_IPU);
     received = 0;
 }
 
 static void setTransmit()
 {
     // set high before we set as output to guarantee idle high
-    gpio_set(input_pin);
-    gpio_mode_set_output(input_pin, GPIO_OUTPUT_PUSH_PULL);
+    gpio_set(input_port,input_pin);
+    gpio_mode_set(input_port,input_pin, GPIO_Mode_Out_PP);
 
     // delay a bit to let the sender get setup for receiving
     delayMicroseconds(BITTIME);
@@ -588,7 +568,7 @@ static bool serialreadChar()
     bl_timer_reset();
 
     // UART is idle high, wait for it to be in the idle state
-    while (~gpio_read(input_pin)) { // wait for rx to go high
+    while (~gpio_read(input_port,input_pin)) { // wait for rx to go high
 	if (bl_timer_us() > 20000) {
 	    /*
 	      if we don't get a command for 20ms then assume we should
@@ -605,7 +585,7 @@ static bool serialreadChar()
 
     // now we need to wait for the start bit leading edge, which is low
     bl_timer_reset();
-    while (gpio_read(input_pin)) {
+    while (gpio_read(input_port,input_pin)) {
 	if (bl_timer_us() > 5*BITTIME && messagereceived) {
 	    // we've been waiting too long, don't allow for long gaps
 	    // between bytes
@@ -619,7 +599,7 @@ static bool serialreadChar()
     // wait to get the center of bit time. We want to sample at the
     // middle of each bit
     delayMicroseconds(HALFBITTIME);
-    if (gpio_read(input_pin)) {
+    if (gpio_read(input_port,input_pin)) {
 	// bad framing, we should be half-way through the start bit
 	// which should still be low
 #ifdef SERIAL_STATS
@@ -634,13 +614,13 @@ static bool serialreadChar()
     bits_to_read = 0;
     while (bits_to_read < 8) {
 	delayMicroseconds(BITTIME);
-	rxbyte = rxbyte | (uint8_t)gpio_read(input_pin) << bits_to_read;
+	rxbyte = rxbyte | (uint8_t)gpio_read(input_port,input_pin) << bits_to_read;
 	bits_to_read++;
     }
 
     // wait till middle of stop bit, so we can check that too
     delayMicroseconds(BITTIME);
-    if (~gpio_read(input_pin)) {
+    if (~gpio_read(input_port,input_pin)) {
 	// bad framing, stop bit should be high
 #ifdef SERIAL_STATS
 	stats.bad_stop++;
@@ -661,17 +641,17 @@ static void serialwriteChar(uint8_t dat)
 {
 	uint8_t bits_written;
     // start bit is low
-    gpio_clear(input_pin);
+    gpio_clear(input_port,input_pin);
     delayMicroseconds(BITTIME);
 
     // send data bits
     bits_written = 0;
     while (bits_written < 8) {
 	if (dat & 0x01) {
-	    gpio_set(input_pin);
+	    gpio_set(input_port,input_pin);
 	} else {
 	    // GPIO_BC(input_port) = input_pin;
-	    gpio_clear(input_pin);
+	    gpio_clear(input_port,input_pin);
 	}
 	bits_written++;
 	dat = dat >> 1;
@@ -679,7 +659,7 @@ static void serialwriteChar(uint8_t dat)
     }
 
     // send stop bit
-    gpio_set(input_pin);
+    gpio_set(input_port,input_pin);
 
     /*
       note that we skip the delay by BITTIME for the full stop bit and
@@ -756,12 +736,12 @@ static void update_EEPROM()
 static void checkForSignal()
 {
 	int i;
-    gpio_mode_set_input(input_pin, GPIO_PULL_DOWN);
+    gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IN_FLOATING);
 	
     delayMicroseconds(500);
 
     for(i = 0 ; i < 500; i ++){
-	if(~gpio_read(input_pin)){
+	if(~gpio_read(input_port,input_pin)){
 	    low_pin_count++;
 	}else{
 	}
@@ -770,7 +750,7 @@ static void checkForSignal()
     }
     if (low_pin_count > 450) {
 #if CHECK_SOFTWARE_RESET
-        if (!bl_was_software_reset()) {
+        if (bl_was_software_reset()) {
 	    jump();
         }
 #else
@@ -778,12 +758,12 @@ static void checkForSignal()
 #endif
     }
 
-    gpio_mode_set_input(input_pin, GPIO_PULL_UP);
+    gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IPU);
 	
     delayMicroseconds(500);
 
     for (i = 0 ; i < 500; i++) {
-	if( ~(gpio_read(input_pin))){
+	if( ~(gpio_read(input_port,input_pin))){
 	    low_pin_count++;
 	}else{
 
@@ -796,12 +776,12 @@ static void checkForSignal()
 
     low_pin_count = 0;
 
-    gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
+    gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IN_FLOATING);
 
     delayMicroseconds(500);
 
     for (i = 0 ; i < 500; i ++) {
-	if( ~(gpio_read(input_pin))){
+	if( ~(gpio_read(input_port,input_pin))){
 	    low_pin_count++;
 	}
 
@@ -869,7 +849,7 @@ int main(void)
 	//Prevent warnings
 	static uint8_t xdata MEMPOOL[1024];		//内存池
 	init_mempool(MEMPOOL, sizeof(MEMPOOL));	//初始化内存池
-	
+
     bl_clock_config();
     bl_timer_init();
     bl_gpio_init();
@@ -885,7 +865,7 @@ int main(void)
 
     checkForSignal();
 
-    gpio_mode_set_input(input_pin, GPIO_PULL_NONE);
+    gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_IN_FLOATING);
 		
 #ifdef USE_ADC_INPUT  // go right to application
     jump();
