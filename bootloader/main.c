@@ -302,7 +302,7 @@ static void setTransmit()
 {
     // set high before we set as output to guarantee idle high
     gpio_set(input_port,input_pin);
-    gpio_mode_set(input_port,input_pin, GPIO_Mode_Out_PP);
+    gpio_mode_set(input_port, mode_set_pin, GPIO_Mode_Out_PP);
 
     // delay a bit to let the sender get setup for receiving
     delayMicroseconds(BITTIME);
