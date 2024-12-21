@@ -57,9 +57,6 @@
   CKCON = 0x00;\
   WTST = 0;\     	
   P_SW2 = 0x80;\	  
-  IRCBAND |= 0x03;\
-	VRTRIM = 26;\
-	IRTRIM = 107;\
 	USBCLK |= (1<<7);\
 	USBCLK &= ~(3<<5);\
 	USBCLK |= (2<<5);\

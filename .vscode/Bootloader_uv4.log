@@ -1,12 +1,6 @@
-Rebuild target 'Bootloader'
-assembling isr.asm...
+Build target 'Bootloader'
 compiling main.c...
-bootloader\main.c(697): warning C173: '==': signed/unsigned type mismatch
-compiling eeprom.c...
-Mcu\8051U\Src\eeprom.c(66): warning C188: 'parameter 3': value truncated
-Mcu\8051U\Src\eeprom.c(66): warning C188: 'parameter 3': value truncated
-Mcu\8051U\Src\eeprom.c(66): warning C188: 'parameter 3': value truncated
-Mcu\8051U\Src\eeprom.c(66): warning C188: 'parameter 3': value truncated
+bootloader\main.c(677): warning C173: '==': signed/unsigned type mismatch
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    FPADD/AI8051U_32_TFPU
@@ -92,7 +86,7 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     NAME:    SLDIV/AI8051U_32_MDU32
 
-Program Size: data=8.0 edata+hdata=289 xdata=1538 const=17 code=3267
+Program Size: data=8.0 edata+hdata=289 xdata=1538 const=17 code=3232
 creating hex file from ".\Objects\AM32_Bootloader_STC8051U"...
-".\Objects\AM32_Bootloader_STC8051U" - 0 Error(s), 33 Warning(s).
+".\Objects\AM32_Bootloader_STC8051U" - 0 Error(s), 29 Warning(s).
 Build Time Elapsed:  00:00:01

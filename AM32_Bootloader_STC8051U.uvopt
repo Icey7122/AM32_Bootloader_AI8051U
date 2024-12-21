@@ -26,7 +26,7 @@
     <ToolsetNumber>0x1</ToolsetNumber>
     <ToolsetName>MCS-251</ToolsetName>
     <TargetOption>
-      <CLK251>48000000</CLK251>
+      <CLK251>40000000</CLK251>
       <OPTTT>
         <gFlags>1</gFlags>
         <BeepAtEnd>1</BeepAtEnd>
@@ -125,7 +125,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>STCMON251</Key>
-          <Name></Name>
+          <Name>-S256 -B0 -O263</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
       <Breakpoint/>

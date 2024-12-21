@@ -18,9 +18,10 @@
 #include "eeprom.h"
 
 
-#define USE_P01
+#define USE_P21
 
-#define DISABLE_APP_HEADER_CHECKS
+// disable checking for app header
+// #define DISABLE_APP_HEADER_CHECKS 
 
 //#define USE_ADC_INPUT      // will go right to application and ignore eeprom
 //#define UPDATE_EEPROM_ENABLE
@@ -219,11 +220,7 @@ static void jump()
 	uint8_t value = *(unsigned char far*)EEPROM_START_ADD;
 #endif
 #ifndef DISABLE_APP_HEADER_CHECKS
-    const uint32_t *app = (unsigned char far*)(MCU_FLASH_START + FIRMWARE_RELATIVE_START);
-    const uint32_t ram_start = 0x000000;
-    const uint32_t ram_limit_kb = 64;
-    const uint32_t ram_end = ram_start+ram_limit_kb*1024;
-	const uint32_t flash_limit_kb = 256;
+    const uint8_t *app = (unsigned char far*)(MCU_FLASH_START + FIRMWARE_RELATIVE_START);
 #endif
 #if CHECK_EEPROM_BEFORE_JUMP
 	if (value != 0x01) {      // check first byte of eeprom to see if its programmed, if not do not jump
@@ -233,20 +230,11 @@ static void jump()
 #endif
 #ifndef DISABLE_APP_HEADER_CHECKS
     /*
-      first word of the app is the stack pointer - make sure that it is in range
+      first word of the app is the LJMP
      */
-    if (app[0] < ram_start || app[0] > ram_end) {
-	invalid_command = 0;
-	return;
-    }
-    /*
-      2nd word is the entry point of the main app. Ensure that is in range
-     */
-	if (app[1] < APPLICATION_ADDRESS || app[1] > APPLICATION_ADDRESS+flash_limit_kb*1024) {
-	// outside a 256k range, really unlikely to be a valid
-	// application, don't jump
-	invalid_command = 0;
-	return;
+    if (app[0] != 0x02) {
+		invalid_command = 0;
+		return;
     }
 #endif
 	jump_to_application();
@@ -302,7 +290,7 @@ static void setTransmit()
 {
     // set high before we set as output to guarantee idle high
     gpio_set(input_port,input_pin);
-    gpio_mode_set(input_port,input_pin, GPIO_Mode_Out_PP);
+    gpio_mode_set(input_port,mode_set_pin, GPIO_Mode_Out_PP);
 
     // delay a bit to let the sender get setup for receiving
     delayMicroseconds(BITTIME);
@@ -345,97 +333,89 @@ static bool checkAddressWritable(uint32_t address)
 static void decodeInput()
 {
     if (incoming_payload_no_command) {
-	uint16_t i;
-	len = payload_buffer_size;
-	if (checkCrc(rxBuffer,len)) {
-	    memset(payLoadBuffer, 0, sizeof(payLoadBuffer));             // reset buffer
-
-	    for(i = 0; i < len; i++){
-		payLoadBuffer[i]= rxBuffer[i];
-	    }
-	    send_ACK();
-	    incoming_payload_no_command = 0;
-	    return;
-	}else{
-	    send_BAD_CRC_ACK();
-	    return;
-	}
+		uint16_t i;
+		len = payload_buffer_size;
+		if (checkCrc(rxBuffer,len)) {
+			memset(payLoadBuffer, 0, sizeof(payLoadBuffer));             // reset buffer
+			for(i = 0; i < len; i++){
+				payLoadBuffer[i]= rxBuffer[i];
+			}
+			send_ACK();
+			incoming_payload_no_command = 0;
+			return;
+		}else{
+			send_BAD_CRC_ACK();
+			return;
+		}
     }
 
     cmd = rxBuffer[0];
 
     if (rxBuffer[16] == 0x7d) {
-	if(rxBuffer[8] == 13 && rxBuffer[9] == 66) {
-	    sendDeviceInfo();
-	    rxBuffer[20]= 0;
-
-	}
-	return;
+		if(rxBuffer[8] == 13 && rxBuffer[9] == 66) {
+			sendDeviceInfo();
+			rxBuffer[20]= 0;
+		}
+		return;
     }
 
     if (rxBuffer[20] == 0x7d) {
-	if(rxBuffer[12] == 13 && rxBuffer[13] == 66) {
-	    sendDeviceInfo();
-	    rxBuffer[20]= 0;
-	    return;
-	}
-
+		if(rxBuffer[12] == 13 && rxBuffer[13] == 66) {
+			sendDeviceInfo();
+			rxBuffer[20]= 0;
+			return;
+		}
     }
     if (rxBuffer[40] == 0x7d) {
-	if (rxBuffer[32] == 13 && rxBuffer[33] == 66) {
-	    sendDeviceInfo();
-	    rxBuffer[20]= 0;
-	    return;
-	}
+		if (rxBuffer[32] == 13 && rxBuffer[33] == 66) {
+			sendDeviceInfo();
+			rxBuffer[20]= 0;
+			return;
+		}
     }
 
     if (cmd == CMD_RUN) {
 	// starts the main app
-	if((rxBuffer[1] == 0) && (rxBuffer[2] == 0) && (rxBuffer[3] == 0)) {
-	    invalid_command = 101;
-	}
+		if((rxBuffer[1] == 0) && (rxBuffer[2] == 0) && (rxBuffer[3] == 0)) {
+			invalid_command = 101;
+		}
     }
 
     if (cmd == CMD_PROG_FLASH) {
-	len = 2;
-	if (!checkCrc((uint8_t*)rxBuffer, len)) {
-	    send_BAD_CRC_ACK();
-
-	    return;
-	}
-
-	if (!checkAddressWritable(address)) {
-	    send_BAD_ACK();
-
-	    return;
-	}
-
-	if (!save_flash_nolib((uint8_t*)payLoadBuffer, payload_buffer_size,address)) {
-	    send_BAD_ACK();
-	} else {
-	    send_ACK();
-	}
-
-	return;
+		len = 2;
+		if (!checkCrc((uint8_t*)rxBuffer, len)) {
+			send_BAD_CRC_ACK();
+			return;
+		}
+		if (!checkAddressWritable(address)) {
+			send_BAD_ACK();
+			return;
+		}
+		if (!save_flash_nolib((uint8_t*)payLoadBuffer, payload_buffer_size,address)) {
+			send_BAD_ACK();
+		} else {
+			send_ACK();
+		}
+		return;
     }
 
     if (cmd == CMD_SET_ADDRESS) {
 	// command set addressinput format is: CMD, 00 , High byte
 	// address, Low byte address, crclb ,crchb
-	len = 4;  // package without 2 byte crc
-	if (!checkCrc((uint8_t*)rxBuffer, len)) {
-	    send_BAD_CRC_ACK();
+		len = 4;  // package without 2 byte crc
+		if (!checkCrc((uint8_t*)rxBuffer, len)) {
+			send_BAD_CRC_ACK();
 
-	    return;
-	}
+			return;
+		}
 
 
 	// will send Ack 0x30 and read input after transfer out callback
-	invalid_command = 0;
-	address = MCU_FLASH_START + ((rxBuffer[2] << 8 | rxBuffer[3]) << ADDRESS_SHIFT);
-	send_ACK();
+		invalid_command = 0;
+		address = MCU_FLASH_START + ((rxBuffer[2] << 8 | rxBuffer[3]) << ADDRESS_SHIFT);
+		send_ACK();
 
-	return;
+		return;
     }
 
     if (cmd == CMD_SET_BUFFER) {
@@ -741,18 +721,17 @@ static void checkForSignal()
     delayMicroseconds(500);
 
     for(i = 0 ; i < 500; i ++){
-	if(~gpio_read(input_port,input_pin)){
-	    low_pin_count++;
-	}else{
+		if(~gpio_read(input_port,input_pin)){
+			low_pin_count++;
+		}else{
 	}
-
-	delayMicroseconds(10);
+		delayMicroseconds(10);
     }
     if (low_pin_count > 450) {
 #if CHECK_SOFTWARE_RESET
-        if (bl_was_software_reset()) {
-	    jump();
-        }
+	if (bl_was_software_reset()) {
+		jump();
+	}
 #else
         jump();
 #endif
@@ -852,6 +831,7 @@ int main(void)
     bl_clock_config();
     bl_timer_init();
     bl_gpio_init();
+
 	// Uart1_Init();	
 	IAP_TPS = 40;
 
