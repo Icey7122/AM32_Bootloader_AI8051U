@@ -1,1 +1,1 @@
-AM32_Bootloader for STC8051U
+AM32_Bootloader for STC8051U/AI8051U
