@@ -1,4 +1,4 @@
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 1   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 1   
 
 
 C251 COMPILER V5.04b, COMPILATION OF MODULE main
@@ -66,7 +66,7 @@ stmt  level    source
    55          #define CHECK_EEPROM_BEFORE_JUMP 1
    56          
    57          /*
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 2   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 2   
 
    58            should we update the bootloader version in eeprom?
    59           */
@@ -134,7 +134,7 @@ stmt  level    source
                
                #elif BOARD_FLASH_SIZE == 64
   123          #define EEPROM_START_ADD (uint32_t)(MCU_FLASH_START+0xF800)
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 3   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 3   
 
   124          #define FLASH_SIZE_CODE 0x35
   125          #define ADDRESS_SHIFT 0
@@ -202,7 +202,7 @@ stmt  level    source
   187          typedef union {
   188              uint8_t bytes[2];
   189              uint16_t word;
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 4   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 4   
 
   190          } uint8_16_u;
   191          
@@ -270,7 +270,7 @@ stmt  level    source
   253   2          uint8_t j;
   254   2          xb = pBuff[i];
   255   2          for ( j = 0; j < 8; j++)
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 5   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 5   
 
   256   2          {
   257   3            if (((xb & 0x01) ^ (CRC_16.word & 0x0001)) !=0 ) {
@@ -338,7 +338,7 @@ stmt  level    source
   318   1      }
   319          
   320          static void sendDeviceInfo()
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 6   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 6   
 
   321          {
   322   1          setTransmit();
@@ -406,7 +406,7 @@ stmt  level    source
   384   1          if (cmd == CMD_PROG_FLASH) {
   385   2          len = 2;
   386   2          if (!checkCrc((uint8_t*)rxBuffer, len)) {
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 7   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 7   
 
   387   3            send_BAD_CRC_ACK();
   388   3            return;
@@ -474,7 +474,7 @@ stmt  level    source
   450   3            return;
   451   3        }
   452   2      
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 8   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 8   
 
   453   2        setTransmit();
   454   2        serialwriteChar(0xC1);                // bad command message.
@@ -542,7 +542,7 @@ stmt  level    source
   514   2      
   515   2        setReceive();
   516   2      
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 9   
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 9   
 
   517   2        return;
   518   2          }
@@ -610,7 +610,7 @@ stmt  level    source
   580   1          // middle of each bit
   581   1          delayMicroseconds(HALFBITTIME);
   582   1          if (gpio_read(input_port,input_pin)) {
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 10  
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 10  
 
   583   2        // bad framing, we should be half-way through the start bit
   584   2        // which should still be low
@@ -678,7 +678,7 @@ stmt  level    source
   646   1            do it in sendString() instead to ensure when sending an ACK
   647   1            immediately followed by a setReceive() on a slow MCU that we
   648   1            start on the receive as soon as possible.
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 11  
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 11  
 
   649   1          */
   650   1      }
@@ -746,7 +746,7 @@ stmt  level    source
   710   2        rxBuffer[2] = BOOTLOADER_VERSION;
   711   2        save_flash_nolib(rxBuffer, 48, EEPROM_START_ADD);
   712   2          }
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 12  
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 12  
 
   713   1      }
   714          #endif // UPDATE_EEPROM_ENABLE
@@ -814,7 +814,7 @@ stmt  level    source
   776   1      }
   777          
   778          #ifdef BOOTLOADER_TEST_CLOCK
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 13  
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 13  
 
                /*
                  this should provide a 2ms low followed by a 1ms high if the clock is correct
@@ -882,7 +882,7 @@ stmt  level    source
                    test_string();
                #endif
   844   1      
-C251 COMPILER V5.04b,  main                                                                21/12/24  10:27:41  PAGE 14  
+C251 COMPILER V5.04b,  main                                                                22/12/24  10:21:49  PAGE 14  
 
   845   1          checkForSignal();
   846   1      

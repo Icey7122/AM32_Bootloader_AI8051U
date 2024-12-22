@@ -3,7 +3,7 @@
 ".\Objects\eeprom.obj",
 ".\MCU\8051U\Lib\AI8051U_32_TFPU.LIB"(AI8051U_32_TFPU),
 ".\MCU\8051U\Lib\AI8051U_32_MDU32.LIB"(AI8051U_32_MDU32) 
-TO ".\Objects\AM32_Bootloader_STC8051U" 
-PRINT(".\Listings\AM32_Bootloader_STC8051U.map") CASE 
+TO ".\Objects\AM32_Bootloader_AI8051U" 
+PRINT(".\Listings\AM32_Bootloader_AI8051U.map") CASE 
 CLASSES (EDATA (0x0-0x7FF), 
 HDATA (0x0-0x7FF)) 
