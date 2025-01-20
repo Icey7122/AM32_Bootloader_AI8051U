@@ -18,7 +18,7 @@
 #include "eeprom.h"
 
 
-#define USE_P21
+#define USE_P11
 
 // disable checking for app header
 // #define DISABLE_APP_HEADER_CHECKS 
@@ -179,6 +179,7 @@ static int cmd;
 static char eeprom_req;
 static int received;
 
+static uint8_t xdata MEMPOOL[1024];		//内存池
 static uint8_t xdata rxBuffer[258];
 static uint8_t xdata payLoadBuffer[256];
 static char rxbyte;
@@ -825,7 +826,6 @@ static void test_string(void)
 int main(void)
 {
 	//Prevent warnings
-	static uint8_t xdata MEMPOOL[1024];		//内存池
 	init_mempool(MEMPOOL, sizeof(MEMPOOL));	//初始化内存池
 
     bl_clock_config();
